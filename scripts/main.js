@@ -14,8 +14,8 @@ if (productsTrack && productsPrev && productsNext) {
     const viewportWidth = viewport.offsetWidth;
     productsTrack.style.transform = `translateX(-${currentPage * viewportWidth}px)`;
 
-    productsPrev.disabled = currentPage === 0;
-    productsNext.disabled = currentPage === totalPages - 1;
+    productsPrev.style.display = currentPage === 0 ? "none" : "grid";
+    productsNext.style.display = currentPage === totalPages - 1 ? "none" : "grid";
   }
 
   productsNext.addEventListener("click", () => {

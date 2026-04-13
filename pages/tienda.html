@@ -1,0 +1,419 @@
+<link rel="stylesheet" href="../styles/tienda.css" />
+<script src="../scripts/tienda.js"></script>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mundo Mascotas - Tienda</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/variables.css" />
+  <link rel="stylesheet" href="../styles/components.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/responsive.css" />
+  <link rel="stylesheet" href="../styles/tienda.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-content">
+      <p>¡Envíos en Bogotá gratis desde $100.000!</p>
+      <span>Compra fácil, rápido y pensado para tu mascota.</span>
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <div class="container nav-content">
+      <div class="logo">
+        <span class="logo-icon">🐾</span>
+        <span class="logo-text">Mundo Mascotas</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="mascotas.html">Mascotas</a></li>
+        <li><a href="citas.html">Citas</a></li>
+        <li><a href="tienda.html" class="active">Tienda</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="adopciones.html">Adopciones</a></li>
+      </ul>
+
+      <a href="dashboard.html" class="btn-nav">Contáctanos</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="store-hero">
+      <div class="container">
+        <div class="store-hero-box">
+          <div class="store-hero-text">
+            <span class="section-tag">Tienda especializada</span>
+            <h1>Productos esenciales para el bienestar de tu mascota</h1>
+            <p>
+              Explora categorías, descubre productos destacados y agrega fácilmente
+              al carrito lo que tu mascota necesita para alimentación, higiene,
+              salud y entretenimiento.
+            </p>
+
+            <div class="store-hero-actions">
+              <a href="#catalogo" class="btn btn-primary">Ver catálogo</a>
+              <a href="#resumen-compra" class="btn btn-secondary">Ver carrito</a>
+            </div>
+          </div>
+
+          <div class="store-hero-stats">
+            <article class="store-mini-card">
+              <strong>+12</strong>
+              <span>Productos destacados</span>
+            </article>
+            <article class="store-mini-card">
+              <strong>3</strong>
+              <span>Categorías activas</span>
+            </article>
+            <article class="store-mini-card">
+              <strong>24h</strong>
+              <span>Confirmación de pedido</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="store-categories">
+      <div class="container">
+        <div class="section-head store-head-left">
+          <span class="section-tag">Categorías</span>
+          <h2>Compra por tipo de producto</h2>
+          <p>Una estructura simple y funcional para navegar la tienda sin perder tiempo.</p>
+        </div>
+
+        <div class="category-chips">
+          <button class="category-chip active" data-category="todos">Todos</button>
+          <button class="category-chip" data-category="alimento">Alimento</button>
+          <button class="category-chip" data-category="juguetes">Juguetes</button>
+          <button class="category-chip" data-category="medicamentos">Medicamentos</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="store-toolbar">
+      <div class="container">
+        <div class="store-toolbar-box">
+          <div class="store-search">
+            <label for="searchProduct" class="sr-only">Buscar producto</label>
+            <input type="text" id="searchProduct" placeholder="Buscar productos..." />
+          </div>
+
+          <div class="store-filters">
+            <select id="petFilter">
+              <option value="todos">Tipo de mascota</option>
+              <option value="perro">Perro</option>
+              <option value="gato">Gato</option>
+            </select>
+
+            <select id="sortFilter">
+              <option value="default">Ordenar por</option>
+              <option value="price-asc">Precio: menor a mayor</option>
+              <option value="price-desc">Precio: mayor a menor</option>
+              <option value="name-asc">Nombre: A-Z</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="store-main" id="catalogo">
+      <div class="container store-main-grid">
+        <div class="store-products-area">
+          <div class="store-section-title">
+            <h2>Catálogo disponible</h2>
+            <p>Productos vinculados a categorías, precios y necesidades reales del sistema.</p>
+          </div>
+
+          <div class="store-products-grid" id="storeProductsGrid">
+            <article class="store-product-card"
+              data-category="alimento"
+              data-pet="perro"
+              data-name="concentrado premium"
+              data-price="85000">
+              <div class="store-product-image">
+                <img src="../assets/img/Cards/Royalcanin.png" alt="Concentrado Premium" />
+              </div>
+              <div class="store-product-info">
+                <span class="store-card-tag">Alimento</span>
+                <h3>Concentrado Premium</h3>
+                <p>Alimento balanceado de alta nutrición para perro adulto.</p>
+                <div class="store-product-meta">
+                  <span>Perro</span>
+                  <span>Stock disponible</span>
+                </div>
+                <div class="store-product-bottom">
+                  <strong>$85.000</strong>
+                  <button class="add-cart-btn" data-name="Concentrado Premium" data-price="85000">Agregar</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="store-product-card"
+              data-category="juguetes"
+              data-pet="perro"
+              data-name="pelota resistente"
+              data-price="18000">
+              <div class="store-product-image">
+                <img src="../assets/img/Cards/pelota.png" alt="Pelota resistente" />
+              </div>
+              <div class="store-product-info">
+                <span class="store-card-tag">Juguetes</span>
+                <h3>Pelota resistente</h3>
+                <p>Ideal para juego activo, entretenimiento y estimulación diaria.</p>
+                <div class="store-product-meta">
+                  <span>Perro</span>
+                  <span>Alta rotación</span>
+                </div>
+                <div class="store-product-bottom">
+                  <strong>$18.000</strong>
+                  <button class="add-cart-btn" data-name="Pelota resistente" data-price="18000">Agregar</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="store-product-card"
+              data-category="medicamentos"
+              data-pet="gato"
+              data-name="antipulgas"
+              data-price="32000">
+              <div class="store-product-image">
+                <img src="../assets/img/Cards/Bolfo_Collar-1.png" alt="Antipulgas" />
+              </div>
+              <div class="store-product-info">
+                <span class="store-card-tag">Medicamentos</span>
+                <h3>Antipulgas</h3>
+                <p>Solución práctica para el cuidado preventivo de tu mascota.</p>
+                <div class="store-product-meta">
+                  <span>Gato</span>
+                  <span>Uso frecuente</span>
+                </div>
+                <div class="store-product-bottom">
+                  <strong>$32.000</strong>
+                  <button class="add-cart-btn" data-name="Antipulgas" data-price="32000">Agregar</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="store-product-card"
+              data-category="juguetes"
+              data-pet="gato"
+              data-name="rascador compacto"
+              data-price="49000">
+              <div class="store-product-image">
+                <img src="../assets/img/Cards/Rascador.png" alt="Rascador compacto" />
+              </div>
+              <div class="store-product-info">
+                <span class="store-card-tag">Juguetes</span>
+                <h3>Rascador compacto</h3>
+                <p>Ideal para gatos en espacios pequeños y rutinas activas.</p>
+                <div class="store-product-meta">
+                  <span>Gato</span>
+                  <span>Recomendado</span>
+                </div>
+                <div class="store-product-bottom">
+                  <strong>$49.000</strong>
+                  <button class="add-cart-btn" data-name="Rascador compacto" data-price="49000">Agregar</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="store-product-card"
+              data-category="alimento"
+              data-pet="gato"
+              data-name="arena para gato"
+              data-price="32000">
+              <div class="store-product-image">
+                <img src="../assets/img/Cards/ArenaGatos.png" alt="Arena para gato" />
+              </div>
+              <div class="store-product-info">
+                <span class="store-card-tag">Alimento</span>
+                <h3>Arena para gato</h3>
+                <p>Alta absorción y control de olores para el cuidado diario.</p>
+                <div class="store-product-meta">
+                  <span>Gato</span>
+                  <span>Compra recurrente</span>
+                </div>
+                <div class="store-product-bottom">
+                  <strong>$32.000</strong>
+                  <button class="add-cart-btn" data-name="Arena para gato" data-price="32000">Agregar</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="store-product-card"
+              data-category="alimento"
+              data-pet="perro"
+              data-name="snack funcional"
+              data-price="15000">
+              <div class="store-product-image">
+                <img src="../assets/img/Cards/Snack.png" alt="Snack funcional" />
+              </div>
+              <div class="store-product-info">
+                <span class="store-card-tag">Alimento</span>
+                <h3>Snack funcional</h3>
+                <p>Premios suaves para entrenamiento y refuerzo positivo.</p>
+                <div class="store-product-meta">
+                  <span>Perro</span>
+                  <span>Uso diario</span>
+                </div>
+                <div class="store-product-bottom">
+                  <strong>$15.000</strong>
+                  <button class="add-cart-btn" data-name="Snack funcional" data-price="15000">Agregar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <aside class="store-sidebar" id="resumen-compra">
+          <div class="cart-summary-card">
+            <div class="cart-summary-head">
+              <h3>Resumen de compra</h3>
+              <span id="cartCount">0 productos</span>
+            </div>
+
+            <div class="cart-summary-body" id="cartItems">
+              <p class="cart-empty">Aún no has agregado productos al carrito.</p>
+            </div>
+
+            <div class="cart-summary-footer">
+              <div class="cart-total-line">
+                <span>Total estimado</span>
+                <strong id="cartTotal">$0</strong>
+              </div>
+              <button class="btn btn-primary cart-action-btn">Finalizar pedido</button>
+            </div>
+          </div>
+
+          <div class="orders-card">
+            <h3>Estado de pedidos</h3>
+            <div class="order-status-list">
+              <article class="order-status-item">
+                <strong>Pedido #MM-001</strong>
+                <span>Pagado</span>
+              </article>
+              <article class="order-status-item">
+                <strong>Pedido #MM-002</strong>
+                <span>Pendiente</span>
+              </article>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="store-benefits">
+      <div class="container">
+        <div class="store-benefits-grid">
+          <article class="benefit-card">
+            <h3>Categorías organizadas</h3>
+            <p>Productos agrupados por tipo para una navegación más clara y eficiente.</p>
+          </article>
+          <article class="benefit-card">
+            <h3>Carrito simplificado</h3>
+            <p>Una vista rápida del pedido para representar la lógica de compra del sistema.</p>
+          </article>
+          <article class="benefit-card">
+            <h3>Pedidos visibles</h3>
+            <p>Resumen simple del estado de órdenes, útil para defender la parte operativa.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="container footer-top-content">
+        <div class="footer-brand-box">
+          <div class="footer-brand-logo"></div>
+          <div class="footer-brand-text">
+            <h3>Mundo Mascotas</h3>
+            <p>Recibe novedades, promociones y recomendaciones para consentir a tu peludo.</p>
+          </div>
+        </div>
+
+        <form class="footer-newsletter">
+          <select>
+            <option selected>Selecciona tu mascota</option>
+            <option>Perro</option>
+            <option>Gato</option>
+            <option>Ambos</option>
+          </select>
+
+          <input type="email" placeholder="Correo electrónico" />
+          <button type="submit">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="container footer-main-content">
+        <div class="footer-column footer-column-brand">
+          <div class="footer-logo">
+            <span class="footer-paw-icon">🐾</span>
+            <span>Mundo Mascotas</span>
+          </div>
+          <p class="footer-description">
+            Todo lo que tu mascota necesita en un solo lugar: productos, bienestar y cuidado con estilo.
+          </p>
+
+          <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">tt</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">yt</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="tienda.html">Tienda</a></li>
+            <li><a href="citas.html">Citas</a></li>
+            <li><a href="mascotas.html">Mascotas</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Ayuda</h4>
+          <ul>
+            <li><a href="dashboard.html">Preguntas frecuentes</a></li>
+            <li><a href="dashboard.html">Contáctanos</a></li>
+            <li><a href="dashboard.html">Términos y condiciones</a></li>
+            <li><a href="dashboard.html">Política de privacidad</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:info@mundomascotas.com">info@mundomascotas.com</a></li>
+            <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
+            <li><a href="dashboard.html">Bogotá, Colombia</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>© 2026 Mundo Mascotas. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/tienda.js"></script>
+</body>
+</html>
