@@ -1,11 +1,376 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mundo Mascotas - Mi espacio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/variables.css" />
+  <link rel="stylesheet" href="../styles/components.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/responsive.css" />
+  <link rel="stylesheet" href="../styles/dashboard.css" />
 </head>
 <body>
-  <h1>Dashboard</h1>
+
+  <header class="topbar">
+    <div class="container topbar-content">
+      <p>Tu información, tus mascotas y tus gestiones en un solo lugar.</p>
+      <span>Resumen claro, rápido y útil para el usuario.</span>
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <div class="container nav-content">
+      <div class="logo">
+        <span class="logo-icon">🐾</span>
+        <span class="logo-text">Mundo Mascotas</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="mascotas.html">Mascotas</a></li>
+        <li><a href="citas.html">Citas</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="adopciones.html">Adopciones</a></li>
+      </ul>
+
+      <a href="dashboard.html" class="btn-nav active-space-btn">Mi espacio</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="dashboard-hero">
+      <div class="container">
+        <div class="dashboard-hero-box">
+          <div class="dashboard-hero-text">
+            <span class="section-tag">Mi espacio</span>
+            <h1>Hola, Ana Torres</h1>
+            <p>
+              Consulta el resumen de tu actividad en la plataforma: mascotas registradas,
+              próximas citas, pedidos, reservas, solicitudes y notificaciones recientes.
+            </p>
+
+            <div class="dashboard-hero-actions">
+              <a href="#quickAccess" class="btn btn-primary">Ver accesos rápidos</a>
+              <a href="#notificationsPanel" class="btn btn-secondary">Ver notificaciones</a>
+            </div>
+          </div>
+
+          <div class="dashboard-user-card">
+            <div class="dashboard-user-top">
+              <div class="dashboard-user-avatar">AT</div>
+              <div>
+                <h3>Ana Torres</h3>
+                <p>ana@email.com</p>
+              </div>
+            </div>
+
+            <div class="dashboard-user-status">
+              <span class="status-pill verified">Cuenta verificada</span>
+              <span class="status-pill active">Usuario activo</span>
+            </div>
+
+            <div class="dashboard-user-extra">
+              <span>Teléfono: 3001112233</span>
+              <span>Dirección: Calle 10 #20-30</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-summary">
+      <div class="container">
+        <div class="dashboard-summary-grid">
+          <article class="summary-card">
+            <strong>3</strong>
+            <span>Mascotas registradas</span>
+          </article>
+
+          <article class="summary-card">
+            <strong>2</strong>
+            <span>Próximas citas</span>
+          </article>
+
+          <article class="summary-card">
+            <strong>1</strong>
+            <span>Pedido activo</span>
+          </article>
+
+          <article class="summary-card">
+            <strong>2</strong>
+            <span>Reservas recientes</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-main">
+      <div class="container dashboard-main-grid">
+        <div class="dashboard-left-column">
+          <div class="dashboard-card">
+            <div class="dashboard-card-head">
+              <h2>Actividad reciente</h2>
+              <p>Lo más importante de tu cuenta en una sola vista.</p>
+            </div>
+
+            <div class="activity-list" id="activityList">
+              <article class="activity-item">
+                <div>
+                  <strong>Próxima cita veterinaria</strong>
+                  <p>Luna · 10 de abril de 2026 · 10:00 AM</p>
+                </div>
+                <span class="item-tag success">Confirmada</span>
+              </article>
+
+              <article class="activity-item">
+                <div>
+                  <strong>Reserva de servicio</strong>
+                  <p>Baño · Luna · 07 de abril de 2026</p>
+                </div>
+                <span class="item-tag warning">Confirmada</span>
+              </article>
+
+              <article class="activity-item">
+                <div>
+                  <strong>Solicitud de adopción</strong>
+                  <p>Toby · En revisión</p>
+                </div>
+                <span class="item-tag pending">Pendiente</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="dashboard-card">
+            <div class="dashboard-card-head">
+              <h2>Pedidos y compras</h2>
+              <p>Resumen simple del estado de órdenes y seguimiento.</p>
+            </div>
+
+            <div class="orders-list">
+              <article class="order-item">
+                <div>
+                  <strong>Pedido #MM-001</strong>
+                  <p>Total: $115.000 · Guía: GUIA123456</p>
+                </div>
+                <span class="item-tag success">Pagado</span>
+              </article>
+
+              <article class="order-item">
+                <div>
+                  <strong>Pedido #MM-002</strong>
+                  <p>Total: $32.000 · Pendiente de pago</p>
+                </div>
+                <span class="item-tag pending">Pendiente</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="dashboard-card">
+            <div class="dashboard-card-head">
+              <h2>Preferencias de notificación</h2>
+              <p>Activa o desactiva los canales principales de aviso.</p>
+            </div>
+
+            <div class="preferences-list">
+              <label class="preference-row">
+                <span>Recibir notificaciones por correo</span>
+                <input type="checkbox" id="prefEmail" checked />
+              </label>
+
+              <label class="preference-row">
+                <span>Recibir notificaciones por app</span>
+                <input type="checkbox" id="prefApp" checked />
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-right-column">
+          <div class="dashboard-card sticky-card" id="notificationsPanel">
+            <div class="dashboard-card-head">
+              <h2>Notificaciones</h2>
+              <p>Mensajes recientes asociados a tu actividad.</p>
+            </div>
+
+            <div class="notifications-list" id="notificationsList">
+              <article class="notification-item unread">
+                <strong>Tu cita ha sido confirmada</strong>
+                <span>Canal: app</span>
+              </article>
+
+              <article class="notification-item unread">
+                <strong>Tu pedido está pendiente de pago</strong>
+                <span>Canal: correo</span>
+              </article>
+            </div>
+
+            <button class="btn btn-primary full-btn" id="markReadBtn">Marcar notificaciones como leídas</button>
+          </div>
+
+          <div class="dashboard-card">
+            <div class="dashboard-card-head">
+              <h2>Perfil del usuario</h2>
+              <p>Información principal asociada a tu cuenta.</p>
+            </div>
+
+            <div class="profile-list">
+              <div class="profile-row">
+                <span>Nombre</span>
+                <strong>Ana Torres</strong>
+              </div>
+              <div class="profile-row">
+                <span>Correo</span>
+                <strong>ana@email.com</strong>
+              </div>
+              <div class="profile-row">
+                <span>Teléfono</span>
+                <strong>3001112233</strong>
+              </div>
+              <div class="profile-row">
+                <span>Dirección</span>
+                <strong>Calle 10 #20-30</strong>
+              </div>
+              <div class="profile-row">
+                <span>Estado</span>
+                <strong>Verificado</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-quick-access" id="quickAccess">
+      <div class="container">
+        <div class="section-head dashboard-head-left">
+          <span class="section-tag">Accesos rápidos</span>
+          <h2>Navega rápido por tus módulos</h2>
+          <p>Desde aquí puedes ir directo a las secciones más importantes de tu cuenta.</p>
+        </div>
+
+        <div class="quick-access-grid">
+          <a href="mascotas.html" class="quick-card">
+            <span class="quick-icon">🐶</span>
+            <h3>Mascotas</h3>
+            <p>Consulta perfiles y estado general.</p>
+          </a>
+
+          <a href="citas.html" class="quick-card">
+            <span class="quick-icon">🩺</span>
+            <h3>Citas</h3>
+            <p>Revisa agenda y seguimiento clínico.</p>
+          </a>
+
+          <a href="tienda.html" class="quick-card">
+            <span class="quick-icon">🛒</span>
+            <h3>Tienda</h3>
+            <p>Explora productos y pedidos.</p>
+          </a>
+
+          <a href="servicios.html" class="quick-card">
+            <span class="quick-icon">🛁</span>
+            <h3>Servicios</h3>
+            <p>Gestiona reservas y paseos.</p>
+          </a>
+
+          <a href="adopciones.html" class="quick-card">
+            <span class="quick-icon">❤️</span>
+            <h3>Adopciones</h3>
+            <p>Consulta publicaciones y solicitudes.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="container footer-top-content">
+        <div class="footer-brand-box">
+          <div class="footer-brand-logo"></div>
+          <div class="footer-brand-text">
+            <h3>Mundo Mascotas</h3>
+            <p>Recibe novedades, promociones y recomendaciones para consentir a tu peludo.</p>
+          </div>
+        </div>
+
+        <form class="footer-newsletter">
+          <select>
+            <option selected>Selecciona tu mascota</option>
+            <option>Perro</option>
+            <option>Gato</option>
+            <option>Ambos</option>
+          </select>
+
+          <input type="email" placeholder="Correo electrónico" />
+          <button type="submit">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="container footer-main-content">
+        <div class="footer-column footer-column-brand">
+          <div class="footer-logo">
+            <span class="footer-paw-icon">🐾</span>
+            <span>Mundo Mascotas</span>
+          </div>
+          <p class="footer-description">
+            Todo lo que tu mascota necesita en un solo lugar: productos, bienestar y cuidado con estilo.
+          </p>
+
+          <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">tt</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">yt</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="tienda.html">Tienda</a></li>
+            <li><a href="citas.html">Citas</a></li>
+            <li><a href="mascotas.html">Mascotas</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Ayuda</h4>
+          <ul>
+            <li><a href="dashboard.html">Preguntas frecuentes</a></li>
+            <li><a href="dashboard.html">Contáctanos</a></li>
+            <li><a href="dashboard.html">Términos y condiciones</a></li>
+            <li><a href="dashboard.html">Política de privacidad</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:info@mundomascotas.com">info@mundomascotas.com</a></li>
+            <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
+            <li><a href="dashboard.html">Bogotá, Colombia</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>© 2026 Mundo Mascotas. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/dashboard.js"></script>
 </body>
 </html>

@@ -1,11 +1,395 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Citas</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mundo Mascotas - Citas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/variables.css" />
+  <link rel="stylesheet" href="../styles/components.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/responsive.css" />
+  <link rel="stylesheet" href="../styles/citas.css" />
 </head>
 <body>
-  <h1>Página de citas</h1>
+
+  <header class="topbar">
+    <div class="container topbar-content">
+      <p>Consulta y organiza las citas veterinarias de tus mascotas.</p>
+      <span>Seguimiento, atención y control en una sola vista.</span>
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <div class="container nav-content">
+      <div class="logo">
+        <span class="logo-icon">🐾</span>
+        <span class="logo-text">Mundo Mascotas</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="mascotas.html">Mascotas</a></li>
+        <li><a href="citas.html" class="active">Citas</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="adopciones.html">Adopciones</a></li>
+      </ul>
+
+      <a href="dashboard.html" class="btn-nav">Contáctanos</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="appointments-hero">
+      <div class="container">
+        <div class="appointments-hero-box">
+          <div class="appointments-hero-text">
+            <span class="section-tag">Citas veterinarias</span>
+            <h1>Gestiona el control y seguimiento clínico de tus mascotas</h1>
+            <p>
+              Revisa citas programadas, estado de atención, veterinario asignado
+              y un resumen clínico pensado para que el usuario entienda rápidamente
+              lo más importante.
+            </p>
+
+            <div class="appointments-hero-actions">
+              <a href="#appointmentsCatalog" class="btn btn-primary">Ver citas</a>
+              <a href="#appointmentPanel" class="btn btn-secondary">Ver detalle</a>
+            </div>
+          </div>
+
+          <div class="appointments-hero-stats">
+            <article class="appointments-mini-card">
+              <strong>+2</strong>
+              <span>Citas registradas</span>
+            </article>
+            <article class="appointments-mini-card">
+              <strong>+2</strong>
+              <span>Veterinarios activos</span>
+            </article>
+            <article class="appointments-mini-card">
+              <strong>24/7</strong>
+              <span>Consulta de estado</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="appointments-filters">
+      <div class="container">
+        <div class="section-head appointments-head-left">
+          <span class="section-tag">Agenda clínica</span>
+          <h2>Citas activas y seguimiento general</h2>
+          <p>Una experiencia clara para revisar el estado de cada cita y su información principal.</p>
+        </div>
+
+        <div class="appointments-filter-chips">
+          <button class="appointment-chip active" data-filter="todos">Todos</button>
+          <button class="appointment-chip" data-filter="confirmada">Confirmadas</button>
+          <button class="appointment-chip" data-filter="pendiente">Pendientes</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="appointments-main" id="appointmentsCatalog">
+      <div class="container appointments-main-grid">
+        <div class="appointments-cards-area">
+          <div class="appointments-cards-grid" id="appointmentsCardsGrid">
+            <article class="appointment-card"
+              data-status="confirmada"
+              data-pet="Luna"
+              data-date="10 de abril de 2026"
+              data-time="10:00 AM"
+              data-reason="Vacunación general"
+              data-vet="Dr. Felipe Gómez"
+              data-specialty="Medicina General"
+              data-clinical="Paciente sano"
+              data-treatment="Aplicación de vacuna">
+              <div class="appointment-card-top">
+                <span class="appointment-badge">Confirmada</span>
+                <span class="appointment-icon">🩺</span>
+              </div>
+              <div class="appointment-card-content">
+                <h3>Luna</h3>
+                <p>Cita enfocada en vacunación y control general de bienestar.</p>
+                <div class="appointment-meta">
+                  <span>10 de abril de 2026</span>
+                  <span>10:00 AM</span>
+                </div>
+                <button
+                  class="appointment-detail-btn"
+                  data-pet="Luna"
+                  data-date="10 de abril de 2026"
+                  data-time="10:00 AM"
+                  data-reason="Vacunación general"
+                  data-vet="Dr. Felipe Gómez"
+                  data-specialty="Medicina General"
+                  data-status="Confirmada"
+                  data-clinical="Paciente sano"
+                  data-treatment="Aplicación de vacuna">
+                  Ver detalle
+                </button>
+              </div>
+            </article>
+
+            <article class="appointment-card"
+              data-status="pendiente"
+              data-pet="Max"
+              data-date="11 de abril de 2026"
+              data-time="11:30 AM"
+              data-reason="Chequeo general"
+              data-vet="Dra. Paula Martínez"
+              data-specialty="Cirugía Veterinaria"
+              data-clinical="Observación preventiva"
+              data-treatment="Seguimiento en casa">
+              <div class="appointment-card-top">
+                <span class="appointment-badge pending">Pendiente</span>
+                <span class="appointment-icon">📋</span>
+              </div>
+              <div class="appointment-card-content">
+                <h3>Max</h3>
+                <p>Control preventivo con observación clínica y seguimiento básico.</p>
+                <div class="appointment-meta">
+                  <span>11 de abril de 2026</span>
+                  <span>11:30 AM</span>
+                </div>
+                <button
+                  class="appointment-detail-btn"
+                  data-pet="Max"
+                  data-date="11 de abril de 2026"
+                  data-time="11:30 AM"
+                  data-reason="Chequeo general"
+                  data-vet="Dra. Paula Martínez"
+                  data-specialty="Cirugía Veterinaria"
+                  data-status="Pendiente"
+                  data-clinical="Observación preventiva"
+                  data-treatment="Seguimiento en casa">
+                  Ver detalle
+                </button>
+              </div>
+            </article>
+
+            <article class="appointment-card"
+              data-status="pendiente"
+              data-pet="Toby"
+              data-date="15 de abril de 2026"
+              data-time="09:15 AM"
+              data-reason="Control de rutina"
+              data-vet="Dr. Felipe Gómez"
+              data-specialty="Medicina General"
+              data-clinical="Pendiente de valoración"
+              data-treatment="Por definir">
+              <div class="appointment-card-top">
+                <span class="appointment-badge pending">Pendiente</span>
+                <span class="appointment-icon">🐶</span>
+              </div>
+              <div class="appointment-card-content">
+                <h3>Toby</h3>
+                <p>Espacio reservado para revisión general y actualización de control.</p>
+                <div class="appointment-meta">
+                  <span>15 de abril de 2026</span>
+                  <span>09:15 AM</span>
+                </div>
+                <button
+                  class="appointment-detail-btn"
+                  data-pet="Toby"
+                  data-date="15 de abril de 2026"
+                  data-time="09:15 AM"
+                  data-reason="Control de rutina"
+                  data-vet="Dr. Felipe Gómez"
+                  data-specialty="Medicina General"
+                  data-status="Pendiente"
+                  data-clinical="Pendiente de valoración"
+                  data-treatment="Por definir">
+                  Ver detalle
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <div class="appointments-history-card">
+            <div class="appointment-section-title appointment-small-title">
+              <h2>Seguimiento clínico reciente</h2>
+              <p>Una vista resumida del estado clínico y tratamiento registrado.</p>
+            </div>
+
+            <div class="appointments-history-list" id="appointmentsHistoryList">
+              <article class="appointments-history-item">
+                <strong>Luna</strong>
+                <span>Paciente sano · Aplicación de vacuna</span>
+              </article>
+              <article class="appointments-history-item">
+                <strong>Max</strong>
+                <span>Observación preventiva · Seguimiento en casa</span>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <aside class="appointments-sidebar" id="appointmentPanel">
+          <div class="appointment-summary-card">
+            <div class="appointment-summary-head">
+              <h3>Detalle de cita</h3>
+              <span id="appointmentStatusLabel">Sin selección</span>
+            </div>
+
+            <div class="appointment-summary-body">
+              <div class="appointment-line">
+                <span>Mascota</span>
+                <strong id="appointmentPet">No seleccionada</strong>
+              </div>
+              <div class="appointment-line">
+                <span>Fecha</span>
+                <strong id="appointmentDate">Sin información</strong>
+              </div>
+              <div class="appointment-line">
+                <span>Hora</span>
+                <strong id="appointmentTime">Sin información</strong>
+              </div>
+              <div class="appointment-line">
+                <span>Motivo</span>
+                <strong id="appointmentReason">Sin información</strong>
+              </div>
+              <div class="appointment-line">
+                <span>Veterinario</span>
+                <strong id="appointmentVet">Sin información</strong>
+              </div>
+              <div class="appointment-line">
+                <span>Especialidad</span>
+                <strong id="appointmentSpecialty">Sin información</strong>
+              </div>
+              <div class="appointment-line">
+                <span>Diagnóstico</span>
+                <strong id="appointmentClinical">Sin información</strong>
+              </div>
+              <div class="appointment-line">
+                <span>Tratamiento</span>
+                <strong id="appointmentTreatment">Sin información</strong>
+              </div>
+            </div>
+
+            <button class="btn btn-primary appointment-main-btn" id="confirmAppointmentBtn">Confirmar seguimiento</button>
+          </div>
+
+          <div class="appointment-links-card">
+            <h3>Accesos relacionados</h3>
+            <ul>
+              <li><a href="mascotas.html">Ver perfiles de mascotas</a></li>
+              <li><a href="servicios.html">Consultar servicios</a></li>
+              <li><a href="tienda.html">Explorar tienda</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="appointments-benefits">
+      <div class="container">
+        <div class="appointments-benefits-grid">
+          <article class="appointments-benefit-card">
+            <h3>Agenda organizada</h3>
+            <p>El usuario puede identificar rápidamente el estado y propósito de cada cita.</p>
+          </article>
+          <article class="appointments-benefit-card">
+            <h3>Seguimiento clínico</h3>
+            <p>Se refleja la relación entre cita, diagnóstico y tratamiento dentro del sistema.</p>
+          </article>
+          <article class="appointments-benefit-card">
+            <h3>Experiencia clara</h3>
+            <p>La información importante queda resumida y accesible en una sola pantalla.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="container footer-top-content">
+        <div class="footer-brand-box">
+          <div class="footer-brand-logo"></div>
+          <div class="footer-brand-text">
+            <h3>Mundo Mascotas</h3>
+            <p>Recibe novedades, promociones y recomendaciones para consentir a tu peludo.</p>
+          </div>
+        </div>
+
+        <form class="footer-newsletter">
+          <select>
+            <option selected>Selecciona tu mascota</option>
+            <option>Perro</option>
+            <option>Gato</option>
+            <option>Ambos</option>
+          </select>
+
+          <input type="email" placeholder="Correo electrónico" />
+          <button type="submit">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="container footer-main-content">
+        <div class="footer-column footer-column-brand">
+          <div class="footer-logo">
+            <span class="footer-paw-icon">🐾</span>
+            <span>Mundo Mascotas</span>
+          </div>
+          <p class="footer-description">
+            Todo lo que tu mascota necesita en un solo lugar: productos, bienestar y cuidado con estilo.
+          </p>
+
+          <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">tt</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">yt</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="tienda.html">Tienda</a></li>
+            <li><a href="citas.html">Citas</a></li>
+            <li><a href="mascotas.html">Mascotas</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Ayuda</h4>
+          <ul>
+            <li><a href="dashboard.html">Preguntas frecuentes</a></li>
+            <li><a href="dashboard.html">Contáctanos</a></li>
+            <li><a href="dashboard.html">Términos y condiciones</a></li>
+            <li><a href="dashboard.html">Política de privacidad</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:info@mundomascotas.com">info@mundomascotas.com</a></li>
+            <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
+            <li><a href="dashboard.html">Bogotá, Colombia</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>© 2026 Mundo Mascotas. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/citas.js"></script>
 </body>
 </html>
