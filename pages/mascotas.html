@@ -1,11 +1,388 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mascotas</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mundo Mascotas - Mascotas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/variables.css" />
+  <link rel="stylesheet" href="../styles/components.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/responsive.css" />
+  <link rel="stylesheet" href="../styles/mascotas.css" />
 </head>
 <body>
-  <h1>Página de mascotas</h1>
+
+  <header class="topbar">
+    <div class="container topbar-content">
+      <p>Gestiona la información de tus mascotas en un solo lugar.</p>
+      <span>Perfil, salud y seguimiento en una sola vista.</span>
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <div class="container nav-content">
+      <div class="logo">
+        <span class="logo-icon">🐾</span>
+        <span class="logo-text">Mundo Mascotas</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="mascotas.html" class="active">Mascotas</a></li>
+        <li><a href="citas.html">Citas</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="adopciones.html">Adopciones</a></li>
+      </ul>
+
+      <a href="dashboard.html" class="btn-nav">Contáctanos</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="pets-hero">
+      <div class="container">
+        <div class="pets-hero-box">
+          <div class="pets-hero-text">
+            <span class="section-tag">Gestión de mascotas</span>
+            <h1>Consulta el perfil y seguimiento básico de tus mascotas</h1>
+            <p>
+              Visualiza datos principales, estado general, vacunas recientes y accesos rápidos
+              a citas, historial y servicios relacionados.
+            </p>
+
+            <div class="pets-hero-actions">
+              <a href="#petsCatalog" class="btn btn-primary">Ver mascotas</a>
+              <a href="#petPanel" class="btn btn-secondary">Ver detalle</a>
+            </div>
+          </div>
+
+          <div class="pets-hero-stats">
+            <article class="pets-mini-card">
+              <strong>+3</strong>
+              <span>Mascotas registradas</span>
+            </article>
+            <article class="pets-mini-card">
+              <strong>+2</strong>
+              <span>Historias clínicas</span>
+            </article>
+            <article class="pets-mini-card">
+              <strong>24/7</strong>
+              <span>Consulta de información</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pets-filters">
+      <div class="container">
+        <div class="section-head pets-head-left">
+          <span class="section-tag">Perfil animal</span>
+          <h2>Mascotas registradas en la plataforma</h2>
+          <p>Una vista pensada para navegar entre mascotas y consultar su información clave.</p>
+        </div>
+
+        <div class="pets-filter-chips">
+          <button class="pet-chip active" data-filter="todos">Todos</button>
+          <button class="pet-chip" data-filter="perro">Perros</button>
+          <button class="pet-chip" data-filter="gato">Gatos</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="pets-main" id="petsCatalog">
+      <div class="container pets-main-grid">
+        <div class="pets-cards-area">
+          <div class="pets-cards-grid" id="petsCardsGrid">
+            <article class="pet-card"
+              data-type="perro"
+              data-name="Luna"
+              data-breed="Labrador"
+              data-age="15 de enero de 2023"
+              data-owner="Ana Torres"
+              data-vaccine="Rabia y Moquillo"
+              data-history="Historia clínica activa"
+              data-status="Salud estable">
+              <div class="pet-card-image">
+                <img src="../assets/img/perrogato.webp" alt="Luna" />
+              </div>
+              <div class="pet-card-content">
+                <span class="pet-badge">Perro</span>
+                <h3>Luna</h3>
+                <p>Mascota con seguimiento general, vacunas registradas y actividad reciente.</p>
+                <div class="pet-meta">
+                  <span>Raza: Labrador</span>
+                  <span>Salud estable</span>
+                </div>
+                <button
+                  class="pet-detail-btn"
+                  data-name="Luna"
+                  data-type="Perro"
+                  data-breed="Labrador"
+                  data-age="15 de enero de 2023"
+                  data-owner="Ana Torres"
+                  data-vaccine="Rabia y Moquillo"
+                  data-history="Historia clínica activa"
+                  data-status="Salud estable">
+                  Ver detalle
+                </button>
+              </div>
+            </article>
+
+            <article class="pet-card"
+              data-type="gato"
+              data-name="Max"
+              data-breed="Siamés"
+              data-age="10 de febrero de 2024"
+              data-owner="Ana Torres"
+              data-vaccine="Rabia"
+              data-history="Historia clínica activa"
+              data-status="Seguimiento preventivo">
+              <div class="pet-card-image">
+                <img src="../assets/img/Cards/ArenaGatos.png" alt="Max" />
+              </div>
+              <div class="pet-card-content">
+                <span class="pet-badge">Gato</span>
+                <h3>Max</h3>
+                <p>Registro activo con información básica, control preventivo y seguimiento.</p>
+                <div class="pet-meta">
+                  <span>Raza: Siamés</span>
+                  <span>Seguimiento preventivo</span>
+                </div>
+                <button
+                  class="pet-detail-btn"
+                  data-name="Max"
+                  data-type="Gato"
+                  data-breed="Siamés"
+                  data-age="10 de febrero de 2024"
+                  data-owner="Ana Torres"
+                  data-vaccine="Rabia"
+                  data-history="Historia clínica activa"
+                  data-status="Seguimiento preventivo">
+                  Ver detalle
+                </button>
+              </div>
+            </article>
+
+            <article class="pet-card"
+              data-type="perro"
+              data-name="Toby"
+              data-breed="Criollo"
+              data-age="1 de agosto de 2024"
+              data-owner="Carlos Ruiz"
+              data-vaccine="Pendiente de actualización"
+              data-history="Sin historia clínica completa"
+              data-status="Requiere seguimiento">
+              <div class="pet-card-image">
+                <img src="../assets/img/Cards/pelota.png" alt="Toby" />
+              </div>
+              <div class="pet-card-content">
+                <span class="pet-badge">Perro</span>
+                <h3>Toby</h3>
+                <p>Perfil registrado con información principal y observaciones de seguimiento.</p>
+                <div class="pet-meta">
+                  <span>Raza: Criollo</span>
+                  <span>Requiere seguimiento</span>
+                </div>
+                <button
+                  class="pet-detail-btn"
+                  data-name="Toby"
+                  data-type="Perro"
+                  data-breed="Criollo"
+                  data-age="1 de agosto de 2024"
+                  data-owner="Carlos Ruiz"
+                  data-vaccine="Pendiente de actualización"
+                  data-history="Sin historia clínica completa"
+                  data-status="Requiere seguimiento">
+                  Ver detalle
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <div class="pet-health-card">
+            <div class="pet-section-title pet-small-title">
+              <h2>Resumen sanitario</h2>
+              <p>Una vista breve del estado general y seguimiento clínico.</p>
+            </div>
+
+            <div class="pet-health-list" id="petHealthList">
+              <article class="pet-health-item">
+                <strong>Luna</strong>
+                <span>Vacunas al día · Salud estable</span>
+              </article>
+              <article class="pet-health-item">
+                <strong>Max</strong>
+                <span>Seguimiento preventivo · Control reciente</span>
+              </article>
+              <article class="pet-health-item">
+                <strong>Toby</strong>
+                <span>Revisión pendiente · Actualizar vacunas</span>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <aside class="pets-sidebar" id="petPanel">
+          <div class="pet-summary-card">
+            <div class="pet-summary-head">
+              <h3>Detalle de mascota</h3>
+              <span id="petStatusLabel">Sin selección</span>
+            </div>
+
+            <div class="pet-summary-body">
+              <div class="pet-line">
+                <span>Nombre</span>
+                <strong id="petName">No seleccionado</strong>
+              </div>
+              <div class="pet-line">
+                <span>Tipo</span>
+                <strong id="petType">No aplica</strong>
+              </div>
+              <div class="pet-line">
+                <span>Raza</span>
+                <strong id="petBreed">No aplica</strong>
+              </div>
+              <div class="pet-line">
+                <span>Fecha de nacimiento</span>
+                <strong id="petAge">Sin información</strong>
+              </div>
+              <div class="pet-line">
+                <span>Propietario</span>
+                <strong id="petOwner">Sin información</strong>
+              </div>
+              <div class="pet-line">
+                <span>Vacunas</span>
+                <strong id="petVaccine">Sin registro</strong>
+              </div>
+              <div class="pet-line">
+                <span>Historia clínica</span>
+                <strong id="petHistory">Sin información</strong>
+              </div>
+            </div>
+
+            <button class="btn btn-primary pet-main-btn" id="activatePetBtn">Marcar como activa</button>
+          </div>
+
+          <div class="pet-links-card">
+            <h3>Accesos rápidos</h3>
+            <ul>
+              <li><a href="citas.html">Ir a citas veterinarias</a></li>
+              <li><a href="servicios.html">Ver servicios disponibles</a></li>
+              <li><a href="tienda.html">Explorar tienda</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="pets-benefits">
+      <div class="container">
+        <div class="pets-benefits-grid">
+          <article class="pets-benefit-card">
+            <h3>Perfiles organizados</h3>
+            <p>La información clave de cada mascota queda agrupada en una sola vista.</p>
+          </article>
+          <article class="pets-benefit-card">
+            <h3>Salud y vacunas</h3>
+            <p>Se refleja la lógica de historial, seguimiento y vacunación del sistema.</p>
+          </article>
+          <article class="pets-benefit-card">
+            <h3>Conexión con otros módulos</h3>
+            <p>La mascota funciona como eje entre citas, servicios y demás procesos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="container footer-top-content">
+        <div class="footer-brand-box">
+          <div class="footer-brand-logo"></div>
+          <div class="footer-brand-text">
+            <h3>Mundo Mascotas</h3>
+            <p>Recibe novedades, promociones y recomendaciones para consentir a tu peludo.</p>
+          </div>
+        </div>
+
+        <form class="footer-newsletter">
+          <select>
+            <option selected>Selecciona tu mascota</option>
+            <option>Perro</option>
+            <option>Gato</option>
+            <option>Ambos</option>
+          </select>
+
+          <input type="email" placeholder="Correo electrónico" />
+          <button type="submit">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="container footer-main-content">
+        <div class="footer-column footer-column-brand">
+          <div class="footer-logo">
+            <span class="footer-paw-icon">🐾</span>
+            <span>Mundo Mascotas</span>
+          </div>
+          <p class="footer-description">
+            Todo lo que tu mascota necesita en un solo lugar: productos, bienestar y cuidado con estilo.
+          </p>
+
+          <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">tt</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">yt</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="tienda.html">Tienda</a></li>
+            <li><a href="citas.html">Citas</a></li>
+            <li><a href="mascotas.html">Mascotas</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Ayuda</h4>
+          <ul>
+            <li><a href="dashboard.html">Preguntas frecuentes</a></li>
+            <li><a href="dashboard.html">Contáctanos</a></li>
+            <li><a href="dashboard.html">Términos y condiciones</a></li>
+            <li><a href="dashboard.html">Política de privacidad</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:info@mundomascotas.com">info@mundomascotas.com</a></li>
+            <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
+            <li><a href="dashboard.html">Bogotá, Colombia</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>© 2026 Mundo Mascotas. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/mascotas.js"></script>
 </body>
 </html>

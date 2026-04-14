@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mundo Mascotas - Adopciones</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/variables.css" />
+  <link rel="stylesheet" href="../styles/components.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/responsive.css" />
+  <link rel="stylesheet" href="../styles/adopciones.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-content">
+      <p>Encuentra una nueva compañía para tu hogar.</p>
+      <span>Adoptar también es cuidar.</span>
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <div class="container nav-content">
+      <div class="logo">
+        <span class="logo-icon">🐾</span>
+        <span class="logo-text">Mundo Mascotas</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="mascotas.html">Mascotas</a></li>
+        <li><a href="citas.html">Citas</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="adopciones.html" class="active">Adopciones</a></li>
+      </ul>
+
+      <a href="dashboard.html" class="btn-nav">Contáctanos</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="adoption-hero">
+      <div class="container">
+        <div class="adoption-hero-box">
+          <div class="adoption-hero-text">
+            <span class="section-tag">Adopción responsable</span>
+            <h1>Conoce mascotas que buscan un nuevo hogar</h1>
+            <p>
+              Explora publicaciones disponibles, revisa información básica de cada mascota
+              y simula una solicitud de adopción de manera clara y organizada.
+            </p>
+
+            <div class="adoption-hero-actions">
+              <a href="#adoptionCatalog" class="btn btn-primary">Ver mascotas</a>
+              <a href="#adoptionPanel" class="btn btn-secondary">Ver solicitud</a>
+            </div>
+          </div>
+
+          <div class="adoption-hero-stats">
+            <article class="adoption-mini-card">
+              <strong>+1</strong>
+              <span>Publicaciones activas</span>
+            </article>
+            <article class="adoption-mini-card">
+              <strong>100%</strong>
+              <span>Proceso visible</span>
+            </article>
+            <article class="adoption-mini-card">
+              <strong>1 clic</strong>
+              <span>Para iniciar solicitud</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="adoption-filters">
+      <div class="container">
+        <div class="section-head adoption-head-left">
+          <span class="section-tag">Disponibles</span>
+          <h2>Mascotas en proceso de adopción</h2>
+          <p>Una vista pensada para que el usuario identifique opciones y solicite información fácilmente.</p>
+        </div>
+
+        <div class="adoption-filter-chips">
+          <button class="adoption-chip active" data-filter="todos">Todos</button>
+          <button class="adoption-chip" data-filter="perro">Perros</button>
+          <button class="adoption-chip" data-filter="gato">Gatos</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="adoption-main" id="adoptionCatalog">
+      <div class="container adoption-main-grid">
+        <div class="adoption-cards-area">
+          <div class="adoption-cards-grid" id="adoptionCardsGrid">
+            <article class="adoption-card"
+              data-type="perro"
+              data-name="Toby"
+              data-status="Disponible">
+              <div class="adoption-card-image">
+                <img src="../assets/img/perrogato.webp" alt="Toby en adopción" />
+              </div>
+              <div class="adoption-card-content">
+                <span class="adoption-badge">Perro</span>
+                <h3>Toby</h3>
+                <p>Perro criollo cariñoso, ideal para familia y convivencia en hogar.</p>
+                <div class="adoption-meta">
+                  <span>Estado: Disponible</span>
+                  <span>Perfil familiar</span>
+                </div>
+                <button
+                  class="adopt-btn"
+                  data-name="Toby"
+                  data-type="Perro"
+                  data-status="Pendiente"
+                  data-description="Perro criollo cariñoso, ideal para familia.">
+                  Solicitar adopción
+                </button>
+              </div>
+            </article>
+
+            <article class="adoption-card"
+              data-type="gato"
+              data-name="Max"
+              data-status="Disponible">
+              <div class="adoption-card-image">
+                <img src="../assets/img/Cards/ArenaGatos.png" alt="Max en adopción" />
+              </div>
+              <div class="adoption-card-content">
+                <span class="adoption-badge">Gato</span>
+                <h3>Max</h3>
+                <p>Gato tranquilo, adaptable y recomendado para espacios interiores.</p>
+                <div class="adoption-meta">
+                  <span>Estado: Disponible</span>
+                  <span>Ambiente tranquilo</span>
+                </div>
+                <button
+                  class="adopt-btn"
+                  data-name="Max"
+                  data-type="Gato"
+                  data-status="Pendiente"
+                  data-description="Gato tranquilo, adaptable y recomendado para interiores.">
+                  Solicitar adopción
+                </button>
+              </div>
+            </article>
+
+            <article class="adoption-card"
+              data-type="perro"
+              data-name="Luna"
+              data-status="Disponible">
+              <div class="adoption-card-image">
+                <img src="../assets/img/Cards/Snack.png" alt="Luna en adopción" />
+              </div>
+              <div class="adoption-card-content">
+                <span class="adoption-badge">Perro</span>
+                <h3>Luna</h3>
+                <p>Perra sociable y enérgica, ideal para hogares con rutinas activas.</p>
+                <div class="adoption-meta">
+                  <span>Estado: Disponible</span>
+                  <span>Alta energía</span>
+                </div>
+                <button
+                  class="adopt-btn"
+                  data-name="Luna"
+                  data-type="Perro"
+                  data-status="Pendiente"
+                  data-description="Perra sociable y enérgica, ideal para rutinas activas.">
+                  Solicitar adopción
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <div class="adoption-recent-card">
+            <div class="adoption-section-title adoption-small-title">
+              <h2>Solicitudes recientes</h2>
+              <p>Una vista simple del seguimiento de solicitudes generadas.</p>
+            </div>
+
+            <div class="adoption-request-list" id="adoptionRequestList">
+              <article class="adoption-request-item">
+                <strong>Toby - Ana Torres</strong>
+                <span>Pendiente</span>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <aside class="adoption-sidebar" id="adoptionPanel">
+          <div class="adoption-summary-card">
+            <div class="adoption-summary-head">
+              <h3>Resumen de solicitud</h3>
+              <span id="adoptionStatusLabel">Sin selección</span>
+            </div>
+
+            <div class="adoption-summary-body">
+              <div class="adoption-line">
+                <span>Mascota</span>
+                <strong id="adoptionPetName">No seleccionada</strong>
+              </div>
+              <div class="adoption-line">
+                <span>Tipo</span>
+                <strong id="adoptionPetType">No aplica</strong>
+              </div>
+              <div class="adoption-line">
+                <span>Estado</span>
+                <strong id="adoptionPetStatus">Sin solicitud</strong>
+              </div>
+              <div class="adoption-line">
+                <span>Descripción</span>
+                <strong id="adoptionPetDescription">Sin información</strong>
+              </div>
+            </div>
+
+            <button class="btn btn-primary adoption-main-btn" id="confirmAdoptionBtn">Confirmar solicitud</button>
+          </div>
+
+          <div class="adoption-info-card">
+            <h3>Qué puedes hacer aquí</h3>
+            <ul>
+              <li>Ver publicaciones de adopción</li>
+              <li>Seleccionar una mascota</li>
+              <li>Generar una solicitud visible</li>
+              <li>Consultar el estado del proceso</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="adoption-benefits">
+      <div class="container">
+        <div class="adoption-benefits-grid">
+          <article class="adoption-benefit-card">
+            <h3>Proceso visible</h3>
+            <p>La interfaz permite representar el flujo entre publicación y solicitud.</p>
+          </article>
+          <article class="adoption-benefit-card">
+            <h3>Selección clara</h3>
+            <p>El usuario identifica fácilmente qué mascota le interesa y cómo solicitarla.</p>
+          </article>
+          <article class="adoption-benefit-card">
+            <h3>Estado organizado</h3>
+            <p>La solicitud queda reflejada en pantalla de forma simple y entendible.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="container footer-top-content">
+        <div class="footer-brand-box">
+          <div class="footer-brand-logo"></div>
+          <div class="footer-brand-text">
+            <h3>Mundo Mascotas</h3>
+            <p>Recibe novedades, promociones y recomendaciones para consentir a tu peludo.</p>
+          </div>
+        </div>
+
+        <form class="footer-newsletter">
+          <select>
+            <option selected>Selecciona tu mascota</option>
+            <option>Perro</option>
+            <option>Gato</option>
+            <option>Ambos</option>
+          </select>
+
+          <input type="email" placeholder="Correo electrónico" />
+          <button type="submit">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="container footer-main-content">
+        <div class="footer-column footer-column-brand">
+          <div class="footer-logo">
+            <span class="footer-paw-icon">🐾</span>
+            <span>Mundo Mascotas</span>
+          </div>
+          <p class="footer-description">
+            Todo lo que tu mascota necesita en un solo lugar: productos, bienestar y cuidado con estilo.
+          </p>
+
+          <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">tt</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">yt</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="tienda.html">Tienda</a></li>
+            <li><a href="citas.html">Citas</a></li>
+            <li><a href="mascotas.html">Mascotas</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Ayuda</h4>
+          <ul>
+            <li><a href="dashboard.html">Preguntas frecuentes</a></li>
+            <li><a href="dashboard.html">Contáctanos</a></li>
+            <li><a href="dashboard.html">Términos y condiciones</a></li>
+            <li><a href="dashboard.html">Política de privacidad</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:info@mundomascotas.com">info@mundomascotas.com</a></li>
+            <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
+            <li><a href="dashboard.html">Bogotá, Colombia</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>© 2026 Mundo Mascotas. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/adopciones.js"></script>
+</body>
+</html>

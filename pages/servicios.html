@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mundo Mascotas - Servicios</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/variables.css" />
+  <link rel="stylesheet" href="../styles/components.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/responsive.css" />
+  <link rel="stylesheet" href="../styles/servicios.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-content">
+      <p>¡Reserva servicios para tu mascota en pocos pasos!</p>
+      <span>Bienestar, cuidado y acompañamiento en un solo lugar.</span>
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <div class="container nav-content">
+      <div class="logo">
+        <span class="logo-icon">🐾</span>
+        <span class="logo-text">Mundo Mascotas</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="mascotas.html">Mascotas</a></li>
+        <li><a href="citas.html">Citas</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="servicios.html" class="active">Servicios</a></li>
+        <li><a href="adopciones.html">Adopciones</a></li>
+      </ul>
+
+      <a href="dashboard.html" class="btn-nav">Contáctanos</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="services-hero">
+      <div class="container">
+        <div class="services-hero-box">
+          <div class="services-hero-text">
+            <span class="section-tag">Servicios especializados</span>
+            <h1>Reserva experiencias de cuidado pensadas para tu mascota</h1>
+            <p>
+              Programa servicios como baño, guardería, consulta a domicilio y paseo.
+              Gestiona reservas y consulta información clave en una sola vista.
+            </p>
+
+            <div class="services-hero-actions">
+              <a href="#catalogo-servicios" class="btn btn-primary">Ver servicios</a>
+              <a href="#panel-reserva" class="btn btn-secondary">Ver resumen</a>
+            </div>
+          </div>
+
+          <div class="services-hero-stats">
+            <article class="services-mini-card">
+              <strong>4</strong>
+              <span>Servicios principales</span>
+            </article>
+            <article class="services-mini-card">
+              <strong>+2</strong>
+              <span>Paseadores disponibles</span>
+            </article>
+            <article class="services-mini-card">
+              <strong>24/7</strong>
+              <span>Consulta de reservas</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-types" id="catalogo-servicios">
+      <div class="container">
+        <div class="section-head services-head-left">
+          <span class="section-tag">Disponibles</span>
+          <h2>Servicios para el bienestar de tu mascota</h2>
+          <p>Una vista clara de las opciones que el usuario puede consultar o reservar.</p>
+        </div>
+
+        <div class="services-filter-chips">
+          <button class="service-chip active" data-filter="todos">Todos</button>
+          <button class="service-chip" data-filter="cuidado">Cuidado</button>
+          <button class="service-chip" data-filter="movilidad">Movilidad</button>
+          <button class="service-chip" data-filter="salud">Salud</button>
+        </div>
+
+        <div class="services-grid" id="servicesGrid">
+          <article class="service-card" data-group="cuidado" data-name="baño">
+            <div class="service-icon">🛁</div>
+            <div class="service-card-content">
+              <span class="service-badge">Cuidado</span>
+              <h3>Baño</h3>
+              <p>Limpieza y cuidado básico para mantener a tu mascota fresca, cómoda y bien atendida.</p>
+              <ul class="service-features">
+                <li>Atención básica</li>
+                <li>Duración estimada: 1 hora</li>
+                <li>Ideal para rutina de higiene</li>
+              </ul>
+              <button
+                class="service-action-btn"
+                data-service="Baño"
+                data-pet="Luna"
+                data-time="09:00 AM"
+                data-status="Confirmada">
+                Reservar
+              </button>
+            </div>
+          </article>
+
+          <article class="service-card" data-group="cuidado" data-name="guardería">
+            <div class="service-icon">🏠</div>
+            <div class="service-card-content">
+              <span class="service-badge">Cuidado</span>
+              <h3>Guardería</h3>
+              <p>Espacio pensado para el acompañamiento y permanencia segura de tu mascota durante el día.</p>
+              <ul class="service-features">
+                <li>Atención por jornada</li>
+                <li>Seguimiento básico</li>
+                <li>Ideal para rutinas activas</li>
+              </ul>
+              <button
+                class="service-action-btn"
+                data-service="Guardería"
+                data-pet="Toby"
+                data-time="08:00 AM"
+                data-status="Pendiente">
+                Reservar
+              </button>
+            </div>
+          </article>
+
+          <article class="service-card" data-group="salud" data-name="consulta a domicilio">
+            <div class="service-icon">🚑</div>
+            <div class="service-card-content">
+              <span class="service-badge">Salud</span>
+              <h3>Consulta a domicilio</h3>
+              <p>Servicio pensado para revisiones y orientación inicial con mayor comodidad para el usuario.</p>
+              <ul class="service-features">
+                <li>Atención en casa</li>
+                <li>Mayor practicidad</li>
+                <li>Apoyo en seguimiento</li>
+              </ul>
+              <button
+                class="service-action-btn"
+                data-service="Consulta a domicilio"
+                data-pet="Max"
+                data-time="11:30 AM"
+                data-status="Pendiente">
+                Reservar
+              </button>
+            </div>
+          </article>
+
+          <article class="service-card" data-group="movilidad" data-name="paseo">
+            <div class="service-icon">🐕</div>
+            <div class="service-card-content">
+              <span class="service-badge">Movilidad</span>
+              <h3>Paseo</h3>
+              <p>Actividad programada para apoyar el bienestar físico, la rutina y la recreación diaria.</p>
+              <ul class="service-features">
+                <li>Duración flexible</li>
+                <li>Apoyo profesional</li>
+                <li>Ideal para energía y rutina</li>
+              </ul>
+              <button
+                class="service-action-btn"
+                data-service="Paseo"
+                data-pet="Luna"
+                data-time="07:30 AM"
+                data-status="Programado">
+                Reservar
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-main">
+      <div class="container services-main-grid">
+        <div class="walkers-area">
+          <div class="services-section-title">
+            <h2>Paseadores destacados</h2>
+            <p>Un bloque pensado para representar el módulo de paseadores y paseos del sistema.</p>
+          </div>
+
+          <div class="walkers-grid" id="walkersGrid">
+            <article class="walker-card">
+              <div class="walker-top">
+                <div class="walker-avatar">JP</div>
+                <div>
+                  <h3>Juan Pérez</h3>
+                  <p>Paseador certificado</p>
+                </div>
+              </div>
+              <div class="walker-info">
+                <span>Tarifa: $20.000</span>
+                <span>Ubicación disponible</span>
+              </div>
+              <button
+                class="walker-btn"
+                data-service="Paseo"
+                data-pet="Luna"
+                data-time="07:30 AM"
+                data-status="Programado"
+                data-walker="Juan Pérez">
+                Agendar paseo
+              </button>
+            </article>
+
+            <article class="walker-card">
+              <div class="walker-top">
+                <div class="walker-avatar">ML</div>
+                <div>
+                  <h3>María López</h3>
+                  <p>Paseadora certificada</p>
+                </div>
+              </div>
+              <div class="walker-info">
+                <span>Tarifa: $25.000</span>
+                <span>Alta disponibilidad</span>
+              </div>
+              <button
+                class="walker-btn"
+                data-service="Paseo"
+                data-pet="Toby"
+                data-time="08:00 AM"
+                data-status="Pendiente"
+                data-walker="María López">
+                Agendar paseo
+              </button>
+            </article>
+          </div>
+
+          <div class="reservation-list-card">
+            <div class="services-section-title services-small-title">
+              <h2>Reservas recientes</h2>
+              <p>Vista rápida del estado de servicios y reservas del usuario.</p>
+            </div>
+
+            <div class="reservation-list" id="reservationList">
+              <article class="reservation-item">
+                <strong>Baño - Luna</strong>
+                <span>Confirmada · 09:00 AM</span>
+              </article>
+              <article class="reservation-item">
+                <strong>Guardería - Toby</strong>
+                <span>Pendiente · 08:00 AM</span>
+              </article>
+              <article class="reservation-item">
+                <strong>Paseo - Luna</strong>
+                <span>Programado · 07:30 AM</span>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <aside class="services-sidebar" id="panel-reserva">
+          <div class="booking-summary-card">
+            <div class="booking-summary-head">
+              <h3>Resumen de reserva</h3>
+              <span id="bookingStatusLabel">Sin selección</span>
+            </div>
+
+            <div class="booking-summary-body">
+              <div class="booking-line">
+                <span>Servicio</span>
+                <strong id="summaryService">No seleccionado</strong>
+              </div>
+              <div class="booking-line">
+                <span>Mascota</span>
+                <strong id="summaryPet">No seleccionada</strong>
+              </div>
+              <div class="booking-line">
+                <span>Horario</span>
+                <strong id="summaryTime">Sin horario</strong>
+              </div>
+              <div class="booking-line">
+                <span>Paseador</span>
+                <strong id="summaryWalker">No aplica</strong>
+              </div>
+            </div>
+
+            <button class="btn btn-primary booking-main-btn" id="confirmBookingBtn">Confirmar reserva</button>
+          </div>
+
+          <div class="service-info-card">
+            <h3>Qué puedes gestionar aquí</h3>
+            <ul>
+              <li>Consultar tipos de servicio</li>
+              <li>Simular una reserva</li>
+              <li>Visualizar paseadores</li>
+              <li>Revisar estados de atención</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="services-benefits">
+      <div class="container">
+        <div class="services-benefits-grid">
+          <article class="services-benefit-card">
+            <h3>Reservas organizadas</h3>
+            <p>Representa la lógica de programación de servicios y consulta de estados.</p>
+          </article>
+          <article class="services-benefit-card">
+            <h3>Paseos y movilidad</h3>
+            <p>Da visibilidad al módulo de paseo y al rol del paseador dentro del sistema.</p>
+          </article>
+          <article class="services-benefit-card">
+            <h3>Atención centralizada</h3>
+            <p>El usuario entiende rápidamente qué puede reservar y cómo visualizarlo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="container footer-top-content">
+        <div class="footer-brand-box">
+          <div class="footer-brand-logo"></div>
+          <div class="footer-brand-text">
+            <h3>Mundo Mascotas</h3>
+            <p>Recibe novedades, promociones y recomendaciones para consentir a tu peludo.</p>
+          </div>
+        </div>
+
+        <form class="footer-newsletter">
+          <select>
+            <option selected>Selecciona tu mascota</option>
+            <option>Perro</option>
+            <option>Gato</option>
+            <option>Ambos</option>
+          </select>
+
+          <input type="email" placeholder="Correo electrónico" />
+          <button type="submit">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="container footer-main-content">
+        <div class="footer-column footer-column-brand">
+          <div class="footer-logo">
+            <span class="footer-paw-icon">🐾</span>
+            <span>Mundo Mascotas</span>
+          </div>
+          <p class="footer-description">
+            Todo lo que tu mascota necesita en un solo lugar: productos, bienestar y cuidado con estilo.
+          </p>
+
+          <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">tt</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">yt</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="tienda.html">Tienda</a></li>
+            <li><a href="citas.html">Citas</a></li>
+            <li><a href="mascotas.html">Mascotas</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Ayuda</h4>
+          <ul>
+            <li><a href="dashboard.html">Preguntas frecuentes</a></li>
+            <li><a href="dashboard.html">Contáctanos</a></li>
+            <li><a href="dashboard.html">Términos y condiciones</a></li>
+            <li><a href="dashboard.html">Política de privacidad</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:info@mundomascotas.com">info@mundomascotas.com</a></li>
+            <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
+            <li><a href="dashboard.html">Bogotá, Colombia</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>© 2026 Mundo Mascotas. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/servicios.js"></script>
+</body>
+</html>
