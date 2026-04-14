@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mundo Mascotas - Reportar mascota para adopción</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/variables.css" />
+  <link rel="stylesheet" href="../styles/components.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/responsive.css" />
+  <link rel="stylesheet" href="../styles/reportar-adopcion.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-content">
+      <p>Ayúdanos a encontrar un hogar responsable para una mascota.</p>
+      <span>Tu reporte será revisado antes de publicarse en la plataforma.</span>
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <div class="container nav-content">
+      <div class="logo">
+        <span class="logo-icon">🐾</span>
+        <span class="logo-text">Mundo Mascotas</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="mascotas.html">Mascotas</a></li>
+        <li><a href="citas.html">Citas</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="adopciones.html">Adopciones</a></li>
+      </ul>
+
+      <a href="dashboard.html" class="btn-nav">Mi espacio</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="report-hero">
+      <div class="container">
+        <div class="report-hero-box">
+          <div class="report-hero-text">
+            <span class="section-tag">Reporte de adopción</span>
+            <h1>Reporta una mascota para que sea revisada por la plataforma</h1>
+            <p>
+              Si encontraste una mascota o deseas informar un caso de adopción,
+              completa este formulario. El equipo revisará la información antes de publicarla.
+            </p>
+
+            <div class="report-hero-actions">
+              <a href="#reportFormCard" class="btn btn-primary">Llenar formulario</a>
+              <a href="#reportInfoPanel" class="btn btn-secondary">Ver proceso</a>
+            </div>
+          </div>
+
+          <div class="report-hero-side">
+            <article class="report-mini-card">
+              <strong>1</strong>
+              <span>Solicitud por mascota</span>
+            </article>
+            <article class="report-mini-card">
+              <strong>24h</strong>
+              <span>Tiempo estimado de revisión</span>
+            </article>
+            <article class="report-mini-card">
+              <strong>100%</strong>
+              <span>Validación antes de publicar</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="report-main">
+      <div class="container report-main-grid">
+        <div class="report-form-card" id="reportFormCard">
+          <div class="report-card-head">
+            <h2>Formulario de reporte</h2>
+            <p>Comparte la información principal de la mascota y tus datos de contacto.</p>
+          </div>
+
+          <form id="reportAdoptionForm" class="report-form" novalidate>
+            <div class="form-section">
+              <h3>Datos de quien reporta</h3>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="reporterName">Nombre completo</label>
+                  <input type="text" id="reporterName" name="reporterName" placeholder="Ej. Ana Torres" required />
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="reporterEmail">Correo electrónico</label>
+                  <input type="email" id="reporterEmail" name="reporterEmail" placeholder="Ej. ana@email.com" required />
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="reporterPhone">Teléfono</label>
+                  <input type="tel" id="reporterPhone" name="reporterPhone" placeholder="Ej. 3001234567" required />
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="reporterCity">Ciudad</label>
+                  <input type="text" id="reporterCity" name="reporterCity" placeholder="Ej. Bogotá" required />
+                  <small class="error-text"></small>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3>Datos de la mascota</h3>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="petName">Nombre de la mascota</label>
+                  <input type="text" id="petName" name="petName" placeholder="Si no lo conoces, escribe 'Sin nombre'" required />
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="petSpecies">Especie</label>
+                  <select id="petSpecies" name="petSpecies" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Perro">Perro</option>
+                    <option value="Gato">Gato</option>
+                  </select>
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="petBreed">Raza o tipo</label>
+                  <input type="text" id="petBreed" name="petBreed" placeholder="Ej. Criollo, Labrador, Siamés" required />
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="petAge">Edad aproximada</label>
+                  <input type="text" id="petAge" name="petAge" placeholder="Ej. 8 meses, 2 años" required />
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="petSex">Sexo</label>
+                  <select id="petSex" name="petSex" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Macho">Macho</option>
+                    <option value="Hembra">Hembra</option>
+                    <option value="No identificado">No identificado</option>
+                  </select>
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="petVaccines">Estado de vacunas</label>
+                  <select id="petVaccines" name="petVaccines" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Vacunas al día">Vacunas al día</option>
+                    <option value="No tiene vacunas">No tiene vacunas</option>
+                    <option value="No se conoce">No se conoce</option>
+                  </select>
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group form-group-full">
+                  <label for="petPhoto">Foto de la mascota</label>
+                  <input type="file" id="petPhoto" name="petPhoto" accept="image/*" />
+                  <small class="helper-text">Adjuntar una imagen ayuda a revisar mejor el caso.</small>
+                </div>
+
+                <div class="form-group form-group-full">
+                  <label for="petHealth">Estado de salud aparente</label>
+                  <textarea id="petHealth" name="petHealth" rows="4" placeholder="Describe si parece herido, desnutrido, sano, asustado, etc."></textarea>
+                </div>
+
+                <div class="form-group form-group-full">
+                  <label for="petDescription">Descripción general</label>
+                  <textarea id="petDescription" name="petDescription" rows="5" placeholder="Describe el caso, dónde lo encontraste, comportamiento, condiciones actuales, etc." required></textarea>
+                  <small class="error-text"></small>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-submit-row">
+              <button type="submit" class="btn btn-primary full-mobile-btn">Enviar reporte</button>
+            </div>
+          </form>
+        </div>
+
+        <aside class="report-sidebar" id="reportInfoPanel">
+          <div class="report-process-card">
+            <div class="report-card-head">
+              <h2>Cómo funciona</h2>
+              <p>La publicación no se crea automáticamente; primero pasa por revisión.</p>
+            </div>
+
+            <div class="process-steps">
+              <article class="process-step">
+                <strong>1. El público general reporta el caso</strong>
+                <span>Se capturan los datos del reportante y de la mascota.</span>
+              </article>
+
+              <article class="process-step">
+                <strong>2. La plataforma revisa la solicitud</strong>
+                <span>El administrador valida la información recibida.</span>
+              </article>
+
+              <article class="process-step">
+                <strong>3. Se publica en adopciones</strong>
+                <span>La mascota se carga oficialmente si el caso es aprobado.</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="report-summary-card">
+            <div class="report-card-head">
+              <h2>Resumen del reporte</h2>
+              <p>Vista rápida de la información capturada.</p>
+            </div>
+
+            <div class="report-summary-body">
+              <div class="summary-line">
+                <span>Reportante</span>
+                <strong id="summaryReporter">Sin información</strong>
+              </div>
+              <div class="summary-line">
+                <span>Correo</span>
+                <strong id="summaryEmail">Sin información</strong>
+              </div>
+              <div class="summary-line">
+                <span>Mascota</span>
+                <strong id="summaryPet">Sin información</strong>
+              </div>
+              <div class="summary-line">
+                <span>Especie</span>
+                <strong id="summarySpecies">Sin información</strong>
+              </div>
+              <div class="summary-line">
+                <span>Estado</span>
+                <strong id="summaryStatus">Pendiente de envío</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="report-alert-card" id="reportSuccessCard">
+            <h3>Reporte enviado</h3>
+            <p>
+              Tu solicitud fue registrada correctamente. El equipo revisará la información
+              antes de publicar la mascota en la sección de adopciones.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="container footer-top-content">
+        <div class="footer-brand-box">
+          <div class="footer-brand-logo"></div>
+          <div class="footer-brand-text">
+            <h3>Mundo Mascotas</h3>
+            <p>Recibe novedades, promociones y recomendaciones para consentir a tu peludo.</p>
+          </div>
+        </div>
+
+        <form class="footer-newsletter">
+          <select>
+            <option selected>Selecciona tu mascota</option>
+            <option>Perro</option>
+            <option>Gato</option>
+            <option>Ambos</option>
+          </select>
+
+          <input type="email" placeholder="Correo electrónico" />
+          <button type="submit">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="container footer-main-content">
+        <div class="footer-column footer-column-brand">
+          <div class="footer-logo">
+            <span class="footer-paw-icon">🐾</span>
+            <span>Mundo Mascotas</span>
+          </div>
+          <p class="footer-description">
+            Todo lo que tu mascota necesita en un solo lugar: productos, bienestar y cuidado con estilo.
+          </p>
+
+          <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">tt</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">yt</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="tienda.html">Tienda</a></li>
+            <li><a href="citas.html">Citas</a></li>
+            <li><a href="mascotas.html">Mascotas</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Ayuda</h4>
+          <ul>
+            <li><a href="dashboard.html">Preguntas frecuentes</a></li>
+            <li><a href="dashboard.html">Contáctanos</a></li>
+            <li><a href="dashboard.html">Términos y condiciones</a></li>
+            <li><a href="dashboard.html">Política de privacidad</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:info@mundomascotas.com">info@mundomascotas.com</a></li>
+            <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
+            <li><a href="dashboard.html">Bogotá, Colombia</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>© 2026 Mundo Mascotas. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/reportar-adopcion.js"></script>
+</body>
+</html>
