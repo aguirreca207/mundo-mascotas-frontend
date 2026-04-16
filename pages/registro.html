@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mundo Mascotas - Registro</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/variables.css" />
+  <link rel="stylesheet" href="../styles/components.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/responsive.css" />
+  <link rel="stylesheet" href="../styles/registro.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-content">
+      <p>Crea tu cuenta para acceder a tu información y tus gestiones.</p>
+      <span>Registro simple, claro y pensado para el usuario.</span>
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <div class="container nav-content">
+      <div class="logo">
+        <span class="logo-icon">🐾</span>
+        <span class="logo-text">Mundo Mascotas</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="mascotas.html">Mascotas</a></li>
+        <li><a href="citas.html">Citas</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="adopciones.html">Adopciones</a></li>
+      </ul>
+
+      <a href="login.html" class="btn-nav">Iniciar sesión</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="register-section">
+      <div class="container">
+        <div class="register-layout">
+          <div class="register-info-card">
+            <span class="section-tag">Nueva cuenta</span>
+            <h1>Crea tu cuenta en Mundo Mascotas</h1>
+            <p>
+              Regístrate para consultar tus mascotas, tus citas, tus pedidos,
+              tus reservas y el resumen general de tu actividad dentro de la plataforma.
+            </p>
+
+            <div class="register-benefits">
+              <article class="register-benefit">
+                <strong>Tu espacio personal</strong>
+                <span>Consulta tu actividad y tus procesos desde una sola vista.</span>
+              </article>
+
+              <article class="register-benefit">
+                <strong>Gestión organizada</strong>
+                <span>Accede fácilmente a mascotas, citas, tienda, servicios y adopciones.</span>
+              </article>
+
+              <article class="register-benefit">
+                <strong>Seguimiento claro</strong>
+                <span>Visualiza solicitudes, reservas, pedidos y notificaciones relevantes.</span>
+              </article>
+            </div>
+          </div>
+
+          
+
+            <form id="registerForm" class="register-form" novalidate>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="registerName">Nombre completo</label>
+                  <input type="text" id="registerName" name="registerName" placeholder="Ej. Ana Torres" required />
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="registerEmail">Correo electrónico</label>
+                  <input type="email" id="registerEmail" name="registerEmail" placeholder="Ej. ana@email.com" required />
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="registerPhone">Teléfono</label>
+                  <input type="tel" id="registerPhone" name="registerPhone" placeholder="Ej. 3001234567" required />
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="registerCity">Ciudad</label>
+                  <input type="text" id="registerCity" name="registerCity" placeholder="Ej. Bogotá" required />
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group form-group-full">
+                  <label for="registerAddress">Dirección</label>
+                  <input type="text" id="registerAddress" name="registerAddress" placeholder="Ej. Calle 10 #20-30" required />
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="registerPassword">Contraseña</label>
+                  <input type="password" id="registerPassword" name="registerPassword" placeholder="Mínimo 6 caracteres" required />
+                  <small class="error-text"></small>
+                </div>
+
+                <div class="form-group">
+                  <label for="confirmPassword">Confirmar contraseña</label>
+                  <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repite tu contraseña" required />
+                  <small class="error-text"></small>
+                </div>
+              </div>
+
+              <label class="terms-row">
+                <input type="checkbox" id="acceptTerms" />
+                <span>Acepto el tratamiento de datos y las condiciones de uso de la plataforma.</span>
+              </label>
+              <small class="terms-error" id="termsError"></small>
+
+              <button type="submit" class="btn btn-primary register-submit-btn">Crear cuenta</button>
+
+              <div class="google-access-block">
+  <div class="auth-divider">
+    <span>o continúa con</span>
+  </div>
+
+  <button type="button" class="google-access-btn" id="googleRegisterBtn">
+    <span class="google-icon">G</span>
+    <span>Vincúlate con Google</span>
+  </button>
+</div>
+            </form>
+
+            <div class="register-message-card" id="registerSuccessCard">
+              <h3>Cuenta creada correctamente</h3>
+              <p>Tu registro fue exitoso. Serás dirigido al inicio de sesión.</p>
+            </div>
+
+            <p>
+  ¿Ya tienes cuenta?
+  <a href="login.html">Iniciar sesión</a>
+</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="container footer-top-content">
+        <div class="footer-brand-box">
+          <div class="footer-brand-logo"></div>
+          <div class="footer-brand-text">
+            <h3>Mundo Mascotas</h3>
+            <p>Recibe novedades, promociones y recomendaciones para consentir a tu peludo.</p>
+          </div>
+        </div>
+
+        <form class="footer-newsletter">
+          <select>
+            <option selected>Selecciona tu mascota</option>
+            <option>Perro</option>
+            <option>Gato</option>
+            <option>Ambos</option>
+          </select>
+
+          <input type="email" placeholder="Correo electrónico" />
+          <button type="submit">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="container footer-main-content">
+        <div class="footer-column footer-column-brand">
+          <div class="footer-logo">
+            <span class="footer-paw-icon">🐾</span>
+            <span>Mundo Mascotas</span>
+          </div>
+          <p class="footer-description">
+            Todo lo que tu mascota necesita en un solo lugar: productos, bienestar y cuidado con estilo.
+          </p>
+
+          <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">tt</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">yt</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="tienda.html">Tienda</a></li>
+            <li><a href="citas.html">Citas</a></li>
+            <li><a href="mascotas.html">Mascotas</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Ayuda</h4>
+          <ul>
+            <li><a href="dashboard.html">Preguntas frecuentes</a></li>
+            <li><a href="dashboard.html">Contáctanos</a></li>
+            <li><a href="dashboard.html">Términos y condiciones</a></li>
+            <li><a href="dashboard.html">Política de privacidad</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:info@mundomascotas.com">info@mundomascotas.com</a></li>
+            <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
+            <li><a href="dashboard.html">Bogotá, Colombia</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>© 2026 Mundo Mascotas. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/registro.js"></script>
+</body>
+</html>
