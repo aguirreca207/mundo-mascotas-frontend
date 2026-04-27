@@ -7,6 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../styles/variables.css" />
@@ -26,10 +27,10 @@
 
   <nav class="navbar">
     <div class="container nav-content">
-      <div class="logo">
-        <span class="logo-icon">🐾</span>
-        <span class="logo-text">Mundo Mascotas</span>
-      </div>
+      <a href="../index.html" class="logo">
+  <span class="logo-icon">🐾</span>
+  <span class="logo-text">Mundo Mascotas</span>
+</a>
 
       <ul class="nav-links">
         <li><a href="../index.html">Inicio</a></li>
@@ -44,118 +45,143 @@
     </div>
   </nav>
 
-  <main>
-    <section class="register-section">
-      <div class="container">
-        <div class="register-layout">
-          <div class="register-info-card">
-            <span class="section-tag">Nueva cuenta</span>
-            <h1>Crea tu cuenta en Mundo Mascotas</h1>
-            <p>
-              Regístrate para consultar tus mascotas, tus citas, tus pedidos,
-              tus reservas y el resumen general de tu actividad dentro de la plataforma.
-            </p>
+<main class="register-page">
+  <section class="register-section">
+    <div class="container register-layout">
+      <article class="register-info-panel">
+        <span class="register-badge">Nueva cuenta</span>
+        <h1>Crea tu cuenta en Mundo Mascotas</h1>
+        <p>
+          Regístrate para consultar tus mascotas, tus citas, tus pedidos,
+          tus reservas y el resumen general de tu actividad dentro de la plataforma.
+        </p>
 
-            <div class="register-benefits">
-              <article class="register-benefit">
-                <strong>Tu espacio personal</strong>
-                <span>Consulta tu actividad y tus procesos desde una sola vista.</span>
-              </article>
+        <div class="register-benefits">
+          <article class="benefit-card">
+            <h3>Tu espacio personal</h3>
+            <p>Consulta tu actividad y tus procesos desde una sola vista.</p>
+          </article>
 
-              <article class="register-benefit">
-                <strong>Gestión organizada</strong>
-                <span>Accede fácilmente a mascotas, citas, tienda, servicios y adopciones.</span>
-              </article>
+          <article class="benefit-card">
+            <h3>Gestión organizada</h3>
+            <p>Accede fácilmente a mascotas, citas, tienda, servicios y adopciones.</p>
+          </article>
 
-              <article class="register-benefit">
-                <strong>Seguimiento claro</strong>
-                <span>Visualiza solicitudes, reservas, pedidos y notificaciones relevantes.</span>
-              </article>
-            </div>
-          </div>
-
-          
-
-            <form id="registerForm" class="register-form" novalidate>
-              <div class="form-grid">
-                <div class="form-group">
-                  <label for="registerName">Nombre completo</label>
-                  <input type="text" id="registerName" name="registerName" placeholder="Ej. Ana Torres" required />
-                  <small class="error-text"></small>
-                </div>
-
-                <div class="form-group">
-                  <label for="registerEmail">Correo electrónico</label>
-                  <input type="email" id="registerEmail" name="registerEmail" placeholder="Ej. ana@email.com" required />
-                  <small class="error-text"></small>
-                </div>
-
-                <div class="form-group">
-                  <label for="registerPhone">Teléfono</label>
-                  <input type="tel" id="registerPhone" name="registerPhone" placeholder="Ej. 3001234567" required />
-                  <small class="error-text"></small>
-                </div>
-
-                <div class="form-group">
-                  <label for="registerCity">Ciudad</label>
-                  <input type="text" id="registerCity" name="registerCity" placeholder="Ej. Bogotá" required />
-                  <small class="error-text"></small>
-                </div>
-
-                <div class="form-group form-group-full">
-                  <label for="registerAddress">Dirección</label>
-                  <input type="text" id="registerAddress" name="registerAddress" placeholder="Ej. Calle 10 #20-30" required />
-                  <small class="error-text"></small>
-                </div>
-
-                <div class="form-group">
-                  <label for="registerPassword">Contraseña</label>
-                  <input type="password" id="registerPassword" name="registerPassword" placeholder="Mínimo 6 caracteres" required />
-                  <small class="error-text"></small>
-                </div>
-
-                <div class="form-group">
-                  <label for="confirmPassword">Confirmar contraseña</label>
-                  <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repite tu contraseña" required />
-                  <small class="error-text"></small>
-                </div>
-              </div>
-
-              <label class="terms-row">
-                <input type="checkbox" id="acceptTerms" />
-                <span>Acepto el tratamiento de datos y las condiciones de uso de la plataforma.</span>
-              </label>
-              <small class="terms-error" id="termsError"></small>
-
-              <button type="submit" class="btn btn-primary register-submit-btn">Crear cuenta</button>
-
-              <div class="google-access-block">
-  <div class="auth-divider">
-    <span>o continúa con</span>
-  </div>
-
-  <button type="button" class="google-access-btn" id="googleRegisterBtn">
-    <span class="google-icon">G</span>
-    <span>Vincúlate con Google</span>
-  </button>
-</div>
-            </form>
-
-            <div class="register-message-card" id="registerSuccessCard">
-              <h3>Cuenta creada correctamente</h3>
-              <p>Tu registro fue exitoso. Serás dirigido al inicio de sesión.</p>
-            </div>
-
-            <p>
-  ¿Ya tienes cuenta?
-  <a href="login.html">Iniciar sesión</a>
-</p>
-            </div>
-          </div>
+          <article class="benefit-card">
+            <h3>Seguimiento claro</h3>
+            <p>Visualiza solicitudes, reservas, pedidos y notificaciones relevantes.</p>
+          </article>
         </div>
-      </div>
-    </section>
-  </main>
+      </article>
+
+      <article class="register-form-panel">
+        <form id="registerForm" class="register-form-grid">
+          <div class="form-group">
+            <label for="registerName">Nombre completo</label>
+            <input type="text" id="registerName" placeholder="Ej. Ana Torres" />
+            <small class="error-text"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="registerEmail">Correo electrónico</label>
+            <input type="email" id="registerEmail" placeholder="Ej. ana@email.com" />
+            <small class="error-text"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="registerPhone">Teléfono</label>
+            <input type="text" id="registerPhone" placeholder="Ej. 3001234567" />
+            <small class="error-text"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="registerCity">Ciudad</label>
+            <input type="text" id="registerCity" placeholder="Ej. Bogotá" />
+            <small class="error-text"></small>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="registerAddress">Dirección</label>
+            <input type="text" id="registerAddress" placeholder="Ej. Calle 10 #20-30" />
+            <small class="error-text"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="registerPassword">Contraseña</label>
+            <div class="password-field">
+              <input
+                type="password"
+                id="registerPassword"
+                placeholder="Mínimo 8 caracteres"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                data-target="registerPassword"
+                aria-label="Mostrar u ocultar contraseña"
+              >
+                <span class="material-symbols-outlined">visibility</span>
+              </button>
+            </div>
+            <small class="error-text"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirmar contraseña</label>
+            <div class="password-field">
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Repite tu contraseña"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                data-target="confirmPassword"
+                aria-label="Mostrar u ocultar contraseña"
+              >
+                <span class="material-symbols-outlined">visibility</span>
+              </button>
+            </div>
+            <small class="error-text"></small>
+          </div>
+
+          <div class="register-terms full-width">
+            <input type="checkbox" id="acceptTerms" />
+            <label for="acceptTerms">
+              Acepto el tratamiento de datos y las condiciones de uso de la plataforma.
+            </label>
+          </div>
+
+          <p id="termsError" class="terms-error full-width"></p>
+
+          <div class="register-actions full-width">
+            <button type="submit" class="register-submit-btn">Crear cuenta</button>
+
+            <div class="register-divider">
+              <span>o continúa con</span>
+            </div>
+
+            <button type="button" id="googleRegisterBtn" class="google-register-btn">
+              <span class="google-icon">G</span>
+              <span>Vincúlate con Google</span>
+            </button>
+
+            <p class="register-login-link">
+              ¿Ya tienes cuenta?
+              <a href="login.html">Iniciar sesión</a>
+            </p>
+          </div>
+
+          <div id="registerSuccessCard" class="success-card full-width">
+            <strong>Cuenta creada correctamente</strong>
+            <p>Tu registro fue validado y ahora serás dirigido al inicio de sesión.</p>
+          </div>
+        </form>
+      </article>
+    </div>
+  </section>
+</main>
 
   <footer class="site-footer">
     <div class="footer-top">
@@ -168,17 +194,19 @@
           </div>
         </div>
 
-        <form class="footer-newsletter">
-          <select>
-            <option selected>Selecciona tu mascota</option>
-            <option>Perro</option>
-            <option>Gato</option>
-            <option>Ambos</option>
-          </select>
+        <form class="footer-newsletter" id="footerNewsletterForm">
+  <select id="footerPetType">
+    <option selected>Selecciona tu mascota</option>
+    <option>Perro</option>
+    <option>Gato</option>
+    <option>Ambos</option>
+  </select>
 
-          <input type="email" placeholder="Correo electrónico" />
-          <button type="submit">Suscribirme</button>
-        </form>
+  <input type="email" id="footerNewsletterEmail" placeholder="Correo electrónico" />
+  <button type="submit">Suscribirme</button>
+
+  <p class="footer-newsletter-message" id="footerNewsletterMessage"></p>
+</form>
       </div>
     </div>
 
@@ -212,21 +240,21 @@
         </div>
 
         <div class="footer-column">
-          <h4>Ayuda</h4>
-          <ul>
-            <li><a href="dashboard.html">Preguntas frecuentes</a></li>
-            <li><a href="dashboard.html">Contáctanos</a></li>
-            <li><a href="dashboard.html">Términos y condiciones</a></li>
-            <li><a href="dashboard.html">Política de privacidad</a></li>
-          </ul>
-        </div>
+  <h4>Explora</h4>
+  <ul>
+    <li><a href="adopciones.html">Adopciones</a></li>
+    <li><a href="reportar-adopcion.html">Reportar adopción</a></li>
+    <li><a href="login.html">Iniciar sesión</a></li>
+    <li><a href="registro.html">Crear cuenta</a></li>
+  </ul>
+</div>
 
         <div class="footer-column">
           <h4>Contacto</h4>
           <ul>
             <li><a href="mailto:info@mundomascotas.com">info@mundomascotas.com</a></li>
             <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
-            <li><a href="dashboard.html">Bogotá, Colombia</a></li>
+                <li><span>Bogotá, Colombia</span></li>
           </ul>
         </div>
       </div>

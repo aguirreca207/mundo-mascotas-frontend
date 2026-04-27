@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mundo Mascotas - Inicio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
@@ -54,9 +55,9 @@
           </p>
 
           <div class="hero-actions">
-            <a href="pages/servicios.html" class="btn btn-primary">Ver servicios</a>
-<a href="pages/tienda.html" class="btn btn-secondary">Explorar tienda</a> 
-          </div>
+  <a href="pages/login.html" class="btn btn-primary">Iniciar sesión</a>
+  <a href="pages/registro.html" class="btn btn-secondary">Crear cuenta</a>
+</div>
 
           <div class="hero-stats">
             <div class="stat-card">
@@ -89,35 +90,45 @@
           <p>Una portada comercial con look cálido, dinámico y más vendible.</p>
         </div>
 
-        <div class="cards-grid">
-          <article class="info-card">
-            <div class="card-icon">🐶</div>
-            <h3>Servicios para mascotas</h3>
-<p>Consulta opciones como baño, guardería, paseo y otros servicios para su bienestar.</p>
-            <a href="#">Ver más</a>
-          </article>
+      
 
-          <article class="info-card">
-            <div class="card-icon">✂️</div>
-            <h3>Citas veterinarias</h3>
-<p>Agenda y consulta citas para el cuidado y seguimiento veterinario de tu mascota.</p>
-            <a href="#">Ver más</a>
-          </article>
+          <div class="cards-grid">
+  <article class="info-card">
+    <div class="card-icon">
+      <span class="material-symbols-outlined">pets</span>
+    </div>
+    <h3>Servicios para mascotas</h3>
+    <p>Consulta opciones como baño, guardería, paseo y otros servicios para su bienestar.</p>
+    <a href="pages/servicios.html">Ver más</a>
+  </article>
 
-          <article class="info-card">
-            <div class="card-icon">📍</div>
-            <h3>Tienda de productos</h3>
-<p>Explora productos destacados para alimentación, higiene, bienestar y entretenimiento.</p>
-            <a href="#">Ver más</a>
-          </article>
+  <article class="info-card">
+    <div class="card-icon">
+  <span class="material-symbols-outlined">calendar_month</span>
+</div>
+    <h3>Citas veterinarias</h3>
+    <p>Agenda y consulta citas para el cuidado y seguimiento veterinario de tu mascota.</p>
+    <a href="pages/citas.html">Ver más</a>
+  </article>
 
-          <article class="info-card">
-            <div class="card-icon">🚚</div>
-            <h3>Domicilios</h3>
-            <p>Llevamos productos y soluciones a tu puerta en tiempo récord.</p>
-            <a href="#">Ver más</a>
-          </article>
-        </div>
+  <article class="info-card">
+    <div class="card-icon">
+  <span class="material-symbols-outlined">shopping_bag</span>
+</div>
+    <h3>Tienda de productos</h3>
+    <p>Explora productos destacados para alimentación, higiene, bienestar y entretenimiento.</p>
+    <a href="pages/tienda.html">Ver más</a>
+  </article>
+
+<article class="info-card">
+  <div class="card-icon">
+    <span class="material-symbols-outlined">volunteer_activism</span>
+  </div>
+  <h3>Adopciones</h3>
+  <p>Conoce mascotas disponibles y encuentra un nuevo compañero para tu hogar.</p>
+  <a href="pages/adopciones.html">Ver más</a>
+</article>
+</div>
       </div>
     </section>
 
@@ -129,7 +140,7 @@
           <h2>Hasta 10% de descuento en tu primera compra</h2>
           <p>Ideal para destacar campañas, cupones o beneficios de lanzamiento.</p>
         </div>
-        <a href="pages/tienda.html" class="btn btn-light">Activar oferta</a>
+        <a href="pages/tienda.html" class="btn btn-light">Ver oferta</a>
       </div>
     </section>
   <section class="featured-products">
@@ -137,6 +148,59 @@
     <div class="products-head">
       <h2>Productos que le encantarán a tu peludo</h2>
     </div>
+
+    <section class="home-offers">
+  <div class="container">
+    <div class="home-offers-head">
+      <h2>Ofertas destacadas de la semana</h2>
+      <a href="pages/tienda.html" class="home-offers-link">Todas las ofertas →</a>
+    </div>
+
+    <div class="home-offers-grid">
+      <article class="home-offer-card">
+        <div class="home-offer-text">
+          <span class="home-offer-tag">Oferta especial</span>
+          <h3>Llega la temporada con precios increíbles</h3>
+          <p>Promociones seleccionadas para consentir a tu mascota.</p>
+        </div>
+
+        <div class="home-offer-image-placeholder">
+          <img src="assets/img/Cards/Rascador.png" alt="Oferta 1" />
+        </div>
+
+        <a href="pages/tienda.html" class="home-offer-arrow" aria-label="Ir a la tienda">→</a>
+      </article>
+
+      <article class="home-offer-card">
+        <div class="home-offer-text">
+          <span class="home-offer-tag">Descuento</span>
+          <h3>Hasta 30% en productos seleccionados</h3>
+          <p>Encuentra referencias destacadas para cada necesidad.</p>
+        </div>
+
+        <div class="home-offer-image-placeholder">
+          Imagen 2
+        </div>
+
+        <a href="pages/tienda.html" class="home-offer-arrow" aria-label="Ir a la tienda">→</a>
+      </article>
+
+      <article class="home-offer-card">
+        <div class="home-offer-text">
+          <span class="home-offer-tag">Bienestar diario</span>
+          <h3>Hasta 10% en alimento y cuidado</h3>
+          <p>Ofertas pensadas para compras frecuentes y esenciales.</p>
+        </div>
+
+        <div class="home-offer-image-placeholder">
+          Imagen 3
+        </div>
+
+        <a href="pages/tienda.html" class="home-offer-arrow" aria-label="Ir a la tienda">→</a>
+      </article>
+    </div>
+  </div>
+</section>
 
     <div class="products-carousel">
       <button class="products-arrow products-arrow-left" id="productsPrev" aria-label="Ver productos anteriores">‹</button>
@@ -398,18 +462,20 @@
         </div>
       </div>
 
-      <form class="footer-newsletter">
-        <select>
-          <option selected>Selecciona tu mascota</option>
-          <option>Perro</option>
-          <option>Gato</option>
-          <option>Ambos</option>
-        </select>
+      <form class="footer-newsletter" id="footerNewsletterForm">
+  <select id="footerPetType">
+    <option selected>Selecciona tu mascota</option>
+    <option>Perro</option>
+    <option>Gato</option>
+    <option>Ambos</option>
+  </select>
 
-        <input type="email" placeholder="Correo electrónico" />
+  <input type="email" id="footerNewsletterEmail" placeholder="Correo electrónico" />
 
-        <button type="submit">Suscribirme</button>
-      </form>
+  <button type="submit">Suscribirme</button>
+
+  <p class="footer-newsletter-message" id="footerNewsletterMessage"></p>
+</form>
     </div>
   </div>
 
@@ -433,31 +499,31 @@
       </div>
 
       <div class="footer-column">
-        <h4>Servicios</h4>
-        <ul>
-          <li><a href="pages/dashboard.html">Tienda</a></li>
-          <li><a href="pages/citas.html">Citas</a></li>
-          <li><a href="pages/mascotas.html">Mascotas</a></li>
-          <li><a href="pages/dashboard.html">Promociones</a></li>
-        </ul>
-      </div>
+  <h4>Servicios</h4>
+  <ul>
+    <li><a href="pages/tienda.html">Tienda</a></li>
+    <li><a href="pages/citas.html">Citas</a></li>
+    <li><a href="pages/mascotas.html">Mascotas</a></li>
+    <li><a href="pages/servicios.html">Servicios</a></li>
+  </ul>
+</div>
 
-      <div class="footer-column">
-        <h4>Ayuda</h4>
-        <ul>
-          <li><a href="pages/dashboard.html">Preguntas frecuentes</a></li>
-          <li><a href="pages/dashboard.html">Contáctanos</a></li>
-          <li><a href="pages/dashboard.html">Términos y condiciones</a></li>
-          <li><a href="pages/dashboard.html">Política de privacidad</a></li>
-        </ul>
-      </div>
+<div class="footer-column">
+  <h4>Explora</h4>
+  <ul>
+    <li><a href="pages/adopciones.html">Adopciones</a></li>
+    <li><a href="pages/reportar-adopcion.html">Reportar adopción</a></li>
+    <li><a href="pages/login.html">Iniciar sesión</a></li>
+    <li><a href="pages/registro.html">Crear cuenta</a></li>
+  </ul>
+</div>
 
       <div class="footer-column">
         <h4>Contacto</h4>
         <ul>
           <li><a href="mailto:info@mundomascotas.com">info@mundomascotas.com</a></li>
           <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
-          <li><a href="pages/dashboard.html">Bogotá, Colombia</a></li>
+          <li><span>Bogotá, Colombia</span></li>
         </ul>
       </div>
     </div>

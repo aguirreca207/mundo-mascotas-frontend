@@ -1,9 +1,55 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const footerNewsletterForm = document.getElementById("footerNewsletterForm");
+  const footerNewsletterEmail = document.getElementById("footerNewsletterEmail");
+  const footerNewsletterMessage = document.getElementById("footerNewsletterMessage");
+
+  function validateFooterEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+  }
+
+  if (footerNewsletterForm && footerNewsletterEmail && footerNewsletterMessage) {
+    footerNewsletterForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      footerNewsletterMessage.textContent = "";
+      footerNewsletterMessage.classList.remove("error", "success");
+
+      if (!footerNewsletterEmail.value.trim()) {
+        footerNewsletterMessage.textContent = "Ingresa un correo electrónico.";
+        footerNewsletterMessage.classList.add("error");
+        return;
+      }
+
+      if (!validateFooterEmail(footerNewsletterEmail.value)) {
+        footerNewsletterMessage.textContent = "Ingresa un correo válido.";
+        footerNewsletterMessage.classList.add("error");
+        return;
+      }
+
+      footerNewsletterMessage.textContent = "¡Suscripción registrada correctamente!";
+      footerNewsletterMessage.classList.add("success");
+      footerNewsletterForm.reset();
+    });
+  }
+  const isLoggedIn = sessionStorage.getItem("mm_logged_in");
+
+  if (isLoggedIn !== "true") {
+    window.location.href = "login.html";
+    return;
+  }
+
   const markReadBtn = document.getElementById("markReadBtn");
   const notificationsList = document.getElementById("notificationsList");
   const prefEmail = document.getElementById("prefEmail");
   const prefApp = document.getElementById("prefApp");
+  const logoutBtn = document.getElementById("logoutBtn");
   const activityList = document.getElementById("activityList");
+  const dashboardUserEmail = document.getElementById("dashboardUserEmail");
+  const storedUserEmail = sessionStorage.getItem("mm_user_email");
+
+  if (dashboardUserEmail && storedUserEmail) {
+    dashboardUserEmail.textContent = storedUserEmail;
+  }
 
   markReadBtn.addEventListener("click", () => {
     const unreadNotifications = notificationsList.querySelectorAll(".notification-item.unread");
@@ -51,5 +97,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   prefApp.addEventListener("change", () => {
     showPreferenceChangeMessage("App", prefApp.checked);
+  });
+
+  logoutBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    sessionStorage.removeItem("mm_logged_in");
+    sessionStorage.removeItem("mm_user_email");
+
+    window.location.href = "login.html";
   });
 });

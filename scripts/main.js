@@ -1,5 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Inicio cargado correctamente");
+
+  const footerNewsletterForm = document.getElementById("footerNewsletterForm");
+  const footerNewsletterEmail = document.getElementById("footerNewsletterEmail");
+  const footerNewsletterMessage = document.getElementById("footerNewsletterMessage");
+
+  function validateEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+  }
+
+  if (footerNewsletterForm && footerNewsletterEmail && footerNewsletterMessage) {
+    footerNewsletterForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      footerNewsletterMessage.textContent = "";
+      footerNewsletterMessage.classList.remove("error", "success");
+
+      if (!footerNewsletterEmail.value.trim()) {
+        footerNewsletterMessage.textContent = "Ingresa un correo electrónico.";
+        footerNewsletterMessage.classList.add("error");
+        return;
+      }
+
+      if (!validateEmail(footerNewsletterEmail.value)) {
+        footerNewsletterMessage.textContent = "Ingresa un correo válido.";
+        footerNewsletterMessage.classList.add("error");
+        return;
+      }
+
+      footerNewsletterMessage.textContent = "¡Suscripción registrada correctamente!";
+      footerNewsletterMessage.classList.add("success");
+
+      footerNewsletterForm.reset();
+    });
+  }
 });
 const productsTrack = document.getElementById("productsTrack");
 const productsPrev = document.getElementById("productsPrev");

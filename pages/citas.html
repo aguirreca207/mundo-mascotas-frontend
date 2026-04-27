@@ -320,17 +320,19 @@
           </div>
         </div>
 
-        <form class="footer-newsletter">
-          <select>
-            <option selected>Selecciona tu mascota</option>
-            <option>Perro</option>
-            <option>Gato</option>
-            <option>Ambos</option>
-          </select>
+        <form class="footer-newsletter" id="footerNewsletterForm">
+  <select id="footerPetType">
+    <option selected>Selecciona tu mascota</option>
+    <option>Perro</option>
+    <option>Gato</option>
+    <option>Ambos</option>
+  </select>
 
-          <input type="email" placeholder="Correo electrónico" />
-          <button type="submit">Suscribirme</button>
-        </form>
+  <input type="email" id="footerNewsletterEmail" placeholder="Correo electrónico" />
+  <button type="submit">Suscribirme</button>
+
+  <p class="footer-newsletter-message" id="footerNewsletterMessage"></p>
+</form>
       </div>
     </div>
 
@@ -364,21 +366,21 @@
         </div>
 
         <div class="footer-column">
-          <h4>Ayuda</h4>
-          <ul>
-            <li><a href="dashboard.html">Preguntas frecuentes</a></li>
-            <li><a href="dashboard.html">Contáctanos</a></li>
-            <li><a href="dashboard.html">Términos y condiciones</a></li>
-            <li><a href="dashboard.html">Política de privacidad</a></li>
-          </ul>
-        </div>
+  <h4>Explora</h4>
+  <ul>
+    <li><a href="adopciones.html">Adopciones</a></li>
+    <li><a href="reportar-adopcion.html">Reportar adopción</a></li>
+    <li><a href="login.html">Iniciar sesión</a></li>
+    <li><a href="registro.html">Crear cuenta</a></li>
+  </ul>
+</div>
 
         <div class="footer-column">
           <h4>Contacto</h4>
           <ul>
             <li><a href="mailto:info@mundomascotas.com">info@mundomascotas.com</a></li>
             <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
-            <li><a href="dashboard.html">Bogotá, Colombia</a></li>
+            <li><span>Bogotá, Colombia</span></li>
           </ul>
         </div>
       </div>

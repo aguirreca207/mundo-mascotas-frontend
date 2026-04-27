@@ -1,39 +1,49 @@
+.register-page {
+  padding: 30px 0 40px;
+}
+
 .register-section {
-  padding: 50px 0 70px;
+  padding: 20px 0 40px;
 }
 
 .register-layout {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 24px;
-  align-items: stretch;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: start;
 }
 
-.register-info-card,
-.register-form-card {
-  background: #fff;
-  border: 1px solid #f0e7dc;
+.register-info-panel,
+.register-form-panel {
+  background: #f7f1e7;
+  border: 1px solid #e8d7c2;
   border-radius: 28px;
   padding: 28px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
 }
 
-.register-info-card {
-  background: linear-gradient(135deg, #fff7ef 0%, #fffaf5 100%);
+.register-badge {
+  display: inline-block;
+  background: #f6e3b6;
+  color: #ff6b00;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  border-radius: 999px;
+  margin-bottom: 16px;
 }
 
-.register-info-card h1 {
-  margin: 12px 0 14px;
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.06;
+.register-info-panel h1 {
+  margin: 0 0 14px;
+  font-size: clamp(2.4rem, 4.4vw, 4.2rem);
+  line-height: 0.96;
   color: #2f2a26;
 }
 
-.register-info-card p {
-  margin: 0 0 22px;
-  color: var(--color-text-soft);
-  line-height: 1.7;
-  max-width: 620px;
+.register-info-panel p {
+  margin: 0 0 20px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #6f6258;
 }
 
 .register-benefits {
@@ -41,56 +51,191 @@
   gap: 14px;
 }
 
-.register-benefit {
+.benefit-card {
   background: #ffffff;
-  border: 1px solid #f0e7dc;
-  border-radius: 18px;
+  border: 1px solid #ead8c5;
+  border-radius: 20px;
   padding: 16px 18px;
+}
+
+.benefit-card h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  color: #2f2a26;
+}
+
+.benefit-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: #6f6258;
+}
+
+.register-form-grid {
   display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 16px;
+  align-items: start;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
   gap: 6px;
 }
 
-.register-benefit strong {
-  color: #2f2a26;
-  font-size: 1rem;
-}
-
-.register-benefit span {
-  color: var(--color-text-soft);
-  font-size: 0.92rem;
-  line-height: 1.55;
-}
-
-.register-card-head {
-  margin-bottom: 18px;
-}
-
-.register-card-head h2 {
-  margin: 0 0 8px;
-  font-size: 1.45rem;
+.form-group label {
+  font-size: 0.98rem;
+  font-weight: 800;
   color: #2f2a26;
 }
 
-.register-card-head p {
-  margin: 0;
-  color: var(--color-text-soft);
-  line-height: 1.6;
-}
-
-.google-access-block {
-  display: grid;
-  gap: 16px;
-  margin-bottom: 18px;
-}
-
-.google-access-btn {
+.form-group input {
   width: 100%;
-  border: 1px solid #ead8c5;
-  border-radius: 16px;
-  background: #fff;
+  height: 48px;
+  border: 1px solid #e2cdb6;
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 0 16px;
+  font-size: 0.98rem;
   color: #2f2a26;
-  padding: 14px 16px;
-  font-family: inherit;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.form-group input:focus {
+  border-color: #f2a15e;
+  box-shadow: 0 0 0 3px rgba(242, 161, 94, 0.12);
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 48px;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8a7e73;
+}
+
+.toggle-password .material-symbols-outlined {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.error-text {
+  min-height: 16px;
+  font-size: 0.84rem;
+  color: #e35b27;
+  line-height: 1.2;
+}
+
+.form-group.has-error input {
+  border-color: #e35b27;
+}
+
+.register-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.register-terms input {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.register-terms label {
+  margin: 0;
+  font-size: 0.96rem;
+  line-height: 1.45;
+  color: #6f6258;
+}
+
+.terms-error {
+  margin: -4px 0 0;
+  font-size: 0.88rem;
+  color: #e35b27;
+  min-height: 16px;
+}
+
+.register-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 0;
+}
+
+.register-submit-btn {
+  width: 100%;
+  height: 48px;
+  border: 2px solid #2f2a26;
+  border-radius: 999px;
+  background: #ff6b00;
+  color: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.register-submit-btn:hover {
+  transform: translateY(-1px);
+}
+
+.register-divider {
+  position: relative;
+  text-align: center;
+  margin: 0;
+}
+
+.register-divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #eadfce;
+  transform: translateY(-50%);
+}
+
+.register-divider span {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  background: #f7f1e7;
+  padding: 0 10px;
+  font-size: 0.84rem;
+  color: #8a7e73;
+}
+
+.google-register-btn {
+  width: 100%;
+  height: 46px;
+  border: 1px solid #e2cdb6;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #2f2a26;
   font-size: 0.96rem;
   font-weight: 700;
   display: flex;
@@ -98,186 +243,100 @@
   justify-content: center;
   gap: 10px;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: 0.25s ease;
 }
 
-.google-access-btn:hover {
-  border-color: #f2b544;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+.google-register-btn:hover {
+  border-color: #d8b792;
+  transform: translateY(-1px);
 }
 
 .google-icon {
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: #fff3e3;
-  color: #b96e19;
+  background: #f6e3b6;
+  color: #c77700;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-size: 0.9rem;
   font-weight: 900;
-  font-size: 0.92rem;
 }
 
-.auth-divider {
-  position: relative;
+.register-login-link {
+  margin: 2px 0 0;
   text-align: center;
+  font-size: 0.94rem;
+  color: #6f6258;
 }
 
-.auth-divider::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: #f0e7dc;
-  transform: translateY(-50%);
+.register-login-link a {
+  color: #6d1fb1;
+  font-weight: 800;
+  text-decoration: none;
 }
 
-.auth-divider span {
-  position: relative;
-  background: #fff;
-  padding: 0 12px;
-  color: var(--color-text-soft);
-  font-size: 0.88rem;
+.register-login-link a:hover {
+  text-decoration: underline;
 }
 
-.register-form {
-  display: grid;
-  gap: 16px;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.form-group {
-  display: grid;
-  gap: 8px;
-}
-
-.form-group-full {
-  grid-column: 1 / -1;
-}
-
-.form-group label {
-  font-weight: 700;
-  color: #2f2a26;
-  font-size: 0.95rem;
-}
-
-.form-group input {
-  width: 100%;
-  border: 1px solid #ead8c5;
-  border-radius: 16px;
-  padding: 14px 16px;
-  font-family: inherit;
-  font-size: 0.96rem;
-  color: #2f2a26;
-  background: #fff;
-  outline: none;
-}
-
-.form-group input:focus {
-  border-color: #f2b544;
-}
-
-.error-text {
-  color: #c05a2c;
-  font-size: 0.82rem;
-  min-height: 16px;
-}
-
-.form-group.has-error input {
-  border-color: #d88b67;
-  background: #fffaf7;
-}
-
-.terms-row {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  color: #5f564e;
-  font-size: 0.92rem;
-  line-height: 1.5;
-}
-
-.terms-row input {
-  width: 16px;
-  height: 16px;
-  margin-top: 2px;
-}
-
-.terms-error {
-  color: #c05a2c;
-  font-size: 0.82rem;
-  min-height: 16px;
-  display: block;
-  margin-top: -8px;
-}
-
-.register-submit-btn {
-  width: 100%;
-}
-
-.register-message-card {
+.success-card {
   display: none;
-  margin-top: 18px;
-  background: #f7fcf8;
-  border: 1px solid #d8ebdd;
+  background: #eef9f1;
+  border: 1px solid #b8dfc0;
+  color: #246b3b;
   border-radius: 18px;
-  padding: 18px;
+  padding: 14px 16px;
 }
 
-.register-message-card.active {
+.success-card.active {
   display: block;
 }
 
-.register-message-card h3 {
-  margin: 0 0 8px;
-  color: #20744a;
-  font-size: 1rem;
+.success-card strong {
+  display: block;
+  margin-bottom: 4px;
 }
 
-.register-message-card p {
+.success-card p {
   margin: 0;
-  color: #5d6a60;
-  line-height: 1.6;
   font-size: 0.92rem;
+  line-height: 1.4;
 }
 
-.register-footer-note {
-  margin-top: 18px;
-  text-align: center;
-}
-
-.register-footer-note p {
-  margin: 0;
-  color: var(--color-text-soft);
-  line-height: 1.6;
-}
-
-.register-footer-note a {
-  color: #b96e19;
-  font-weight: 700;
-}
-
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .register-layout {
     grid-template-columns: 1fr;
   }
+
+  .register-info-panel,
+  .register-form-panel {
+    padding: 24px;
+  }
 }
 
-@media (max-width: 768px) {
-  .register-info-card,
-  .register-form-card {
-    padding: 22px;
+@media (max-width: 640px) {
+  .register-form-grid {
+    grid-template-columns: 1fr;
   }
 
-  .form-grid {
-    grid-template-columns: 1fr;
+  .full-width {
+    grid-column: auto;
+  }
+
+  .register-info-panel h1 {
+    font-size: 2.5rem;
+  }
+
+  .register-info-panel,
+  .register-form-panel {
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .register-submit-btn,
+  .google-register-btn {
+    height: 46px;
   }
 }

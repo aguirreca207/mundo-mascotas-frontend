@@ -1,4 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const footerNewsletterForm = document.getElementById("footerNewsletterForm");
+  const footerNewsletterEmail = document.getElementById("footerNewsletterEmail");
+  const footerNewsletterMessage = document.getElementById("footerNewsletterMessage");
+
+  function validateFooterEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+  }
+
+  if (footerNewsletterForm && footerNewsletterEmail && footerNewsletterMessage) {
+    footerNewsletterForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      footerNewsletterMessage.textContent = "";
+      footerNewsletterMessage.classList.remove("error", "success");
+
+      if (!footerNewsletterEmail.value.trim()) {
+        footerNewsletterMessage.textContent = "Ingresa un correo electrónico.";
+        footerNewsletterMessage.classList.add("error");
+        return;
+      }
+
+      if (!validateFooterEmail(footerNewsletterEmail.value)) {
+        footerNewsletterMessage.textContent = "Ingresa un correo válido.";
+        footerNewsletterMessage.classList.add("error");
+        return;
+      }
+
+      footerNewsletterMessage.textContent = "¡Suscripción registrada correctamente!";
+      footerNewsletterMessage.classList.add("success");
+      footerNewsletterForm.reset();
+    });
+  }
   const form = document.getElementById("registerForm");
 
   const registerName = document.getElementById("registerName");
@@ -29,18 +61,61 @@ document.addEventListener("DOMContentLoaded", () => {
     if (errorText) errorText.textContent = message;
   }
 
-  function clearError(input) {
+    function clearError(input) {
     const group = input.closest(".form-group");
     const errorText = group.querySelector(".error-text");
     group.classList.remove("has-error");
+    group.classList.remove("has-success");
     if (errorText) errorText.textContent = "";
+  }
+
+  function setSuccess(input, message) {
+    const group = input.closest(".form-group");
+    const errorText = group.querySelector(".error-text");
+    group.classList.remove("has-error");
+    group.classList.add("has-success");
+    if (errorText) errorText.textContent = message;
   }
 
   function validateEmail(value) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
   }
+    function validatePassword(value) {
+    return /^(?=.*[A-Za-z])(?=.*\d).{8,}$/.test(value.trim());
+  }
 
   const googleRegisterBtn = document.getElementById("googleRegisterBtn");
+
+    const toggleButtons = document.querySelectorAll(".toggle-password");
+
+  toggleButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const targetInput = document.getElementById(button.dataset.target);
+      const icon = button.querySelector(".material-symbols-rounded");
+
+      if (targetInput.type === "password") {
+        targetInput.type = "text";
+        icon.textContent = "visibility_off";
+        button.setAttribute("aria-label", "Ocultar contraseña");
+      } else {
+        targetInput.type = "password";
+        icon.textContent = "visibility";
+        button.setAttribute("aria-label", "Mostrar contraseña");
+      }
+    });
+  });
+    confirmPassword.addEventListener("input", () => {
+    clearError(confirmPassword);
+
+    if (!confirmPassword.value.trim()) return;
+    if (!registerPassword.value.trim()) return;
+
+    if (registerPassword.value === confirmPassword.value) {
+      setSuccess(confirmPassword, "✓ Las contraseñas coinciden.");
+    } else {
+      setError(confirmPassword, "Las contraseñas no coinciden.");
+    }
+  });
 
 googleRegisterBtn.addEventListener("click", () => {
   alert("La vinculación con Google quedará disponible cuando se conecte el sistema de autenticación.");
@@ -67,8 +142,12 @@ googleRegisterBtn.addEventListener("click", () => {
       isValid = false;
     }
 
-    if (registerPassword.value.trim() && registerPassword.value.trim().length < 6) {
-      setError(registerPassword, "La contraseña debe tener al menos 6 caracteres.");
+        if (registerPassword.value.trim() && !validatePassword(registerPassword.value)) {
+            setError(
+        registerPassword,
+        "Mínimo 8 caracteres, una letra y un número."
+      );
+
       isValid = false;
     }
 

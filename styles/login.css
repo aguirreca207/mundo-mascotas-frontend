@@ -150,6 +150,38 @@
 .login-submit-btn {
   width: 100%;
 }
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  width: 100%;
+  padding-right: 52px;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #7a6f66;
+}
+
+.toggle-password:hover {
+  color: #f07b34;
+}
+
+.toggle-password .material-symbols-outlined {
+  font-size: 22px;
+  line-height: 1;
+}
 
 .login-message-card {
   display: none;
