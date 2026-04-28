@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mundo Mascotas - Registro</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/variables.css" />
+  <link rel="stylesheet" href="../styles/components.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/responsive.css" />
+  <link rel="stylesheet" href="../styles/registro.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-content">
+      <p>Crea tu cuenta para acceder a tu información y tus gestiones.</p>
+      <span>Registro simple, claro y pensado para el usuario.</span>
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="../index.html" class="logo">
+  <span class="logo-icon">🐾</span>
+  <span class="logo-text">Mundo Mascotas</span>
+</a>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="mascotas.html">Mascotas</a></li>
+        <li><a href="citas.html">Citas</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="adopciones.html">Adopciones</a></li>
+      </ul>
+
+      <a href="login.html" class="btn-nav">Iniciar sesión</a>
+    </div>
+  </nav>
+
+<main class="register-page">
+  <section class="register-section">
+    <div class="container register-layout">
+      <article class="register-info-panel">
+        <span class="register-badge">Nueva cuenta</span>
+        <h1>Crea tu cuenta en Mundo Mascotas</h1>
+        <p>
+          Regístrate para consultar tus mascotas, tus citas, tus pedidos,
+          tus reservas y el resumen general de tu actividad dentro de la plataforma.
+        </p>
+
+        <div class="register-benefits">
+          <article class="benefit-card">
+            <h3>Tu espacio personal</h3>
+            <p>Consulta tu actividad y tus procesos desde una sola vista.</p>
+          </article>
+
+          <article class="benefit-card">
+            <h3>Gestión organizada</h3>
+            <p>Accede fácilmente a mascotas, citas, tienda, servicios y adopciones.</p>
+          </article>
+
+          <article class="benefit-card">
+            <h3>Seguimiento claro</h3>
+            <p>Visualiza solicitudes, reservas, pedidos y notificaciones relevantes.</p>
+          </article>
+        </div>
+      </article>
+
+      <article class="register-form-panel">
+        <form id="registerForm" class="register-form-grid">
+          <div class="form-group">
+            <label for="registerName">Nombre completo</label>
+            <input type="text" id="registerName" placeholder="Ej. Ana Torres" />
+            <small class="error-text"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="registerEmail">Correo electrónico</label>
+            <input type="email" id="registerEmail" placeholder="Ej. ana@email.com" />
+            <small class="error-text"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="registerPhone">Teléfono</label>
+            <input type="text" id="registerPhone" placeholder="Ej. 3001234567" />
+            <small class="error-text"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="registerCity">Ciudad</label>
+            <input type="text" id="registerCity" placeholder="Ej. Bogotá" />
+            <small class="error-text"></small>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="registerAddress">Dirección</label>
+            <input type="text" id="registerAddress" placeholder="Ej. Calle 10 #20-30" />
+            <small class="error-text"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="registerPassword">Contraseña</label>
+            <div class="password-field">
+              <input
+                type="password"
+                id="registerPassword"
+                placeholder="Mínimo 8 caracteres"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                data-target="registerPassword"
+                aria-label="Mostrar u ocultar contraseña"
+              >
+                <span class="material-symbols-outlined">visibility</span>
+              </button>
+            </div>
+            <small class="error-text"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirmar contraseña</label>
+            <div class="password-field">
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Repite tu contraseña"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                data-target="confirmPassword"
+                aria-label="Mostrar u ocultar contraseña"
+              >
+                <span class="material-symbols-outlined">visibility</span>
+              </button>
+            </div>
+            <small class="error-text"></small>
+          </div>
+
+          <div class="register-terms full-width">
+            <input type="checkbox" id="acceptTerms" />
+            <label for="acceptTerms">
+              Acepto el tratamiento de datos y las condiciones de uso de la plataforma.
+            </label>
+          </div>
+
+          <p id="termsError" class="terms-error full-width"></p>
+
+          <div class="register-actions full-width">
+            <button type="submit" class="register-submit-btn">Crear cuenta</button>
+
+            <div class="register-divider">
+              <span>o continúa con</span>
+            </div>
+
+            <button type="button" id="googleRegisterBtn" class="google-register-btn">
+              <span class="google-icon">G</span>
+              <span>Vincúlate con Google</span>
+            </button>
+
+            <p class="register-login-link">
+              ¿Ya tienes cuenta?
+              <a href="login.html">Iniciar sesión</a>
+            </p>
+          </div>
+
+          <div id="registerSuccessCard" class="success-card full-width">
+            <strong>Cuenta creada correctamente</strong>
+            <p>Tu registro fue validado y ahora serás dirigido al inicio de sesión.</p>
+          </div>
+        </form>
+      </article>
+    </div>
+  </section>
+</main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="container footer-top-content">
+        <div class="footer-brand-box">
+          <div class="footer-brand-logo"></div>
+          <div class="footer-brand-text">
+            <h3>Mundo Mascotas</h3>
+            <p>Recibe novedades, promociones y recomendaciones para consentir a tu peludo.</p>
+          </div>
+        </div>
+
+        <form class="footer-newsletter" id="footerNewsletterForm">
+  <select id="footerPetType">
+    <option selected>Selecciona tu mascota</option>
+    <option>Perro</option>
+    <option>Gato</option>
+    <option>Ambos</option>
+  </select>
+
+  <input type="email" id="footerNewsletterEmail" placeholder="Correo electrónico" />
+  <button type="submit">Suscribirme</button>
+
+  <p class="footer-newsletter-message" id="footerNewsletterMessage"></p>
+</form>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="container footer-main-content">
+        <div class="footer-column footer-column-brand">
+          <div class="footer-logo">
+            <span class="footer-paw-icon">🐾</span>
+            <span>Mundo Mascotas</span>
+          </div>
+          <p class="footer-description">
+            Todo lo que tu mascota necesita en un solo lugar: productos, bienestar y cuidado con estilo.
+          </p>
+
+          <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">tt</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">yt</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="tienda.html">Tienda</a></li>
+            <li><a href="citas.html">Citas</a></li>
+            <li><a href="mascotas.html">Mascotas</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+  <h4>Explora</h4>
+  <ul>
+    <li><a href="adopciones.html">Adopciones</a></li>
+    <li><a href="reportar-adopcion.html">Reportar adopción</a></li>
+    <li><a href="login.html">Iniciar sesión</a></li>
+    <li><a href="registro.html">Crear cuenta</a></li>
+  </ul>
+</div>
+
+        <div class="footer-column">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:info@mundomascotas.com">info@mundomascotas.com</a></li>
+            <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
+                <li><span>Bogotá, Colombia</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>© 2026 Mundo Mascotas. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/registro.js"></script>
+</body>
+</html>
