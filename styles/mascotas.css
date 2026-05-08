@@ -1,0 +1,417 @@
+.pets-hero {
+  padding: 50px 0 24px;
+}
+
+.pets-hero-box {
+  background: linear-gradient(135deg, #fff7ef 0%, #fffaf5 100%);
+  border: 1px solid #f1dfcf;
+  border-radius: 32px;
+  padding: 36px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.pets-hero-text h1 {
+  margin: 0 0 14px;
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  line-height: 1.05;
+  color: #2f2a26;
+}
+
+.pets-hero-text p {
+  margin: 0 0 24px;
+  color: var(--color-text-soft);
+  line-height: 1.7;
+  max-width: 620px;
+}
+
+.pets-hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.pets-hero-stats {
+  display: grid;
+  gap: 14px;
+}
+
+.pets-mini-card {
+  background: #ffffff;
+  border: 1px solid #f0e7dc;
+  border-radius: 20px;
+  padding: 18px 20px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+}
+
+.pets-mini-card strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-secondary);
+  font-size: 1.3rem;
+}
+
+.pets-mini-card span {
+  color: var(--color-text-soft);
+  font-size: 0.95rem;
+}
+
+.pets-filters {
+  padding: 18px 0 10px;
+}
+
+.pets-head-left {
+  text-align: left;
+  margin: 0 0 24px;
+}
+
+.pets-filter-chips {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pet-chip {
+  border: 1px solid #ead8c5;
+  background: #fff;
+  color: #2f2a26;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.pet-chip:hover,
+.pet-chip.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.pets-main {
+  padding: 26px 0 70px;
+}
+
+.pets-main-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 0.75fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.pets-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.pet-card {
+  background: #ffffff;
+  border: 1px solid #f0e7dc;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.pet-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
+  border-color: #e7cdb4;
+}
+
+.pet-card-image {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 14px 10px;
+}
+
+.pet-card-image img {
+  width: 100%;
+  max-width: 170px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  display: block;
+}
+
+.pet-card-content {
+  padding: 16px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.pet-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  background: #fff3e3;
+  color: #b96e19;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.pet-card-content h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  color: #2f2a26;
+}
+
+.pet-card-content p {
+  margin: 0;
+  color: var(--color-text-soft);
+  line-height: 1.6;
+  min-height: 78px;
+}
+
+.pet-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: #7c7268;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.pet-detail-btn {
+  border: none;
+  border-radius: 999px;
+  background: var(--color-secondary);
+  color: #fff;
+  padding: 11px 18px;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+  margin-top: auto;
+}
+
+.pet-detail-btn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.pet-health-card,
+.pet-summary-card,
+.pet-links-card {
+  background: #fff;
+  border: 1px solid #f0e7dc;
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+}
+
+.pet-section-title {
+  margin-bottom: 18px;
+}
+
+.pet-section-title h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: #2f2a26;
+}
+
+.pet-section-title p {
+  margin: 0;
+  color: var(--color-text-soft);
+  line-height: 1.6;
+}
+
+.pet-small-title h2 {
+  font-size: 1.45rem;
+}
+
+.pet-health-list {
+  display: grid;
+  gap: 12px;
+}
+
+.pet-health-item {
+  border: 1px solid #f2e5d8;
+  border-radius: 16px;
+  padding: 14px;
+  display: grid;
+  gap: 4px;
+  background: #fffaf5;
+}
+
+.pet-health-item strong {
+  color: #2f2a26;
+  font-size: 0.96rem;
+}
+
+.pet-health-item span {
+  color: var(--color-text-soft);
+  font-size: 0.88rem;
+}
+
+.pets-sidebar {
+  display: grid;
+  gap: 18px;
+  position: sticky;
+  top: 110px;
+}
+
+.pet-summary-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.pet-summary-head h3,
+.pet-links-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #2f2a26;
+}
+
+.pet-summary-head h3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pet-summary-head span {
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: right;
+  max-width: 160px;
+  line-height: 1.3;
+  margin-left: auto;
+}
+
+.pet-summary-body {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.pet-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f2e5d8;
+}
+
+.pet-line span {
+  color: var(--color-text-soft);
+}
+
+.pet-line strong {
+  color: #2f2a26;
+  text-align: right;
+  font-size: 0.96rem;
+}
+
+.pet-main-btn {
+  width: 100%;
+}
+
+.pet-links-card ul {
+  margin: 16px 0 0;
+  padding-left: 18px;
+  line-height: 1.9;
+}
+
+.pet-links-card a {
+  color: #6f655c;
+}
+
+.pet-links-card a:hover {
+  color: #f07b34;
+}
+
+.pets-benefits {
+  padding: 0 0 70px;
+}
+
+.pets-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.pets-benefit-card {
+  background: #fff;
+  border: 1px solid #f0e7dc;
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.04);
+}
+
+.pets-benefit-card h3 {
+  margin: 0 0 10px;
+  color: #2f2a26;
+  font-size: 1.1rem;
+}
+
+.pets-benefit-card p {
+  margin: 0;
+  color: var(--color-text-soft);
+  line-height: 1.6;
+}
+
+.pet-card.hidden {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .pets-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .pets-hero-box,
+  .pets-main-grid,
+  .pets-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pets-sidebar {
+    position: static;
+    top: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .pets-hero-box {
+    padding: 24px;
+  }
+
+  .pets-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pet-card-content p {
+    min-height: auto;
+  }
+
+  .pet-line {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pet-line strong {
+    text-align: left;
+  }
+
+  .pet-detail-btn {
+    width: 100%;
+  }
+}

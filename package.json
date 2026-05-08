@@ -1,0 +1,28 @@
+{
+  "name": "mundo-mascotas-frontend",
+  "version": "1.0.0",
+  "description": "Aplicación web frontend para la gestión de mascotas y citas veterinarias.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+  "dev": "live-server --port=5500 --open=index.html",
+  "start": "live-server --port=5500 --open=index.html"
+},
+"repository": {
+    "type": "git",
+    "url": "git+https://github.com/aguirreca207/mundo-mascotas-frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/aguirreca207/mundo-mascotas-frontend/issues"
+  },
+  "homepage": "https://github.com/aguirreca207/mundo-mascotas-frontend#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
