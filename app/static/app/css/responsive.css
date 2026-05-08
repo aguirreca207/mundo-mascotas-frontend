@@ -41,48 +41,7 @@
   }
 }
 
-@media (max-width: 768px) {
-  .hero-grid,
-  .cards-grid,
-  .hero-stats,
-  .footer-main-content {
-    grid-template-columns: 1fr;
-  }
 
-  .hero {
-    padding-top: 30px;
-  }
-
-  .hero-image {
-    min-height: 360px;
-  }
-
-  .hero-text h1 {
-    font-size: 2.4rem;
-  }
-
-  .nav-content {
-    align-items: flex-start;
-  }
-
-  .products-carousel {
-    padding: 0 46px;
-  }
-
-  .products-page {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .products-arrow {
-    width: 34px;
-    height: 34px;
-    font-size: 1.3rem;
-  }
-
-  .shop-card img {
-    width: 72%;
-  }
-}
 
 @media (max-width: 640px) {
   .footer-newsletter {
@@ -117,5 +76,17 @@
     width: 32px;
     height: 32px;
     font-size: 1.2rem;
+  }
+}
+
+/* =====================
+   TOP BAR RESPONSIVE
+===================== */
+
+@media (max-width: 768px) {
+  .topbar-content {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
   }
 }

@@ -497,6 +497,12 @@
   position: relative;
   z-index: 2;
 }
+.home-offer-image-placeholder img {
+  width: auto;
+  max-width: 250px;
+  height: auto;
+  object-fit: contain;
+}
 
 .home-offer-tag {
   display: inline-flex;
@@ -511,9 +517,10 @@
 }
 
 .home-offer-text h3 {
+  word-break: break-word;
   margin: 0 0 10px;
-  font-size: 1.6rem;
-  line-height: 1.05;
+  font-size: 1.4rem;
+  line-height: 1.02;
   color: #1f4f16;
   font-weight: 900;
 }
@@ -528,18 +535,13 @@
 .home-offer-image-placeholder {
   position: absolute;
   right: 22px;
-  top: 22px;
-  width: 42%;
-  height: 68%;
-  border: 2px dashed #c8d9ab;
-  border-radius: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48%;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #7c8d6a;
-  font-weight: 700;
-  font-size: 0.95rem;
-  background: rgba(255, 255, 255, 0.35);
 }
 
 .home-offer-arrow {
@@ -578,6 +580,7 @@
   }
 }
 
+
 @media (max-width: 768px) {
   .home-offer-card {
     min-height: auto;
@@ -589,19 +592,20 @@
     padding-right: 0;
   }
 
-  .home-offer-image-placeholder {
-    position: relative;
-    right: auto;
-    top: auto;
-    width: 100%;
-    height: 180px;
-    margin: 18px 0 60px;
-  }
 
   .home-offer-arrow {
     right: 20px;
     bottom: 16px;
   }
+}
+.churu-img img {
+  max-width: 270px;
+}
+.rascador-img img {
+  max-width: 190px;
+}
+.comida-img img {
+  max-width: 150px;
 }
 
 .site-footer {
@@ -710,9 +714,9 @@
 
 .footer-newsletter button {
   height: 52px;
-  border: 2px solid #ffffff;
-  background: transparent;
-  color: #ffffff;
+  border: none;
+  background: white;
+  color: #EB6E25;
   padding: 0 26px;
   border-radius: 999px;
   font-weight: 800;
@@ -721,12 +725,12 @@
 }
 
 .footer-newsletter button:hover {
-  background: #ffffff;
-  color: #f07b34;
+  background: #2f2a26;
+  color: #aaa;
 }
 
 .footer-main {
-  background: #fffaf5;
+  background: #fdf8f3;
   padding: 48px 0 18px;
   border-top: 1px solid #f1dfcf;
 }
@@ -795,24 +799,23 @@
 }
 
 .footer-social a {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: #fff;
+  background: #ffffff;
   border: 1px solid #efd8c3;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #2f2a26;
-  font-size: 0.9rem;
-  font-weight: 800;
-  transition: 0.25s ease;
+  color: #EB6E25;
+  font-size: 1.1rem;
+  transition: all 0.25s ease;
 }
 
 .footer-social a:hover {
-  background: #f07b34;
-  border-color: #f07b34;
-  color: #fff;
+  background: #EB6E25;
+  color: #ffffff;
+  transform: translateY(-2px);
 }
 
 .footer-bottom {
@@ -838,3 +841,50 @@
 .footer-paw-icon-small {
   font-size: 1.4rem;
 }
+
+.product-rating .rating-stars {
+  color: #F4B400 !important;
+}
+
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #EB6E25, #F4B400);
+  color: white;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* =====================
+   TOP BAR (SUPERIOR)
+===================== */
+
+.topbar {
+  background: linear-gradient(90deg, #EB6E25, #F4B400);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.topbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+}
+
+.topbar-right {
+  opacity: 0.9;
+}
+

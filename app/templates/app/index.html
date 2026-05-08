@@ -1,48 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mundo Mascotas - Inicio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+{% extends "app/base.html" %}
+{% load static %}
 
-  <link rel="stylesheet" href="styles/variables.css" />
-  <link rel="stylesheet" href="styles/components.css" />
-  <link rel="stylesheet" href="styles/main.css" />
-  <link rel="stylesheet" href="styles/responsive.css" />
-</head>
-<body>
+{% block title %}Inicio{% endblock %}
 
-  <header class="topbar">
-    <div class="container topbar-content">
-      <p>¡Envíos en Bogotá gratis desde $100.000!</p>
-      <span>Tu mascota manda, tú ejecutas.</span>
-    </div>
-  </header>
-
-  <nav class="navbar">
-    <div class="container nav-content">
-      <div class="logo">
-        <span class="logo-icon">🐾</span>
-        <span class="logo-text">Mundo Mascotas</span>
-      </div>
-
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Inicio</a></li>
-<li><a href="pages/mascotas.html">Mascotas</a></li>
-<li><a href="pages/citas.html">Citas</a></li>
-<li><a href="pages/tienda.html">Tienda</a></li>
-<li><a href="pages/servicios.html">Servicios</a></li>
-<li><a href="pages/adopciones.html">Adopciones</a></li>
-      </ul>
-
-      <a href="pages/login.html" class="btn-nav">Iniciar sesión</a>
-    </div>
-  </nav>
-
+{% block content %}
   <main>
     <section class="hero">
       <div class="container hero-grid">
@@ -55,8 +16,8 @@
           </p>
 
           <div class="hero-actions">
-  <a href="pages/login.html" class="btn btn-primary">Iniciar sesión</a>
-  <a href="pages/registro.html" class="btn btn-secondary">Crear cuenta</a>
+<a href="/login/" class="btn btn-primary">Iniciar sesión</a>
+<a href="/registro/" class="btn btn-secondary">Crear cuenta</a>
 </div>
 
           <div class="hero-stats">
@@ -76,7 +37,7 @@
         </div>
 
         <div class="hero-image">
-  <img src="assets/img/perrogato.webp" alt="Mascota principal" />
+  <img src="{% static 'app/img/perrogato.webp' %}" alt="Mascota principal" />
   <div class="hero-shape hero-shape-1"></div>
   <div class="hero-shape hero-shape-2"></div>
 </div>
@@ -164,9 +125,9 @@
           <p>Promociones seleccionadas para consentir a tu mascota.</p>
         </div>
 
-        <div class="home-offer-image-placeholder">
-          <img src="assets/img/Cards/Rascador.png" alt="Oferta 1" />
-        </div>
+        <div class="home-offer-image-placeholder rascador-img">
+  <img src="{% static 'app/img/Cards/Rascador.png' %}" alt="Rascador para gatos" />
+</div>
 
         <a href="pages/tienda.html" class="home-offer-arrow" aria-label="Ir a la tienda">→</a>
       </article>
@@ -177,11 +138,9 @@
           <h3>Hasta 30% en productos seleccionados</h3>
           <p>Encuentra referencias destacadas para cada necesidad.</p>
         </div>
-
-        <div class="home-offer-image-placeholder">
-          Imagen 2
-        </div>
-
+<div class="home-offer-image-placeholder churu-img">
+  <img src="{% static 'app/img/Cards/churu.png' %}" alt="Churu snacks para mascotas" />
+</div>
         <a href="pages/tienda.html" class="home-offer-arrow" aria-label="Ir a la tienda">→</a>
       </article>
 
@@ -192,9 +151,9 @@
           <p>Ofertas pensadas para compras frecuentes y esenciales.</p>
         </div>
 
-        <div class="home-offer-image-placeholder">
-          Imagen 3
-        </div>
+       <div class="home-offer-image-placeholder comida-img">
+  <img src="{% static 'app/img/Cards/snack.png' %}" alt="Comida para perro" />  
+</div>
 
         <a href="pages/tienda.html" class="home-offer-arrow" aria-label="Ir a la tienda">→</a>
       </article>
@@ -210,7 +169,7 @@
     <div class="products-page">
       <article class="product-card shop-card">
   <div class="product-image-box">
-    <img src="assets/img/Cards/Royalcanin.png" alt="Producto para mascotas" />
+    <img src="{% static 'app/img/Cards/Royalcanin.png' %}" alt="Producto para mascotas" />
   </div>
   <div class="product-info">
           <div class="product-rating">
@@ -228,7 +187,7 @@
 
       <article class="product-card shop-card">
   <div class="product-image-box">
-    <img src="assets/img/Cards/Snack.png" alt="Snack para mascotas" />
+   <img src="{% static 'app/img/Cards/Snack.png' %}" alt="Snack para mascotas" />
   </div>
   <div class="product-info">
     <div class="product-rating">
@@ -246,7 +205,7 @@
 
 <article class="product-card shop-card">
   <div class="product-image-box">
-    <img src="assets/img/Cards/Bolfo_Collar-1.png" alt="Collar antipulgas" class="img-ajuste-medium img-bajar-arena" />
+    <img src="{% static 'app/img/Cards/Bolfo_Collar-1.png' %}" alt="Collar antipulgas" class="img-ajuste-medium img-bajar-arena" />
   </div>
   <div class="product-info">
     <div class="product-rating">
@@ -264,7 +223,7 @@
 
 <article class="product-card shop-card">
   <div class="product-image-box">
-    <img src="assets/img/Cards/ArenaGatos.png" alt="Arena para gato" />
+  <img src="{% static 'app/img/Cards/ArenaGatos.png' %}" alt="Arena para gato" />
   </div>
   <div class="product-info">
     <div class="product-rating">
@@ -281,7 +240,7 @@
 </article>
 
       <article class="product-card shop-card">
-        <img src="assets/img/Cards/suplemento.png" alt="Suplemento mascota" />
+<img src="{% static 'app/img/Cards/suplemento.png' %}" alt="Suplemento mascota" />
         <div class="product-info">
           <div class="product-rating">
             <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
@@ -297,7 +256,7 @@
       </article>
 
       <article class="product-card shop-card">
-        <img src="assets/img/Cards/pelota.png" alt="Juguete para perro" />
+     <img src="{% static 'app/img/Cards/pelota.png' %}" alt="Juguete para perro" />
         <div class="product-info">
           <div class="product-rating">
             <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
@@ -313,7 +272,7 @@
       </article>
 
       <article class="product-card shop-card">
-        <img src="assets/img/Cards/shampo.png" alt="Shampoo mascota" />
+<img src="{% static 'app/img/Cards/shampo.png' %}" alt="Shampoo mascota" />
         <div class="product-info">
           <div class="product-rating">
             <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
@@ -331,7 +290,7 @@
 
     <div class="products-page">
       <article class="product-card shop-card">
-        <img src="assets/img/Cards/galletas.png" alt="Producto 8" />
+<img src="{% static 'app/img/Cards/galletas.png' %}" alt="Producto 8" />
         <div class="product-info">
           <div class="product-rating">
             <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
@@ -347,7 +306,7 @@
       </article>
 
       <article class="product-card shop-card">
-        <img src="assets/img/Cards/Pechera.png" alt="Producto 9" />
+        <img src="{% static 'app/img/Cards/Pechera.png' %}" alt="Pechera ajustable" />
         <div class="product-info">
           <div class="product-rating">
             <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
@@ -363,7 +322,7 @@
       </article>
 
       <article class="product-card shop-card">
-        <img src="assets/img/Cards/Comedero.png" alt="Producto 10" />
+       <img src="{% static 'app/img/Cards/Comedero.png' %}" alt="Producto 10" />
         <div class="product-info">
           <div class="product-rating">
             <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
@@ -379,7 +338,7 @@
       </article>
 
       <article class="product-card shop-card">
-        <img src="assets/img/Cards/Rascador.png" alt="Producto 11" />
+       <img src="{% static 'app/img/Cards/Rascador.png' %}" alt="Producto 11" />
         <div class="product-info">
           <div class="product-rating">
             <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
@@ -395,7 +354,7 @@
       </article>
 
       <article class="product-card shop-card">
-        <img src="assets/img/Cards/Toallitas.png" alt="Producto 12" />
+        <img src="{% static 'app/img/Cards/Toallitas.png' %}" alt="Producto 12" />
         <div class="product-info">
           <div class="product-rating">
             <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
@@ -411,7 +370,7 @@
       </article>
 
       <article class="product-card shop-card">
-        <img src="assets/img/Cards/Cama (1).png" alt="Producto 13" />
+        <img src="{% static 'app/img/Cards/Cama (1).png' %}" alt="Producto 13" />
         <div class="product-info">
           <div class="product-rating">
             <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
@@ -427,7 +386,7 @@
       </article>
 
       <article class="product-card shop-card">
-        <img src="assets/img/Cards/Suero.png" alt="Producto 14" />
+        <img src="{% static 'app/img/Cards/Suero.png' %}" alt="Producto 14" />
         <div class="product-info">
           <div class="product-rating">
             <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
@@ -449,92 +408,4 @@
     </div>
   </div>
 </section>
-  <footer class="site-footer">
-  <div class="footer-top">
-    <div class="container footer-top-content">
-      <div class="footer-brand-box">
-        <div class="footer-brand-logo">
-          
-        </div>
-        <div class="footer-brand-text">
-          <h3>Mundo Mascotas</h3>
-          <p>Recibe novedades, promociones y recomendaciones para consentir a tu peludo.</p>
-        </div>
-      </div>
-
-      <form class="footer-newsletter" id="footerNewsletterForm">
-  <select id="footerPetType">
-    <option selected>Selecciona tu mascota</option>
-    <option>Perro</option>
-    <option>Gato</option>
-    <option>Ambos</option>
-  </select>
-
-  <input type="email" id="footerNewsletterEmail" placeholder="Correo electrónico" />
-
-  <button type="submit">Suscribirme</button>
-
-  <p class="footer-newsletter-message" id="footerNewsletterMessage"></p>
-</form>
-    </div>
-  </div>
-
-  <div class="footer-main">
-    <div class="container footer-main-content">
-      <div class="footer-column footer-column-brand">
-        <div class="footer-logo">
-          <span class="footer-paw-icon">🐾</span>
-          <span>Mundo Mascotas</span>
-        </div>
-        <p class="footer-description">
-          Todo lo que tu mascota necesita en un solo lugar: productos, bienestar y cuidado con estilo.
-        </p>
-
-        <div class="footer-social">
-  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
-  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
-  <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">tt</a>
-  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">yt</a>
-</div>
-      </div>
-
-      <div class="footer-column">
-  <h4>Servicios</h4>
-  <ul>
-    <li><a href="pages/tienda.html">Tienda</a></li>
-    <li><a href="pages/citas.html">Citas</a></li>
-    <li><a href="pages/mascotas.html">Mascotas</a></li>
-    <li><a href="pages/servicios.html">Servicios</a></li>
-  </ul>
-</div>
-
-<div class="footer-column">
-  <h4>Explora</h4>
-  <ul>
-    <li><a href="pages/adopciones.html">Adopciones</a></li>
-    <li><a href="pages/reportar-adopcion.html">Reportar adopción</a></li>
-    <li><a href="pages/login.html">Iniciar sesión</a></li>
-    <li><a href="pages/registro.html">Crear cuenta</a></li>
-  </ul>
-</div>
-
-      <div class="footer-column">
-        <h4>Contacto</h4>
-        <ul>
-          <li><a href="mailto:info@mundomascotas.com">info@mundomascotas.com</a></li>
-          <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
-          <li><span>Bogotá, Colombia</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="container footer-bottom">
-      <p>© 2026 Mundo Mascotas. Todos los derechos reservados.</p>
-    </div>
-  </div>
-</footer>
-
-  <script src="scripts/utils.js"></script>
-  <script src="scripts/main.js"></script>
-</body>
-</html>
+ {% endblock %}

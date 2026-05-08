@@ -1,50 +1,15 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mundo Mascotas - Mascotas</title>
+{% extends "app/base.html" %}
+{% load static %}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+{% block title %}Mascotas{% endblock %}
 
-  <link rel="stylesheet" href="../styles/variables.css" />
-  <link rel="stylesheet" href="../styles/components.css" />
-  <link rel="stylesheet" href="../styles/main.css" />
-  <link rel="stylesheet" href="../styles/responsive.css" />
-  <link rel="stylesheet" href="../styles/mascotas.css" />
-</head>
-<body>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app/css/mascotas.css' %}">
+{% endblock %}
 
-  <header class="topbar">
-    <div class="container topbar-content">
-      <p>Gestiona la información de tus mascotas en un solo lugar.</p>
-      <span>Perfil, salud y seguimiento en una sola vista.</span>
-    </div>
-  </header>
+{% block content %}
 
-  <nav class="navbar">
-    <div class="container nav-content">
-      <div class="logo">
-        <span class="logo-icon">🐾</span>
-        <span class="logo-text">Mundo Mascotas</span>
-      </div>
-
-      <ul class="nav-links">
-        <li><a href="../index.html">Inicio</a></li>
-        <li><a href="mascotas.html" class="active">Mascotas</a></li>
-        <li><a href="citas.html">Citas</a></li>
-        <li><a href="tienda.html">Tienda</a></li>
-        <li><a href="servicios.html">Servicios</a></li>
-        <li><a href="adopciones.html">Adopciones</a></li>
-      </ul>
-
-      <a href="login.html" class="btn-nav">Iniciar sesión</a>
-    </div>
-  </nav>
-
-  <main>
+ <main>
     <section class="pets-hero">
       <div class="container">
         <div class="pets-hero-box">
@@ -110,7 +75,7 @@
               data-history="Historia clínica activa"
               data-status="Salud estable">
               <div class="pet-card-image">
-                <img src="../assets/img/perrogato.webp" alt="Luna" />
+                <img src="{% static 'app/img/perrogato.webp' %}" />
               </div>
               <div class="pet-card-content">
                 <span class="pet-badge">Perro</span>
@@ -145,7 +110,7 @@
               data-history="Historia clínica activa"
               data-status="Seguimiento preventivo">
               <div class="pet-card-image">
-                <img src="../assets/img/Cards/ArenaGatos.png" alt="Max" />
+                <img src="{% static 'app/img/Cards/ArenaGatos.png' %}" alt="Max" />
               </div>
               <div class="pet-card-content">
                 <span class="pet-badge">Gato</span>
@@ -180,7 +145,7 @@
               data-history="Sin historia clínica completa"
               data-status="Requiere seguimiento">
               <div class="pet-card-image">
-                <img src="../assets/img/Cards/pelota.png" alt="Toby" />
+                <img src="{% static 'app/img/Cards/pelota.png' %}" alt="Toby" />    
               </div>
               <div class="pet-card-content">
                 <span class="pet-badge">Perro</span>
@@ -273,12 +238,12 @@
           <div class="pet-links-card">
             <h3>Accesos rápidos</h3>
             <ul>
-              <li><a href="citas.html">Ir a citas veterinarias</a></li>
-              <li><a href="servicios.html">Ver servicios disponibles</a></li>
-              <li><a href="tienda.html">Explorar tienda</a></li>
+              <li><a href="/citas/">Ir a citas veterinarias</a></li>
+              <li><a href="/servicios/">Ver servicios disponibles</a></li>
+              <li><a href="/tienda/">Explorar tienda</a></li>
             </ul>
             <p class="pet-extra-link">
-  <a href="registro-mascota.html">Solicitar registro de una nueva mascota</a>
+  <a href="/registro-mascota/">Solicitar registro de una nueva mascota</a>
 </p>
           </div>
         </aside>
@@ -305,87 +270,8 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-top">
-      <div class="container footer-top-content">
-        <div class="footer-brand-box">
-          <div class="footer-brand-logo"></div>
-          <div class="footer-brand-text">
-            <h3>Mundo Mascotas</h3>
-            <p>Recibe novedades, promociones y recomendaciones para consentir a tu peludo.</p>
-          </div>
-        </div>
+  {% endblock %}
 
-        <form class="footer-newsletter">
-          <select>
-            <option selected>Selecciona tu mascota</option>
-            <option>Perro</option>
-            <option>Gato</option>
-            <option>Ambos</option>
-          </select>
-
-          <input type="email" placeholder="Correo electrónico" />
-          <button type="submit">Suscribirme</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="footer-main">
-      <div class="container footer-main-content">
-        <div class="footer-column footer-column-brand">
-          <div class="footer-logo">
-            <span class="footer-paw-icon">🐾</span>
-            <span>Mundo Mascotas</span>
-          </div>
-          <p class="footer-description">
-            Todo lo que tu mascota necesita en un solo lugar: productos, bienestar y cuidado con estilo.
-          </p>
-
-          <div class="footer-social">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">tt</a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">yt</a>
-          </div>
-        </div>
-
-        <div class="footer-column">
-          <h4>Servicios</h4>
-          <ul>
-            <li><a href="tienda.html">Tienda</a></li>
-            <li><a href="citas.html">Citas</a></li>
-            <li><a href="mascotas.html">Mascotas</a></li>
-            <li><a href="servicios.html">Servicios</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column">
-          <h4>Ayuda</h4>
-          <ul>
-            <li><a href="dashboard.html">Preguntas frecuentes</a></li>
-            <li><a href="dashboard.html">Contáctanos</a></li>
-            <li><a href="dashboard.html">Términos y condiciones</a></li>
-            <li><a href="dashboard.html">Política de privacidad</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column">
-          <h4>Contacto</h4>
-          <ul>
-            <li><a href="mailto:info@mundomascotas.com">info@mundomascotas.com</a></li>
-            <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
-            <li><a href="dashboard.html">Bogotá, Colombia</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="container footer-bottom">
-        <p>© 2026 Mundo Mascotas. Todos los derechos reservados.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="../scripts/utils.js"></script>
-  <script src="../scripts/mascotas.js"></script>
-</body>
-</html>
+{% block extra_js %}
+<script src="{% static 'app/js/mascotas.js' %}"></script>
+{% endblock %}

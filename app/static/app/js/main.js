@@ -1,72 +1,130 @@
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("Inicio cargado correctamente");
+document.addEventListener("DOMContentLoaded", function () {
 
-  const footerNewsletterForm = document.getElementById("footerNewsletterForm");
-  const footerNewsletterEmail = document.getElementById("footerNewsletterEmail");
-  const footerNewsletterMessage = document.getElementById("footerNewsletterMessage");
+  console.log("JS cargado correctamente");
 
-  function validateEmail(value) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
-  }
+  /* =========================
+     🔔 NEWSLETTER
+  ========================= */
 
-  if (footerNewsletterForm && footerNewsletterEmail && footerNewsletterMessage) {
-    footerNewsletterForm.addEventListener("submit", (event) => {
-      event.preventDefault();
+  const form = document.getElementById("newsletterForm");
 
-      footerNewsletterMessage.textContent = "";
-      footerNewsletterMessage.classList.remove("error", "success");
+  if (form) {
 
-      if (!footerNewsletterEmail.value.trim()) {
-        footerNewsletterMessage.textContent = "Ingresa un correo electrónico.";
-        footerNewsletterMessage.classList.add("error");
+    form.addEventListener("submit", function(e) {
+      e.preventDefault(); // 🔥 evita recarga y salto SIEMPRE
+
+      const email = form.querySelector("input[name='email']").value.trim();
+      const pet = form.querySelector("select[name='pet_type']").value;
+
+      // VALIDACIONES
+      if (!email) {
+        showToast("Debes ingresar un correo");
         return;
       }
 
-      if (!validateEmail(footerNewsletterEmail.value)) {
-        footerNewsletterMessage.textContent = "Ingresa un correo válido.";
-        footerNewsletterMessage.classList.add("error");
+      if (!validateEmail(email)) {
+        showToast("Correo inválido");
         return;
       }
 
-      footerNewsletterMessage.textContent = "¡Suscripción registrada correctamente!";
-      footerNewsletterMessage.classList.add("success");
+      fetch("/newsletter/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCSRFToken()
+        },
+        body: JSON.stringify({
+          email: email,
+          pet_type: pet
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        showToast(data.message || "Suscripción exitosa");
+        form.reset();
+      })
+      .catch(() => {
+        showToast("Error al enviar. Intenta nuevamente.");
+      });
 
-      footerNewsletterForm.reset();
     });
   }
-});
-const productsTrack = document.getElementById("productsTrack");
-const productsPrev = document.getElementById("productsPrev");
-const productsNext = document.getElementById("productsNext");
 
-if (productsTrack && productsPrev && productsNext) {
-  let currentPage = 0;
-  const totalPages = 2;
 
-  function updateProductsCarousel() {
-    const viewport = productsTrack.parentElement;
-    const viewportWidth = viewport.offsetWidth;
-    productsTrack.style.transform = `translateX(-${currentPage * viewportWidth}px)`;
+  /* =========================
+     🎯 CARRUSEL PRODUCTOS
+  ========================= */
 
-    productsPrev.style.display = currentPage === 0 ? "none" : "grid";
-    productsNext.style.display = currentPage === totalPages - 1 ? "none" : "grid";
+  const track = document.getElementById("productsTrack");
+  const prevBtn = document.getElementById("productsPrev");
+  const nextBtn = document.getElementById("productsNext");
+
+  if (track && prevBtn && nextBtn) {
+
+    let currentPage = 0;
+    const pages = document.querySelectorAll(".products-page");
+    const totalPages = pages.length;
+
+    function updateCarousel() {
+      const viewport = track.parentElement;
+      const width = viewport.clientWidth;
+
+      track.style.transform = `translateX(-${currentPage * width}px)`;
+
+      prevBtn.style.display = currentPage === 0 ? "none" : "flex";
+      nextBtn.style.display = currentPage === totalPages - 1 ? "none" : "flex";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (currentPage < totalPages - 1) {
+        currentPage++;
+        updateCarousel();
+      }
+    });
+
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 0) {
+        currentPage--;
+        updateCarousel();
+      }
+    });
+
+    window.addEventListener("resize", updateCarousel);
+
+    updateCarousel();
   }
 
-  productsNext.addEventListener("click", () => {
-    if (currentPage < totalPages - 1) {
-      currentPage++;
-      updateProductsCarousel();
-    }
-  });
+});
 
-  productsPrev.addEventListener("click", () => {
-    if (currentPage > 0) {
-      currentPage--;
-      updateProductsCarousel();
-    }
-  });
 
-  window.addEventListener("resize", updateProductsCarousel);
+/* =========================
+   🔔 TOAST
+========================= */
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
 
-  updateProductsCarousel();
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
+}
+
+
+/* =========================
+   📧 VALIDACIÓN EMAIL
+========================= */
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+
+/* =========================
+   🔐 CSRF TOKEN DJANGO
+========================= */
+function getCSRFToken() {
+  const token = document.querySelector('[name=csrfmiddlewaretoken]');
+  return token ? token.value : "";
 }
