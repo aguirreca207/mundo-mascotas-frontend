@@ -1,104 +1,89 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const petForm = document.getElementById("petForm");
+  const editingPetId = document.getElementById("editingPetId");
+  const petNameInput = document.getElementById("petNameInput");
+  const petTypeSelect = document.getElementById("petTypeSelect");
+  const petBreedInput = document.getElementById("petBreedInput");
+  const petBirthInput = document.getElementById("petBirthInput");
+  const petVaccineInput = document.getElementById("petVaccineInput");
+  const petStatusSelect = document.getElementById("petStatusSelect");
+  const petNotesInput = document.getElementById("petNotesInput");
+  const petSubmitBtn = document.getElementById("petSubmitBtn");
+
   const filterButtons = document.querySelectorAll(".pet-chip");
   const petCards = document.querySelectorAll(".pet-card");
-  const petDetailButtons = document.querySelectorAll(".pet-detail-btn");
 
-  const petName = document.getElementById("petName");
-  const petType = document.getElementById("petType");
-  const petBreed = document.getElementById("petBreed");
-  const petAge = document.getElementById("petAge");
-  const petOwner = document.getElementById("petOwner");
-  const petVaccine = document.getElementById("petVaccine");
-  const petHistory = document.getElementById("petHistory");
-  const petStatusLabel = document.getElementById("petStatusLabel");
-  const activatePetBtn = document.getElementById("activatePetBtn");
-  const petHealthList = document.getElementById("petHealthList");
+  function showPetNotice(message, type = "success") {
+    let notice = document.querySelector(".pet-notice");
 
-  let currentFilter = "todos";
+    if (!notice) {
+      notice = document.createElement("div");
+      notice.className = "pet-notice";
+      document.body.appendChild(notice);
+    }
 
-  function resetPetButton() {
-    activatePetBtn.textContent = "Marcar como activa";
-    activatePetBtn.disabled = false;
-    activatePetBtn.style.opacity = "1";
-  }
+    notice.textContent = message;
+    notice.className = `pet-notice ${type} active`;
 
-  function applyFilter() {
-    petCards.forEach((card) => {
-      const type = card.dataset.type;
-      const shouldShow = currentFilter === "todos" || type === currentFilter;
-      card.classList.toggle("hidden", !shouldShow);
-    });
-  }
-
-  function updatePetSummary({ name, type, breed, age, owner, vaccine, history, status }) {
-    petName.textContent = name || "No seleccionado";
-    petType.textContent = type || "No aplica";
-    petBreed.textContent = breed || "No aplica";
-    petAge.textContent = age || "Sin información";
-    petOwner.textContent = owner || "Sin información";
-    petVaccine.textContent = vaccine || "Sin registro";
-    petHistory.textContent = history || "Sin información";
-    petStatusLabel.textContent = status || "Sin selección";
-    resetPetButton();
+    setTimeout(() => {
+      notice.classList.remove("active");
+    }, 2600);
   }
 
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
+      const currentFilter = button.dataset.filter || "todos";
+
       filterButtons.forEach((btn) => btn.classList.remove("active"));
       button.classList.add("active");
-      currentFilter = button.dataset.filter;
-      applyFilter();
-    });
-  });
 
-  petDetailButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    updatePetSummary({
-      name: button.dataset.name,
-      type: button.dataset.type,
-      breed: button.dataset.breed,
-      age: button.dataset.age,
-      owner: button.dataset.owner,
-      vaccine: button.dataset.vaccine,
-      history: button.dataset.history,
-      status: button.dataset.status
-    });
-
-    if (window.innerWidth <= 1024) {
-      const petPanel = document.getElementById("petPanel");
-      petPanel.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+      petCards.forEach((card) => {
+        const type = card.dataset.type;
+        const shouldShow = currentFilter === "todos" || type === currentFilter;
+        card.classList.toggle("hidden", !shouldShow);
       });
-    }
-  });
-});
-
-  activatePetBtn.addEventListener("click", () => {
-    const nombre = petName.textContent;
-    const estado = petStatusLabel.textContent;
-
-    if (nombre === "No seleccionado") {
-      alert("Debes seleccionar una mascota antes de continuar.");
-      return;
-    }
-
-    petStatusLabel.textContent = "Mascota activa";
-    activatePetBtn.textContent = "Perfil activo";
-    activatePetBtn.disabled = true;
-    activatePetBtn.style.opacity = "0.7";
-
-    const newHealthItem = document.createElement("article");
-    newHealthItem.className = "pet-health-item";
-    newHealthItem.innerHTML = `
-      <strong>${nombre}</strong>
-      <span>Perfil activo · ${estado}</span>
-    `;
-
-    petHealthList.prepend(newHealthItem);
-
-    alert("La mascota fue marcada como activa correctamente.");
+    });
   });
 
-  applyFilter();
+  document.addEventListener("click", (event) => {
+    const editButton = event.target.closest("[data-action='edit']");
+
+    if (!editButton) return;
+
+    editingPetId.value = editButton.dataset.id;
+    petNameInput.value = editButton.dataset.name;
+    petTypeSelect.value = editButton.dataset.type;
+    petBreedInput.value = editButton.dataset.breed;
+    petBirthInput.value = editButton.dataset.birth;
+    petVaccineInput.value = editButton.dataset.vaccines;
+    petStatusSelect.value = editButton.dataset.status;
+    petNotesInput.value = editButton.dataset.notes || "";
+
+    if (petSubmitBtn) {
+      petSubmitBtn.textContent = "Guardar cambios";
+    }
+
+    document.getElementById("petRegisterForm")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+    showPetNotice("Edita los datos y guarda los cambios.");
+  });
+
+  if (petForm) {
+    petForm.addEventListener("submit", (event) => {
+      if (
+        !petNameInput.value.trim() ||
+        !petTypeSelect.value ||
+        !petBreedInput.value.trim() ||
+        !petBirthInput.value ||
+        !petVaccineInput.value.trim() ||
+        !petStatusSelect.value
+      ) {
+        event.preventDefault();
+        showPetNotice("Completa los datos principales de tu mascota.", "error");
+      }
+    });
+  }
 });

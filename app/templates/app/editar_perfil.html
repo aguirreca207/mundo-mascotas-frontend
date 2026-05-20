@@ -1,0 +1,83 @@
+{% extends 'app/base.html' %} {% load static %} {% block title %}Editar perfil -
+Mundo Mascotas{% endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'app/css/perfil.css' %}" />
+{% endblock %} {% block content %}
+<section class="profile-section">
+  <div class="container profile-layout">
+    <article class="profile-hero profile-edit-hero">
+      <div class="profile-avatar">
+        {{ request.user.first_name|default:request.user.email|first|upper }}
+      </div>
+
+      <div class="profile-main-info">
+        <span class="profile-badge">Editar cuenta</span>
+        <h1>Actualiza tu perfil</h1>
+        <p>Mantén tus datos listos para citas, compras y servicios.</p>
+      </div>
+    </article>
+
+    <article class="profile-card profile-edit-card">
+      <form method="POST" class="profile-edit-form">
+        {% csrf_token %}
+
+        <div class="profile-field">
+          <label for="profileName">Nombre</label>
+          <input
+            type="text"
+            id="profileName"
+            name="name"
+            value="{{ request.user.first_name }}"
+          />
+        </div>
+
+        <div class="profile-field">
+          <label for="profileEmail">Correo electrónico</label>
+          <input
+            type="email"
+            id="profileEmail"
+            name="email"
+            value="{{ request.user.email }}"
+          />
+        </div>
+
+        <div class="profile-field">
+          <label for="profilePhone">Teléfono</label>
+          <input
+            type="text"
+            id="profilePhone"
+            name="phone"
+            value="{{ profile.phone }}"
+          />
+        </div>
+
+        <div class="profile-field">
+          <label for="profileCity">Ciudad</label>
+          <input
+            type="text"
+            id="profileCity"
+            name="city"
+            value="{{ profile.city }}"
+          />
+        </div>
+
+        <div class="profile-field full-width">
+          <label for="profileAddress">Dirección</label>
+          <input
+            type="text"
+            id="profileAddress"
+            name="address"
+            value="{{ profile.address }}"
+          />
+        </div>
+
+        <div class="profile-form-actions full-width">
+          <a href="/perfil/" class="profile-cancel-btn">Cancelar</a>
+          <button type="submit" class="profile-save-btn">
+            Guardar cambios
+          </button>
+        </div>
+      </form>
+    </article>
+  </div>
+</section>
+{% endblock %}

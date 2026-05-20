@@ -1,150 +1,120 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const footerNewsletterForm = document.getElementById("footerNewsletterForm");
-  const footerNewsletterEmail = document.getElementById("footerNewsletterEmail");
-  const footerNewsletterMessage = document.getElementById("footerNewsletterMessage");
+  const appointmentForm = document.getElementById("appointmentForm");
+  const petSelect = document.getElementById("appointmentPetSelect");
+  const reasonSelect = document.getElementById("appointmentReasonSelect");
+  const dateInput = document.getElementById("appointmentDateInput");
+  const timeSelect = document.getElementById("appointmentTimeSelect");
+  const notesInput = document.getElementById("appointmentNotesInput");
 
-  function validateFooterEmail(value) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
-  }
+  const summaryPet = document.getElementById("summaryPet");
+  const summaryReason = document.getElementById("summaryReason");
+  const summaryDate = document.getElementById("summaryDate");
+  const summaryTime = document.getElementById("summaryTime");
+  const statusLabel = document.getElementById("appointmentStatusLabel");
 
-  if (footerNewsletterForm && footerNewsletterEmail && footerNewsletterMessage) {
-    footerNewsletterForm.addEventListener("submit", (event) => {
-      event.preventDefault();
+  const appointmentsList = document.getElementById("appointmentsList");
+  const emptyState = document.getElementById("appointmentsEmptyState");
 
-      footerNewsletterMessage.textContent = "";
-      footerNewsletterMessage.classList.remove("error", "success");
+  function showAppointmentNotice(message, type = "success") {
+    let notice = document.querySelector(".appointment-notice");
 
-      if (!footerNewsletterEmail.value.trim()) {
-        footerNewsletterMessage.textContent = "Ingresa un correo electrónico.";
-        footerNewsletterMessage.classList.add("error");
-        return;
-      }
-
-      if (!validateFooterEmail(footerNewsletterEmail.value)) {
-        footerNewsletterMessage.textContent = "Ingresa un correo válido.";
-        footerNewsletterMessage.classList.add("error");
-        return;
-      }
-
-      footerNewsletterMessage.textContent = "¡Suscripción registrada correctamente!";
-      footerNewsletterMessage.classList.add("success");
-      footerNewsletterForm.reset();
-    });
-  }
-  const filterButtons = document.querySelectorAll(".appointment-chip");
-  const appointmentCards = document.querySelectorAll(".appointment-card");
-  const appointmentDetailButtons = document.querySelectorAll(".appointment-detail-btn");
-
-  const appointmentPet = document.getElementById("appointmentPet");
-  const appointmentDate = document.getElementById("appointmentDate");
-  const appointmentTime = document.getElementById("appointmentTime");
-  const appointmentReason = document.getElementById("appointmentReason");
-  const appointmentVet = document.getElementById("appointmentVet");
-  const appointmentSpecialty = document.getElementById("appointmentSpecialty");
-  const appointmentClinical = document.getElementById("appointmentClinical");
-  const appointmentTreatment = document.getElementById("appointmentTreatment");
-  const appointmentStatusLabel = document.getElementById("appointmentStatusLabel");
-  const confirmAppointmentBtn = document.getElementById("confirmAppointmentBtn");
-  const appointmentsHistoryList = document.getElementById("appointmentsHistoryList");
-
-  let currentFilter = "todos";
-
-  function resetAppointmentButton() {
-    confirmAppointmentBtn.textContent = "Confirmar seguimiento";
-    confirmAppointmentBtn.disabled = false;
-    confirmAppointmentBtn.style.opacity = "1";
-  }
-
-  function applyFilter() {
-    appointmentCards.forEach((card) => {
-      const status = card.dataset.status;
-      const shouldShow = currentFilter === "todos" || status === currentFilter;
-      card.classList.toggle("hidden", !shouldShow);
-    });
-  }
-
-  function updateAppointmentSummary({
-    pet,
-    date,
-    time,
-    reason,
-    vet,
-    specialty,
-    status,
-    clinical,
-    treatment
-  }) {
-    appointmentPet.textContent = pet || "No seleccionada";
-    appointmentDate.textContent = date || "Sin información";
-    appointmentTime.textContent = time || "Sin información";
-    appointmentReason.textContent = reason || "Sin información";
-    appointmentVet.textContent = vet || "Sin información";
-    appointmentSpecialty.textContent = specialty || "Sin información";
-    appointmentClinical.textContent = clinical || "Sin información";
-    appointmentTreatment.textContent = treatment || "Sin información";
-    appointmentStatusLabel.textContent = status || "Sin selección";
-    resetAppointmentButton();
-  }
-
-  filterButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      filterButtons.forEach((btn) => btn.classList.remove("active"));
-      button.classList.add("active");
-      currentFilter = button.dataset.filter;
-      applyFilter();
-    });
-  });
-
-  appointmentDetailButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      updateAppointmentSummary({
-        pet: button.dataset.pet,
-        date: button.dataset.date,
-        time: button.dataset.time,
-        reason: button.dataset.reason,
-        vet: button.dataset.vet,
-        specialty: button.dataset.specialty,
-        status: button.dataset.status,
-        clinical: button.dataset.clinical,
-        treatment: button.dataset.treatment
-      });
-
-      if (window.innerWidth <= 1024) {
-        const appointmentPanel = document.getElementById("appointmentPanel");
-        appointmentPanel.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }
-    });
-  });
-
-  confirmAppointmentBtn.addEventListener("click", () => {
-    const mascota = appointmentPet.textContent;
-    const diagnostico = appointmentClinical.textContent;
-    const tratamiento = appointmentTreatment.textContent;
-
-    if (mascota === "No seleccionada") {
-      alert("Debes seleccionar una cita antes de continuar.");
-      return;
+    if (!notice) {
+      notice = document.createElement("div");
+      notice.className = "appointment-notice";
+      document.body.appendChild(notice);
     }
 
-    appointmentStatusLabel.textContent = "Seguimiento confirmado";
-    confirmAppointmentBtn.textContent = "Seguimiento registrado";
-    confirmAppointmentBtn.disabled = true;
-    confirmAppointmentBtn.style.opacity = "0.7";
+    notice.textContent = message;
+    notice.className = `appointment-notice ${type} active`;
 
-    const newHistoryItem = document.createElement("article");
-    newHistoryItem.className = "appointments-history-item";
-    newHistoryItem.innerHTML = `
-      <strong>${mascota}</strong>
-      <span>${diagnostico} · ${tratamiento}</span>
-    `;
+    setTimeout(() => {
+      notice.classList.remove("active");
+    }, 2600);
+  }
 
-    appointmentsHistoryList.prepend(newHistoryItem);
+  function formatDate(value) {
+    if (!value) return "Sin fecha";
 
-    alert("El seguimiento de la cita fue registrado correctamente.");
+    const date = new Date(`${value}T00:00:00`);
+
+    return date.toLocaleDateString("es-CO", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+  }
+
+  function updateSummary() {
+    if (summaryPet) summaryPet.textContent = petSelect.value || "No seleccionada";
+    if (summaryReason) summaryReason.textContent = reasonSelect.value || "Sin información";
+    if (summaryDate) summaryDate.textContent = formatDate(dateInput.value);
+    if (summaryTime) summaryTime.textContent = timeSelect.value || "Sin jornada";
+
+    if (statusLabel) {
+      const hasData = petSelect.value || reasonSelect.value || dateInput.value || timeSelect.value;
+      statusLabel.textContent = hasData ? "En preparación" : "Sin completar";
+    }
+  }
+
+  [petSelect, reasonSelect, dateInput, timeSelect].forEach((field) => {
+    if (!field) return;
+    field.addEventListener("change", updateSummary);
   });
 
-  applyFilter();
+  if (notesInput) {
+    notesInput.addEventListener("input", updateSummary);
+  }
+
+  if (appointmentForm) {
+    appointmentForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (!petSelect.value || !reasonSelect.value || !dateInput.value || !timeSelect.value) {
+        showAppointmentNotice("Completa mascota, motivo, fecha y jornada.", "error");
+        return;
+      }
+
+      if (emptyState) {
+        emptyState.remove();
+      }
+
+      const card = document.createElement("article");
+      card.className = "appointment-request-card";
+
+      const formattedDate = formatDate(dateInput.value);
+      const notes = notesInput.value.trim();
+
+      card.innerHTML = `
+        <div>
+          <h3>${petSelect.value} · ${reasonSelect.value}</h3>
+          <p>${notes || "Solicitud registrada sin observaciones adicionales."}</p>
+
+          <div class="appointment-request-meta">
+            <span>${formattedDate}</span>
+            <span>${timeSelect.value}</span>
+          </div>
+        </div>
+
+        <span class="appointment-request-status">Pendiente de confirmación</span>
+      `;
+
+      appointmentsList.prepend(card);
+
+      if (statusLabel) {
+        statusLabel.textContent = "Solicitud enviada";
+      }
+
+      showAppointmentNotice("Cita solicitada correctamente.");
+
+      appointmentForm.reset();
+      updateSummary();
+
+      document.getElementById("upcomingAppointments")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+  }
+
+  updateSummary();
 });

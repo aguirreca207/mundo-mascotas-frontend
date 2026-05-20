@@ -1,36 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const footerNewsletterForm = document.getElementById("footerNewsletterForm");
-  const footerNewsletterEmail = document.getElementById("footerNewsletterEmail");
-  const footerNewsletterMessage = document.getElementById("footerNewsletterMessage");
-
-  function validateFooterEmail(value) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
-  }
-
-  if (footerNewsletterForm && footerNewsletterEmail && footerNewsletterMessage) {
-    footerNewsletterForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      footerNewsletterMessage.textContent = "";
-      footerNewsletterMessage.classList.remove("error", "success");
-
-      if (!footerNewsletterEmail.value.trim()) {
-        footerNewsletterMessage.textContent = "Ingresa un correo electrónico.";
-        footerNewsletterMessage.classList.add("error");
-        return;
-      }
-
-      if (!validateFooterEmail(footerNewsletterEmail.value)) {
-        footerNewsletterMessage.textContent = "Ingresa un correo válido.";
-        footerNewsletterMessage.classList.add("error");
-        return;
-      }
-
-      footerNewsletterMessage.textContent = "¡Suscripción registrada correctamente!";
-      footerNewsletterMessage.classList.add("success");
-      footerNewsletterForm.reset();
-    });
-  }
   const categoryButtons = document.querySelectorAll(".category-chip");
   const petFilter = document.getElementById("petFilter");
   const sortFilter = document.getElementById("sortFilter");
@@ -41,9 +9,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartItemsContainer = document.getElementById("cartItems");
   const cartCount = document.getElementById("cartCount");
   const cartTotal = document.getElementById("cartTotal");
+  const finishOrderBtn = document.getElementById("finishOrderBtn");
+  const ordersList = document.getElementById("ordersList");
 
   let currentCategory = "todos";
   const cart = [];
+
+  function showStoreNotice(message, type = "success") {
+    let notice = document.querySelector(".store-notice");
+
+    if (!notice) {
+      notice = document.createElement("div");
+      notice.className = "store-notice";
+      document.body.appendChild(notice);
+    }
+
+    notice.textContent = message;
+    notice.className = `store-notice ${type} is-visible`;
+
+    setTimeout(() => {
+      notice.classList.remove("is-visible");
+    }, 2400);
+  }
 
   function formatCurrency(value) {
     return new Intl.NumberFormat("es-CO", {
@@ -54,27 +41,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function applyFilters() {
-    const searchValue = searchInput.value.trim().toLowerCase();
-    const petValue = petFilter.value;
-    const sortValue = sortFilter.value;
+    if (!productGrid) return;
+
+    const searchValue = searchInput ? searchInput.value.trim().toLowerCase() : "";
+    const petValue = petFilter ? petFilter.value : "todos";
+    const sortValue = sortFilter ? sortFilter.value : "default";
 
     let visibleCards = [...productCards];
 
-    visibleCards.forEach((card) => {
+    productCards.forEach((card) => {
+      const cardCategory = card.dataset.category;
+      const cardPet = card.dataset.pet;
+      const cardName = card.dataset.name || "";
+
       const matchesCategory =
-        currentCategory === "todos" ||
-        card.dataset.category === currentCategory;
+        currentCategory === "todos" || cardCategory === currentCategory;
 
       const matchesPet =
-        petValue === "todos" ||
-        card.dataset.pet === petValue;
+        petValue === "todos" || cardPet === petValue || cardPet === "ambos";
 
-      const matchesSearch =
-        card.dataset.name.includes(searchValue);
+      const matchesSearch = cardName.includes(searchValue);
 
-      const shouldShow = matchesCategory && matchesPet && matchesSearch;
-
-      card.classList.toggle("hidden", !shouldShow);
+      card.classList.toggle("hidden", !(matchesCategory && matchesPet && matchesSearch));
     });
 
     visibleCards = visibleCards.filter((card) => !card.classList.contains("hidden"));
@@ -83,12 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
       visibleCards.sort((a, b) => {
         const priceA = Number(a.dataset.price);
         const priceB = Number(b.dataset.price);
-        const nameA = a.dataset.name.toLowerCase();
-        const nameB = b.dataset.name.toLowerCase();
+        const nameA = (a.dataset.name || "").toLowerCase();
+        const nameB = (b.dataset.name || "").toLowerCase();
 
         if (sortValue === "price-asc") return priceA - priceB;
         if (sortValue === "price-desc") return priceB - priceA;
         if (sortValue === "name-asc") return nameA.localeCompare(nameB);
+
         return 0;
       });
 
@@ -96,9 +85,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function getCartTotals() {
+    return cart.reduce(
+      (summary, item) => {
+        summary.units += item.quantity;
+        summary.total += item.price * item.quantity;
+        return summary;
+      },
+      { units: 0, total: 0 }
+    );
+  }
+
   function renderCart() {
+    if (!cartItemsContainer || !cartCount || !cartTotal) return;
+
     if (cart.length === 0) {
-      cartItemsContainer.innerHTML = `<p class="cart-empty">Aún no has agregado productos al carrito.</p>`;
+      cartItemsContainer.innerHTML = `
+        <p class="cart-empty">Aún no has agregado productos al carrito.</p>
+      `;
       cartCount.textContent = "0 productos";
       cartTotal.textContent = "$0";
       return;
@@ -106,34 +110,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
     cartItemsContainer.innerHTML = "";
 
-    let total = 0;
-    let totalUnits = 0;
-
     cart.forEach((item) => {
-      total += item.price * item.quantity;
-      totalUnits += item.quantity;
-
       const itemElement = document.createElement("article");
       itemElement.className = "cart-item";
+
       itemElement.innerHTML = `
-        <strong>${item.name}</strong>
-        <span>Cantidad: ${item.quantity}</span>
+        <div class="cart-item-top">
+          <div>
+            <strong>${item.name}</strong>
+            <span>Cantidad: ${item.quantity}</span>
+          </div>
+
+          <button
+            type="button"
+            class="remove-cart-btn"
+            data-id="${item.id}"
+            aria-label="Quitar ${item.name}"
+          >
+            ×
+          </button>
+        </div>
+
         <span>${formatCurrency(item.price * item.quantity)}</span>
       `;
+
       cartItemsContainer.appendChild(itemElement);
     });
 
-    cartCount.textContent = `${totalUnits} producto${totalUnits > 1 ? "s" : ""}`;
-    cartTotal.textContent = formatCurrency(total);
+    const totals = getCartTotals();
+
+    cartCount.textContent = `${totals.units} producto${totals.units !== 1 ? "s" : ""}`;
+    cartTotal.textContent = formatCurrency(totals.total);
   }
 
-  function addToCart(name, price) {
-    const existingProduct = cart.find((item) => item.name === name);
+  function addToCart({ id, name, price }) {
+    const existingProduct = cart.find((item) => item.id === id);
 
     if (existingProduct) {
       existingProduct.quantity += 1;
     } else {
       cart.push({
+        id,
         name,
         price,
         quantity: 1
@@ -141,6 +158,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     renderCart();
+    showStoreNotice(`${name} agregado al carrito.`);
+  }
+
+  function removeFromCart(productId) {
+    const productIndex = cart.findIndex((item) => item.id === productId);
+
+    if (productIndex === -1) return;
+
+    const product = cart[productIndex];
+
+    if (product.quantity > 1) {
+      product.quantity -= 1;
+    } else {
+      cart.splice(productIndex, 1);
+    }
+
+    renderCart();
+    showStoreNotice("Producto eliminado del carrito.");
   }
 
   categoryButtons.forEach((button) => {
@@ -152,17 +187,70 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  petFilter.addEventListener("change", applyFilters);
-  sortFilter.addEventListener("change", applyFilters);
-  searchInput.addEventListener("input", applyFilters);
+  if (petFilter) {
+    petFilter.addEventListener("change", applyFilters);
+  }
+
+  if (sortFilter) {
+    sortFilter.addEventListener("change", applyFilters);
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener("input", applyFilters);
+  }
 
   addCartButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      const name = button.dataset.name;
-      const price = Number(button.dataset.price);
-      addToCart(name, price);
+      if (button.disabled) return;
+
+      addToCart({
+        id: button.dataset.id,
+        name: button.dataset.name,
+        price: Number(button.dataset.price)
+      });
     });
   });
+
+  if (cartItemsContainer) {
+    cartItemsContainer.addEventListener("click", (event) => {
+      const removeButton = event.target.closest(".remove-cart-btn");
+
+      if (!removeButton) return;
+
+      removeFromCart(removeButton.dataset.id);
+    });
+  }
+
+  if (finishOrderBtn) {
+    finishOrderBtn.addEventListener("click", () => {
+      if (cart.length === 0) {
+        showStoreNotice("Agrega al menos un producto antes de finalizar.", "error");
+        return;
+      }
+
+      const totals = getCartTotals();
+      const orderCode = `MM-${Date.now().toString().slice(-5)}`;
+
+      if (ordersList) {
+        const emptyMessage = ordersList.querySelector(".order-empty");
+        if (emptyMessage) emptyMessage.remove();
+
+        const orderElement = document.createElement("article");
+        orderElement.className = "order-status-item";
+        orderElement.innerHTML = `
+          <strong>Pedido #${orderCode}</strong>
+          <span>Confirmado · ${formatCurrency(totals.total)}</span>
+        `;
+
+        ordersList.prepend(orderElement);
+      }
+
+      cart.splice(0, cart.length);
+      renderCart();
+
+      showStoreNotice("Pedido confirmado correctamente.");
+    });
+  }
 
   renderCart();
   applyFilters();

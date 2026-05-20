@@ -15,9 +15,14 @@
             con un diseño moderno, fresco y con mucha personalidad.
           </p>
 
-          <div class="hero-actions">
-<a href="/login/" class="btn btn-primary">Iniciar sesión</a>
-<a href="/registro/" class="btn btn-secondary">Crear cuenta</a>
+<div class="hero-actions">
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'perfil' %}" class="btn btn-primary">Ir a mi cuenta</a>
+    <a href="{% url 'citas' %}" class="btn btn-secondary">Agendar cita</a>
+  {% else %}
+    <a href="{% url 'login' %}" class="btn btn-primary">Iniciar sesión</a>
+    <a href="{% url 'registro' %}" class="btn btn-secondary">Crear cuenta</a>
+  {% endif %}
 </div>
 
           <div class="hero-stats">
@@ -60,7 +65,7 @@
     </div>
     <h3>Servicios para mascotas</h3>
     <p>Consulta opciones como baño, guardería, paseo y otros servicios para su bienestar.</p>
-    <a href="pages/servicios.html">Ver más</a>
+    <a href="{% url 'servicios' %}">Ver más</a>
   </article>
 
   <article class="info-card">
@@ -69,7 +74,7 @@
 </div>
     <h3>Citas veterinarias</h3>
     <p>Agenda y consulta citas para el cuidado y seguimiento veterinario de tu mascota.</p>
-    <a href="pages/citas.html">Ver más</a>
+    <a href="{% url 'citas' %}">Ver más</a>
   </article>
 
   <article class="info-card">
@@ -78,7 +83,7 @@
 </div>
     <h3>Tienda de productos</h3>
     <p>Explora productos destacados para alimentación, higiene, bienestar y entretenimiento.</p>
-    <a href="pages/tienda.html">Ver más</a>
+    <a href="{% url 'tienda' %}">Ver más</a>
   </article>
 
 <article class="info-card">
@@ -87,7 +92,7 @@
   </div>
   <h3>Adopciones</h3>
   <p>Conoce mascotas disponibles y encuentra un nuevo compañero para tu hogar.</p>
-  <a href="pages/adopciones.html">Ver más</a>
+  <a href="{% url 'adopciones' %}">Ver más</a>
 </article>
 </div>
       </div>

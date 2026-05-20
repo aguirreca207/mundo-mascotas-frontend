@@ -1,0 +1,52 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Mi cuenta - Mundo Mascotas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app/css/perfil.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="profile-section">
+  <div class="container profile-layout">
+    <article class="profile-hero">
+      <div class="profile-avatar">{{ request.user.first_name|default:request.user.email|first|upper }}</div>
+
+      <div class="profile-main-info">
+        <span class="profile-badge">Cuenta activa</span>
+        <h1>Hola, {{ request.user.first_name|default:"bienvenido" }}</h1>
+        <p>{{ request.user.email }}</p>
+      </div>
+
+      <div class="profile-actions">
+        <a href="/perfil/editar/" class="profile-edit-btn">Editar perfil</a>
+        <a href="{% url 'logout' %}" class="profile-logout-btn">Cerrar sesión</a>
+      </div>
+    </article>
+
+    <div class="profile-grid">
+      <article class="profile-card">
+        <span class="material-symbols-outlined">person</span>
+        <h3>Datos personales</h3>
+        <p><strong>Nombre:</strong> {{ request.user.first_name|default:"Pendiente" }}</p>
+        <p><strong>Correo:</strong> {{ request.user.email }}</p>
+      </article>
+
+      <article class="profile-card">
+        <span class="material-symbols-outlined">location_on</span>
+        <h3>Ubicación</h3>
+        <p><strong>Ciudad:</strong> {{ request.user.profile.city|default:"Pendiente" }}</p>
+        <p><strong>Dirección:</strong> {{ request.user.profile.address|default:"Pendiente" }}</p>
+      </article>
+
+      <article class="profile-card">
+        <span class="material-symbols-outlined">call</span>
+        <h3>Contacto</h3>
+        <p><strong>Teléfono:</strong> {{ request.user.profile.phone|default:"Pendiente" }}</p>
+        <p><strong>Estado:</strong> Perfil registrado</p>
+      </article>
+    </div>
+  </div>
+</section>
+{% endblock %}

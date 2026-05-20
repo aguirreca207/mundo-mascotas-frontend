@@ -94,6 +94,34 @@ document.addEventListener("DOMContentLoaded", function () {
     updateCarousel();
   }
 
+    /* =========================
+     👁️ TOGGLE PASSWORD
+  ========================= */
+
+  const toggleButtons = document.querySelectorAll(".toggle-password");
+
+  if (toggleButtons.length > 0) {
+    toggleButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+
+        const targetId = button.getAttribute("data-target");
+        const input = document.getElementById(targetId);
+        const icon = button.querySelector(".material-symbols-outlined");
+
+        if (!input) return;
+
+        if (input.type === "password") {
+          input.type = "text";
+          if (icon) icon.textContent = "visibility_off";
+        } else {
+          input.type = "password";
+          if (icon) icon.textContent = "visibility";
+        }
+
+      });
+    });
+  }
+
 });
 
 

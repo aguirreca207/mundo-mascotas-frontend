@@ -90,3 +90,134 @@
     text-align: center;
   }
 }
+
+/* =====================
+   LOGIN BUTTON MOBILE
+===================== */
+
+@media (max-width: 768px) {
+  .btn-primary.login-submit-btn {
+    height: 48px;
+    font-size: 0.9rem;
+  }
+}
+/* =========================
+   🔥 OVERRIDE REAL MOBILE CARDS
+========================= */
+
+@media (max-width: 768px) {
+
+  /* 🔴 CARD CONTENEDORA */
+  .products-page > div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 🔴 TEXTO */
+  .products-page h3 {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  /* 🔴 IMAGEN (CORRECCIÓN CLAVE) */
+  .products-page img {
+    position: relative !important;
+    width: 120px !important;
+    height: auto !important;
+
+    align-self: flex-end;
+    margin-top: 8px;
+  }
+
+  /* 🔴 BOTÓN (QUITAR FLOTANTE) */
+  .products-page button,
+  .products-page .arrow-btn {
+    position: relative !important;
+    right: auto !important;
+    bottom: auto !important;
+
+    margin-top: 8px;
+    align-self: flex-end;
+  }
+
+}
+/* =========================
+   🟢 FIX UX MOBILE OFERTAS
+========================= */
+
+/* =========================
+   🔥 MOBILE CARDS PRO UI
+========================= */
+
+@media (max-width: 768px) {
+
+  .home-offer-card {
+    display: flex;
+    flex-direction: row; /* 🔥 clave */
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 16px;
+    gap: 12px;
+  }
+
+  /* TEXTO */
+  .home-offer-text {
+    width: 65%;
+  }
+
+  .home-offer-text h3 {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  .home-offer-text p {
+    font-size: 0.85rem;
+  }
+
+  /* IMAGEN CONTENEDOR */
+  .home-offer-image-placeholder {
+    width: 35%;
+    position: relative !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .home-offer-image-placeholder img {
+    width: 90px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* BOTÓN */
+  .home-offer-arrow {
+    position: absolute !important;
+    right: 0;
+    bottom: 0;
+
+    width: 34px;
+    height: 34px;
+    font-size: 0.9rem;
+  }
+
+}
+@media (max-width: 768px) {
+
+  .register-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .register-info-panel {
+    padding: 24px;
+  }
+
+  .register-form-panel {
+    padding: 24px;
+  }
+
+}
