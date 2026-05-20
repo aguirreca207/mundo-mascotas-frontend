@@ -1,120 +1,84 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const footerNewsletterForm = document.getElementById("footerNewsletterForm");
-  const footerNewsletterEmail = document.getElementById("footerNewsletterEmail");
-  const footerNewsletterMessage = document.getElementById("footerNewsletterMessage");
+  const adoptionForm = document.querySelector(".adoption-form");
+  const submitButton = document.querySelector(".adoption-submit-btn");
+  const photoInput = document.getElementById("adoptionPhoto");
 
-  function validateFooterEmail(value) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
-  }
+  function showAdoptionNotice(message, type = "success") {
+    let notice = document.querySelector(".adoption-notice");
 
-  if (footerNewsletterForm && footerNewsletterEmail && footerNewsletterMessage) {
-    footerNewsletterForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      footerNewsletterMessage.textContent = "";
-      footerNewsletterMessage.classList.remove("error", "success");
-
-      if (!footerNewsletterEmail.value.trim()) {
-        footerNewsletterMessage.textContent = "Ingresa un correo electrónico.";
-        footerNewsletterMessage.classList.add("error");
-        return;
-      }
-
-      if (!validateFooterEmail(footerNewsletterEmail.value)) {
-        footerNewsletterMessage.textContent = "Ingresa un correo válido.";
-        footerNewsletterMessage.classList.add("error");
-        return;
-      }
-
-      footerNewsletterMessage.textContent = "¡Suscripción registrada correctamente!";
-      footerNewsletterMessage.classList.add("success");
-      footerNewsletterForm.reset();
-    });
-  }
-  const filterButtons = document.querySelectorAll(".adoption-chip");
-  const adoptionCards = document.querySelectorAll(".adoption-card");
-  const adoptButtons = document.querySelectorAll(".adopt-btn");
-
-  const adoptionPetName = document.getElementById("adoptionPetName");
-  const adoptionPetType = document.getElementById("adoptionPetType");
-  const adoptionPetStatus = document.getElementById("adoptionPetStatus");
-  const adoptionPetDescription = document.getElementById("adoptionPetDescription");
-  const adoptionStatusLabel = document.getElementById("adoptionStatusLabel");
-  const confirmAdoptionBtn = document.getElementById("confirmAdoptionBtn");
-  const adoptionRequestList = document.getElementById("adoptionRequestList");
-
-  let currentFilter = "todos";
-
-  function resetAdoptionButton() {
-    confirmAdoptionBtn.textContent = "Confirmar solicitud";
-    confirmAdoptionBtn.disabled = false;
-    confirmAdoptionBtn.style.opacity = "1";
-  }
-
-  function applyFilter() {
-    adoptionCards.forEach((card) => {
-      const type = card.dataset.type;
-      const shouldShow = currentFilter === "todos" || type === currentFilter;
-      card.classList.toggle("hidden", !shouldShow);
-    });
-  }
-
-  function updateAdoptionSummary({ name, type, status, description }) {
-    adoptionPetName.textContent = name || "No seleccionada";
-    adoptionPetType.textContent = type || "No aplica";
-    adoptionPetStatus.textContent = status || "Sin solicitud";
-    adoptionPetDescription.textContent = description || "Sin información";
-    adoptionStatusLabel.textContent = status || "Sin selección";
-    resetAdoptionButton();
-  }
-
-  filterButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      filterButtons.forEach((btn) => btn.classList.remove("active"));
-      button.classList.add("active");
-      currentFilter = button.dataset.filter;
-      applyFilter();
-    });
-  });
-
-  adoptButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      updateAdoptionSummary({
-        name: button.dataset.name,
-        type: button.dataset.type,
-        status: button.dataset.status,
-        description: button.dataset.description
-      });
-    });
-  });
-
-  confirmAdoptionBtn.addEventListener("click", () => {
-    const mascota = adoptionPetName.textContent;
-    const tipo = adoptionPetType.textContent;
-
-    if (mascota === "No seleccionada") {
-      alert("Debes seleccionar una mascota antes de confirmar la solicitud.");
-      return;
+    if (!notice) {
+      notice = document.createElement("div");
+      notice.className = "adoption-notice";
+      document.body.appendChild(notice);
     }
 
-    adoptionPetStatus.textContent = "Confirmada";
-    adoptionStatusLabel.textContent = "Confirmada";
+    notice.textContent = message;
+    notice.className = `adoption-notice ${type} is-visible`;
 
-    confirmAdoptionBtn.textContent = "Solicitud confirmada";
-    confirmAdoptionBtn.disabled = true;
-    confirmAdoptionBtn.style.opacity = "0.7";
+    setTimeout(() => {
+      notice.classList.remove("is-visible");
+    }, 2600);
+  }
 
-    const newRequest = document.createElement("article");
-    newRequest.className = "adoption-request-item";
-    newRequest.innerHTML = `
-      <strong>${mascota} - Usuario interesado</strong>
-      <span>Confirmada · ${tipo}</span>
-    `;
+  function getRequiredFields() {
+    return [
+      document.getElementById("adoptionName"),
+      document.getElementById("adoptionType"),
+      document.getElementById("adoptionAge"),
+      document.getElementById("adoptionSize"),
+      document.getElementById("adoptionCity"),
+      document.getElementById("adoptionPhone"),
+      document.getElementById("adoptionDescription"),
+      document.getElementById("adoptionRequirements"),
+      document.getElementById("adoptionPhoto")
+    ];
+  }
 
-    adoptionRequestList.prepend(newRequest);
+  function clearErrors() {
+    getRequiredFields().forEach((field) => {
+      if (field) field.classList.remove("has-adoption-error");
+    });
+  }
 
-    alert("Tu solicitud de adopción fue registrada correctamente.");
-  });
+  if (photoInput) {
+    photoInput.addEventListener("change", () => {
+      const file = photoInput.files[0];
 
-  applyFilter();
+      if (file && !file.type.startsWith("image/")) {
+        photoInput.value = "";
+        showAdoptionNotice("Selecciona una imagen válida.", "error");
+      }
+    });
+  }
+
+  if (adoptionForm) {
+    adoptionForm.addEventListener("submit", (event) => {
+      clearErrors();
+
+      let isValid = true;
+
+      getRequiredFields().forEach((field) => {
+        if (!field) return;
+
+        const hasValue =
+          field.type === "file" ? field.files.length > 0 : field.value.trim();
+
+        if (!hasValue) {
+          field.classList.add("has-adoption-error");
+          isValid = false;
+        }
+      });
+
+      if (!isValid) {
+        event.preventDefault();
+        showAdoptionNotice("Completa todos los campos antes de enviar.", "error");
+        return;
+      }
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Enviando solicitud...";
+      }
+    });
+  }
 });

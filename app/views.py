@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import UserProfile, Pet, Product, Order, OrderItem
+from .models import UserProfile, Pet, Product, Order, OrderItem, AdoptionPet
 import json
 
 
@@ -191,9 +191,51 @@ def tienda(request):
 def servicios(request):
     return render(request, 'app/servicios.html')
 
-
+@login_required(login_url="/login/")
 def adopciones(request):
-    return render(request, 'app/adopciones.html')
+    if request.method == "POST":
+        name = request.POST.get("name", "").strip()
+        pet_type = request.POST.get("pet_type", "").strip()
+        age = request.POST.get("age", "").strip()
+        size = request.POST.get("size", "").strip()
+        city = request.POST.get("city", "").strip()
+        description = request.POST.get("description", "").strip()
+        requirements = request.POST.get("requirements", "").strip()
+        contact_phone = request.POST.get("contact_phone", "").strip()
+        photo = request.FILES.get("photo")
+
+        if not name or not pet_type or not age or not size or not city or not description or not requirements or not contact_phone or not photo:
+            approved_pets = AdoptionPet.objects.filter(status="aprobado").order_by("-created_at")
+            my_requests = AdoptionPet.objects.filter(owner=request.user).order_by("-created_at")
+
+            return render(request, "app/adopciones.html", {
+                "approved_pets": approved_pets,
+                "my_requests": my_requests,
+                "adoption_error": "Completa todos los campos para enviar la solicitud."
+            })
+
+        AdoptionPet.objects.create(
+            owner=request.user,
+            name=name,
+            pet_type=pet_type,
+            age=age,
+            size=size,
+            city=city,
+            description=description,
+            requirements=requirements,
+            contact_phone=contact_phone,
+            photo=photo
+        )
+
+        return redirect("adopciones")
+
+    approved_pets = AdoptionPet.objects.filter(status="aprobado").order_by("-created_at")
+    my_requests = AdoptionPet.objects.filter(owner=request.user).order_by("-created_at")
+
+    return render(request, "app/adopciones.html", {
+        "approved_pets": approved_pets,
+        "my_requests": my_requests
+    })
 
 
 # 🔹 NEWSLETTER

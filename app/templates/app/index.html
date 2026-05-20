@@ -1,416 +1,467 @@
 {% extends "app/base.html" %}
 {% load static %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Inicio - Mundo Mascotas{% endblock %}
 
 {% block content %}
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-text">
-          <span class="badge">Pet Grooming • Tienda • Servicios</span>
-          <h1>Todo para tu mascota en un solo lugar</h1>
-          <p>
-            Encuentra productos, grooming, atención y una experiencia cálida
-            con un diseño moderno, fresco y con mucha personalidad.
-          </p>
+<main class="home-page">
 
-<div class="hero-actions">
-  {% if request.user.is_authenticated %}
-    <a href="{% url 'perfil' %}" class="btn btn-primary">Ir a mi cuenta</a>
-    <a href="{% url 'citas' %}" class="btn btn-secondary">Agendar cita</a>
-  {% else %}
-    <a href="{% url 'login' %}" class="btn btn-primary">Iniciar sesión</a>
-    <a href="{% url 'registro' %}" class="btn btn-secondary">Crear cuenta</a>
-  {% endif %}
-</div>
+  <section class="hero">
+    <div class="container hero-grid">
 
-          <div class="hero-stats">
-            <div class="stat-card">
-              <strong>+500</strong>
-              <span>Clientes felices</span>
-            </div>
-            <div class="stat-card">
-              <strong>4</strong>
-              <span>Servicios clave</span>
-            </div>
-            <div class="stat-card">
-              <strong>24/7</strong>
-              <span>Atención digital</span>
-            </div>
+      <div class="hero-text">
+        <span class="badge">Cuidado • Tienda • Servicios • Adopciones</span>
+
+        <h1>Todo para tu mascota en un solo lugar</h1>
+
+        <p>
+          Gestiona tus mascotas, agenda citas, compra productos, solicita servicios
+          y consulta adopciones desde una plataforma cálida, clara y fácil de usar.
+        </p>
+
+        <div class="hero-actions">
+          {% if request.user.is_authenticated %}
+            <a href="{% url 'perfil' %}" class="btn btn-primary">Ir a mi cuenta</a>
+            <a href="{% url 'citas' %}" class="btn btn-secondary">Agendar cita</a>
+          {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary">Iniciar sesión</a>
+            <a href="{% url 'registro' %}" class="btn btn-secondary">Crear cuenta</a>
+          {% endif %}
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-card">
+            <strong>+500</strong>
+            <span>Clientes felices</span>
+          </div>
+
+          <div class="stat-card">
+            <strong>5</strong>
+            <span>Módulos conectados</span>
+          </div>
+
+          <div class="stat-card">
+            <strong>24/7</strong>
+            <span>Gestión digital</span>
           </div>
         </div>
-
-        <div class="hero-image">
-  <img src="{% static 'app/img/perrogato.webp' %}" alt="Mascota principal" />
-  <div class="hero-shape hero-shape-1"></div>
-  <div class="hero-shape hero-shape-2"></div>
-</div>
-    </section>
-
-    <section class="services-preview">
-      <div class="container">
-        <div class="section-head">
-          <span class="section-tag">Nuestras áreas</span>
-          <h2>Servicios que más se mueven</h2>
-          <p>Una portada comercial con look cálido, dinámico y más vendible.</p>
-        </div>
-
-      
-
-          <div class="cards-grid">
-  <article class="info-card">
-    <div class="card-icon">
-      <span class="material-symbols-outlined">pets</span>
-    </div>
-    <h3>Servicios para mascotas</h3>
-    <p>Consulta opciones como baño, guardería, paseo y otros servicios para su bienestar.</p>
-    <a href="{% url 'servicios' %}">Ver más</a>
-  </article>
-
-  <article class="info-card">
-    <div class="card-icon">
-  <span class="material-symbols-outlined">calendar_month</span>
-</div>
-    <h3>Citas veterinarias</h3>
-    <p>Agenda y consulta citas para el cuidado y seguimiento veterinario de tu mascota.</p>
-    <a href="{% url 'citas' %}">Ver más</a>
-  </article>
-
-  <article class="info-card">
-    <div class="card-icon">
-  <span class="material-symbols-outlined">shopping_bag</span>
-</div>
-    <h3>Tienda de productos</h3>
-    <p>Explora productos destacados para alimentación, higiene, bienestar y entretenimiento.</p>
-    <a href="{% url 'tienda' %}">Ver más</a>
-  </article>
-
-<article class="info-card">
-  <div class="card-icon">
-    <span class="material-symbols-outlined">volunteer_activism</span>
-  </div>
-  <h3>Adopciones</h3>
-  <p>Conoce mascotas disponibles y encuentra un nuevo compañero para tu hogar.</p>
-  <a href="{% url 'adopciones' %}">Ver más</a>
-</article>
-</div>
       </div>
-    </section>
 
+      <div class="hero-image">
+        <img src="{% static 'app/img/perrogato.webp' %}" alt="Perro y gato de Mundo Mascotas">
+        <div class="hero-shape hero-shape-1"></div>
+        <div class="hero-shape hero-shape-2"></div>
+      </div>
 
-    <section class="promo-band">
-      <div class="container promo-content">
+    </div>
+  </section>
+
+  <section class="services-preview">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">Explora la plataforma</span>
+        <h2>Todo conectado para cuidar mejor a tu mascota</h2>
+        <p>
+          Cada sección está pensada para que puedas gestionar información,
+          solicitudes y compras sin perder tiempo.
+        </p>
+      </div>
+
+      <div class="cards-grid">
+        <article class="info-card">
+          <div class="card-icon">
+            <span class="material-symbols-outlined">pets</span>
+          </div>
+          <h3>Mis mascotas</h3>
+          <p>Registra tus mascotas y mantén sus datos listos para citas, servicios y seguimiento.</p>
+          <a href="{% url 'mascotas' %}">Gestionar mascotas</a>
+        </article>
+
+        <article class="info-card">
+          <div class="card-icon">
+            <span class="material-symbols-outlined">calendar_month</span>
+          </div>
+          <h3>Citas veterinarias</h3>
+          <p>Solicita atención veterinaria usando las mascotas registradas en tu cuenta.</p>
+          <a href="{% url 'citas' %}">Agendar cita</a>
+        </article>
+
+        <article class="info-card">
+          <div class="card-icon">
+            <span class="material-symbols-outlined">shopping_bag</span>
+          </div>
+          <h3>Tienda de productos</h3>
+          <p>Compra productos reales administrados desde el panel de la plataforma.</p>
+          <a href="{% url 'tienda' %}">Ir a la tienda</a>
+        </article>
+
+        <article class="info-card">
+          <div class="card-icon">
+            <span class="material-symbols-outlined">volunteer_activism</span>
+          </div>
+          <h3>Adopciones</h3>
+          <p>Publica mascotas para adopción y consulta las aprobadas por el administrador.</p>
+          <a href="{% url 'adopciones' %}">Ver adopciones</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="promo-band">
+    <div class="container promo-content">
+      <div>
+        <span class="section-tag light">Tienda Mundo Mascotas</span>
+        <h2>Productos seleccionados para el cuidado diario</h2>
+        <p>
+          Encuentra alimento, juguetes, accesorios y productos de cuidado para perros y gatos.
+        </p>
+      </div>
+
+      <a href="{% url 'tienda' %}" class="btn btn-light">Comprar ahora</a>
+    </div>
+  </section>
+
+  <section class="home-offers">
+    <div class="container">
+      <div class="home-offers-head">
         <div>
-          <span class="section-tag light">Promoción activa</span>
-          <h2>Hasta 10% de descuento en tu primera compra</h2>
-          <p>Ideal para destacar campañas, cupones o beneficios de lanzamiento.</p>
+          <span class="section-tag">Ofertas destacadas</span>
+          <h2>Promociones para consentir a tu mascota</h2>
         </div>
-        <a href="pages/tienda.html" class="btn btn-light">Ver oferta</a>
+
+        <a href="{% url 'tienda' %}" class="home-offers-link">Todas las ofertas →</a>
       </div>
-    </section>
+
+      <div class="home-offers-grid">
+        <article class="home-offer-card">
+          <div class="home-offer-text">
+            <span class="home-offer-tag">Oferta especial</span>
+            <h3>Llega la temporada con precios increíbles</h3>
+            <p>Promociones seleccionadas para el bienestar diario de tu mascota.</p>
+          </div>
+
+          <div class="home-offer-image-placeholder rascador-img">
+            <img src="{% static 'app/img/Cards/Rascador.png' %}" alt="Rascador para gatos">
+          </div>
+
+          <a href="{% url 'tienda' %}" class="home-offer-arrow" aria-label="Ir a la tienda">→</a>
+        </article>
+
+        <article class="home-offer-card">
+          <div class="home-offer-text">
+            <span class="home-offer-tag">Descuento</span>
+            <h3>Hasta 30% en productos seleccionados</h3>
+            <p>Encuentra referencias destacadas para cada necesidad.</p>
+          </div>
+
+          <div class="home-offer-image-placeholder churu-img">
+            <img src="{% static 'app/img/Cards/churu.png' %}" alt="Snack para mascotas">
+          </div>
+
+          <a href="{% url 'tienda' %}" class="home-offer-arrow" aria-label="Ir a la tienda">→</a>
+        </article>
+
+        <article class="home-offer-card">
+          <div class="home-offer-text">
+            <span class="home-offer-tag">Bienestar diario</span>
+            <h3>Hasta 10% en alimento y cuidado</h3>
+            <p>Ofertas pensadas para compras frecuentes y esenciales.</p>
+          </div>
+
+          <div class="home-offer-image-placeholder comida-img">
+            <img src="{% static 'app/img/Cards/snack.png' %}" alt="Producto para mascota">
+          </div>
+
+          <a href="{% url 'tienda' %}" class="home-offer-arrow" aria-label="Ir a la tienda">→</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="featured-products">
-  <div class="container">
-    <div class="products-head">
-      <h2>Productos que le encantarán a tu peludo</h2>
+    <div class="container">
+      <div class="products-head">
+        <div>
+          <span class="section-tag">Productos destacados</span>
+          <h2>Productos que le encantarán a tu peludo</h2>
+        </div>
+
+        <a href="{% url 'tienda' %}" class="home-offers-link">Ver catálogo completo →</a>
+      </div>
+
+      <div class="products-carousel">
+        <button class="products-arrow products-arrow-left" id="productsPrev" type="button" aria-label="Ver productos anteriores">
+          ‹
+        </button>
+
+        <div class="products-viewport">
+          <div class="products-track" id="productsTrack">
+
+            <div class="products-page">
+              <article class="product-card shop-card">
+                <div class="product-image-box">
+                  <img src="{% static 'app/img/Cards/Royalcanin.png' %}" alt="Concentrado Premium">
+                </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                    <span class="rating-count">(140)</span>
+                  </div>
+                  <h3>Concentrado Premium</h3>
+                  <p class="product-detail">Alimento balanceado de alta nutrición.</p>
+                  <div class="product-price-block">
+                    <strong>$85.000</strong>
+                    <span>$3.400 / 100 g</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card shop-card">
+                <div class="product-image-box">
+                  <img src="{% static 'app/img/Cards/Snack.png' %}" alt="Snack funcional">
+                </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                    <span class="rating-count">(67)</span>
+                  </div>
+                  <h3>Snack funcional</h3>
+                  <p class="product-detail">Premios suaves para entrenamiento.</p>
+                  <div class="product-price-block">
+                    <strong>$15.000</strong>
+                    <span>$300 / Uni</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card shop-card">
+                <div class="product-image-box">
+                  <img src="{% static 'app/img/Cards/Bolfo_Collar-1.png' %}" alt="Collar antipulgas">
+                </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                    <span class="rating-count">(22)</span>
+                  </div>
+                  <h3>Collar antipulgas</h3>
+                  <p class="product-detail">Protección práctica para perro mediano.</p>
+                  <div class="product-price-block">
+                    <strong>$75.000</strong>
+                    <span>$75.000 / Uni</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card shop-card">
+                <div class="product-image-box">
+                  <img src="{% static 'app/img/Cards/ArenaGatos.png' %}" alt="Arena para gato">
+                </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                    <span class="rating-count">(71)</span>
+                  </div>
+                  <h3>Arena para gato</h3>
+                  <p class="product-detail">Alta absorción y control de olores.</p>
+                  <div class="product-price-block">
+                    <strong>$32.000</strong>
+                    <span>$2.600 / kg</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card shop-card">
+                <div class="product-image-box">
+                  <img src="{% static 'app/img/Cards/suplemento.png' %}" alt="Suplemento nutricional">
+                </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                    <span class="rating-count">(48)</span>
+                  </div>
+                  <h3>Suplemento nutricional</h3>
+                  <p class="product-detail">Apoyo diario para bienestar y vitalidad.</p>
+                  <div class="product-price-block">
+                    <strong>$29.900</strong>
+                    <span>$1.495 / porción</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card shop-card">
+                <div class="product-image-box">
+                  <img src="{% static 'app/img/Cards/pelota.png' %}" alt="Pelota resistente">
+                </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                    <span class="rating-count">(33)</span>
+                  </div>
+                  <h3>Pelota resistente</h3>
+                  <p class="product-detail">Ideal para juego activo y diario.</p>
+                  <div class="product-price-block">
+                    <strong>$18.000</strong>
+                    <span>$18.000 / Uni</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card shop-card">
+                <div class="product-image-box">
+                  <img src="{% static 'app/img/Cards/shampo.png' %}" alt="Shampoo dermatológico">
+                </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                    <span class="rating-count">(54)</span>
+                  </div>
+                  <h3>Shampoo dermatológico</h3>
+                  <p class="product-detail">Limpieza suave para piel sensible.</p>
+                  <div class="product-price-block">
+                    <strong>$26.500</strong>
+                    <span>$13.250 / 250 ml</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="products-page">
+              <article class="product-card shop-card">
+                <div class="product-image-box">
+                  <img src="{% static 'app/img/Cards/galletas.png' %}" alt="Galletas naturales">
+                </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                    <span class="rating-count">(62)</span>
+                  </div>
+                  <h3>Galletas naturales</h3>
+                  <p class="product-detail">Snack crocante para premio diario.</p>
+                  <div class="product-price-block">
+                    <strong>$12.000</strong>
+                    <span>$240 / Uni</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card shop-card">
+                <div class="product-image-box">
+                  <img src="{% static 'app/img/Cards/Pechera.png' %}" alt="Pechera ajustable">
+                </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                    <span class="rating-count">(18)</span>
+                  </div>
+                  <h3>Pechera ajustable</h3>
+                  <p class="product-detail">Cómoda y segura para paseos.</p>
+                  <div class="product-price-block">
+                    <strong>$38.000</strong>
+                    <span>$38.000 / Uni</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card shop-card">
+                <div class="product-image-box">
+                  <img src="{% static 'app/img/Cards/Comedero.png' %}" alt="Comedero antideslizante">
+                </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                    <span class="rating-count">(45)</span>
+                  </div>
+                  <h3>Comedero antideslizante</h3>
+                  <p class="product-detail">Práctico para agua o concentrado.</p>
+                  <div class="product-price-block">
+                    <strong>$22.000</strong>
+                    <span>$22.000 / Uni</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card shop-card">
+                <div class="product-image-box">
+                  <img src="{% static 'app/img/Cards/Rascador.png' %}" alt="Rascador compacto">
+                </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                    <span class="rating-count">(28)</span>
+                  </div>
+                  <h3>Rascador compacto</h3>
+                  <p class="product-detail">Ideal para gatos en espacios pequeños.</p>
+                  <div class="product-price-block">
+                    <strong>$49.000</strong>
+                    <span>$49.000 / Uni</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card shop-card">
+                <div class="product-image-box">
+                  <img src="{% static 'app/img/Cards/Toallitas.png' %}" alt="Toallitas húmedas">
+                </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                    <span class="rating-count">(90)</span>
+                  </div>
+                  <h3>Toallitas húmedas</h3>
+                  <p class="product-detail">Limpieza rápida para patas y pelaje.</p>
+                  <div class="product-price-block">
+                    <strong>$19.900</strong>
+                    <span>$398 / Uni</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card shop-card">
+                <div class="product-image-box">
+                  <img src="{% static 'app/img/Cards/Cama (1).png' %}" alt="Cama acolchada">
+                </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                    <span class="rating-count">(39)</span>
+                  </div>
+                  <h3>Cama acolchada</h3>
+                  <p class="product-detail">Descanso cómodo para tu mascota.</p>
+                  <div class="product-price-block">
+                    <strong>$79.000</strong>
+                    <span>$79.000 / Uni</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card shop-card">
+                <div class="product-image-box">
+                  <img src="{% static 'app/img/Cards/Suero.png' %}" alt="Suero oral veterinario">
+                </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                    <span class="rating-count">(51)</span>
+                  </div>
+                  <h3>Suero oral veterinario</h3>
+                  <p class="product-detail">Apoyo de hidratación para cuidado básico.</p>
+                  <div class="product-price-block">
+                    <strong>$9.500</strong>
+                    <span>$9.500 / Uni</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+          </div>
+        </div>
+
+        <button class="products-arrow products-arrow-right" id="productsNext" type="button" aria-label="Ver más productos">
+          ›
+        </button>
+      </div>
     </div>
+  </section>
 
-    <section class="home-offers">
-  <div class="container">
-    <div class="home-offers-head">
-      <h2>Ofertas destacadas de la semana</h2>
-      <a href="pages/tienda.html" class="home-offers-link">Todas las ofertas →</a>
-    </div>
-
-    <div class="home-offers-grid">
-      <article class="home-offer-card">
-        <div class="home-offer-text">
-          <span class="home-offer-tag">Oferta especial</span>
-          <h3>Llega la temporada con precios increíbles</h3>
-          <p>Promociones seleccionadas para consentir a tu mascota.</p>
-        </div>
-
-        <div class="home-offer-image-placeholder rascador-img">
-  <img src="{% static 'app/img/Cards/Rascador.png' %}" alt="Rascador para gatos" />
-</div>
-
-        <a href="pages/tienda.html" class="home-offer-arrow" aria-label="Ir a la tienda">→</a>
-      </article>
-
-      <article class="home-offer-card">
-        <div class="home-offer-text">
-          <span class="home-offer-tag">Descuento</span>
-          <h3>Hasta 30% en productos seleccionados</h3>
-          <p>Encuentra referencias destacadas para cada necesidad.</p>
-        </div>
-<div class="home-offer-image-placeholder churu-img">
-  <img src="{% static 'app/img/Cards/churu.png' %}" alt="Churu snacks para mascotas" />
-</div>
-        <a href="pages/tienda.html" class="home-offer-arrow" aria-label="Ir a la tienda">→</a>
-      </article>
-
-      <article class="home-offer-card">
-        <div class="home-offer-text">
-          <span class="home-offer-tag">Bienestar diario</span>
-          <h3>Hasta 10% en alimento y cuidado</h3>
-          <p>Ofertas pensadas para compras frecuentes y esenciales.</p>
-        </div>
-
-       <div class="home-offer-image-placeholder comida-img">
-  <img src="{% static 'app/img/Cards/snack.png' %}" alt="Comida para perro" />  
-</div>
-
-        <a href="pages/tienda.html" class="home-offer-arrow" aria-label="Ir a la tienda">→</a>
-      </article>
-    </div>
-  </div>
-</section>
-
-    <div class="products-carousel">
-      <button class="products-arrow products-arrow-left" id="productsPrev" aria-label="Ver productos anteriores">‹</button>
-
-      <div class="products-viewport">
-  <div class="products-track" id="productsTrack">
-    <div class="products-page">
-      <article class="product-card shop-card">
-  <div class="product-image-box">
-    <img src="{% static 'app/img/Cards/Royalcanin.png' %}" alt="Producto para mascotas" />
-  </div>
-  <div class="product-info">
-          <div class="product-rating">
-            <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-            <span class="rating-count">(140)</span>
-          </div>
-          <h3>Concentrado Premium</h3>
-          <p class="product-detail">Alimento balanceado de alta nutrición.</p>
-          <div class="product-price-block">
-            <strong>$85.000</strong>
-            <span>$3.400 / 100 g</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card shop-card">
-  <div class="product-image-box">
-   <img src="{% static 'app/img/Cards/Snack.png' %}" alt="Snack para mascotas" />
-  </div>
-  <div class="product-info">
-    <div class="product-rating">
-      <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-      <span class="rating-count">(67)</span>
-    </div>
-    <h3>Snack funcional</h3>
-    <p class="product-detail">Premios suaves para entrenamiento.</p>
-    <div class="product-price-block">
-      <strong>$15.000</strong>
-      <span>$300 / Uni</span>
-    </div>
-  </div>
-</article>
-
-<article class="product-card shop-card">
-  <div class="product-image-box">
-    <img src="{% static 'app/img/Cards/Bolfo_Collar-1.png' %}" alt="Collar antipulgas" class="img-ajuste-medium img-bajar-arena" />
-  </div>
-  <div class="product-info">
-    <div class="product-rating">
-      <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-      <span class="rating-count">(22)</span>
-    </div>
-    <h3>Collar antipulgas</h3>
-    <p class="product-detail">Protección práctica para perro mediano.</p>
-    <div class="product-price-block">
-      <strong>$75.000</strong>
-      <span>$75.000 / Uni</span>
-    </div>
-  </div>
-</article>
-
-<article class="product-card shop-card">
-  <div class="product-image-box">
-  <img src="{% static 'app/img/Cards/ArenaGatos.png' %}" alt="Arena para gato" />
-  </div>
-  <div class="product-info">
-    <div class="product-rating">
-      <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-      <span class="rating-count">(71)</span>
-    </div>
-    <h3>Arena para gato</h3>
-    <p class="product-detail">Alta absorción y control de olores.</p>
-    <div class="product-price-block">
-      <strong>$32.000</strong>
-      <span>$2.600 / kg</span>
-    </div>
-  </div>
-</article>
-
-      <article class="product-card shop-card">
-<img src="{% static 'app/img/Cards/suplemento.png' %}" alt="Suplemento mascota" />
-        <div class="product-info">
-          <div class="product-rating">
-            <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-            <span class="rating-count">(48)</span>
-          </div>
-          <h3>Suplemento nutricional</h3>
-          <p class="product-detail">Apoyo diario para bienestar y vitalidad.</p>
-          <div class="product-price-block">
-            <strong>$29.900</strong>
-            <span>$1.495 / porción</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card shop-card">
-     <img src="{% static 'app/img/Cards/pelota.png' %}" alt="Juguete para perro" />
-        <div class="product-info">
-          <div class="product-rating">
-            <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-            <span class="rating-count">(33)</span>
-          </div>
-          <h3>Pelota resistente</h3>
-          <p class="product-detail">Ideal para juego activo y diario.</p>
-          <div class="product-price-block">
-            <strong>$18.000</strong>
-            <span>$18.000 / Uni</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card shop-card">
-<img src="{% static 'app/img/Cards/shampo.png' %}" alt="Shampoo mascota" />
-        <div class="product-info">
-          <div class="product-rating">
-            <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-            <span class="rating-count">(54)</span>
-          </div>
-          <h3>Shampoo dermatológico</h3>
-          <p class="product-detail">Limpieza suave para piel sensible.</p>
-          <div class="product-price-block">
-            <strong>$26.500</strong>
-            <span>$13.250 / 250 ml</span>
-          </div>
-        </div>
-      </article>
-    </div>
-
-    <div class="products-page">
-      <article class="product-card shop-card">
-<img src="{% static 'app/img/Cards/galletas.png' %}" alt="Producto 8" />
-        <div class="product-info">
-          <div class="product-rating">
-            <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-            <span class="rating-count">(62)</span>
-          </div>
-          <h3>Galletas naturales</h3>
-          <p class="product-detail">Snack crocante para premio diario.</p>
-          <div class="product-price-block">
-            <strong>$12.000</strong>
-            <span>$240 / Uni</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card shop-card">
-        <img src="{% static 'app/img/Cards/Pechera.png' %}" alt="Pechera ajustable" />
-        <div class="product-info">
-          <div class="product-rating">
-            <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-            <span class="rating-count">(18)</span>
-          </div>
-          <h3>Pechera ajustable</h3>
-          <p class="product-detail">Cómoda y segura para paseos.</p>
-          <div class="product-price-block">
-            <strong>$38.000</strong>
-            <span>$38.000 / Uni</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card shop-card">
-       <img src="{% static 'app/img/Cards/Comedero.png' %}" alt="Producto 10" />
-        <div class="product-info">
-          <div class="product-rating">
-            <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-            <span class="rating-count">(45)</span>
-          </div>
-          <h3>Comedero antideslizante</h3>
-          <p class="product-detail">Práctico para agua o concentrado.</p>
-          <div class="product-price-block">
-            <strong>$22.000</strong>
-            <span>$22.000 / Uni</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card shop-card">
-       <img src="{% static 'app/img/Cards/Rascador.png' %}" alt="Producto 11" />
-        <div class="product-info">
-          <div class="product-rating">
-            <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-            <span class="rating-count">(28)</span>
-          </div>
-          <h3>Rascador compacto</h3>
-          <p class="product-detail">Ideal para gatos en espacios pequeños.</p>
-          <div class="product-price-block">
-            <strong>$49.000</strong>
-            <span>$49.000 / Uni</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card shop-card">
-        <img src="{% static 'app/img/Cards/Toallitas.png' %}" alt="Producto 12" />
-        <div class="product-info">
-          <div class="product-rating">
-            <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-            <span class="rating-count">(90)</span>
-          </div>
-          <h3>Toallitas húmedas</h3>
-          <p class="product-detail">Limpieza rápida para patas y pelaje.</p>
-          <div class="product-price-block">
-            <strong>$19.900</strong>
-            <span>$398 / Uni</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card shop-card">
-        <img src="{% static 'app/img/Cards/Cama (1).png' %}" alt="Producto 13" />
-        <div class="product-info">
-          <div class="product-rating">
-            <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-            <span class="rating-count">(39)</span>
-          </div>
-          <h3>Cama acolchada</h3>
-          <p class="product-detail">Descanso cómodo para tu mascota.</p>
-          <div class="product-price-block">
-            <strong>$79.000</strong>
-            <span>$79.000 / Uni</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card shop-card">
-        <img src="{% static 'app/img/Cards/Suero.png' %}" alt="Producto 14" />
-        <div class="product-info">
-          <div class="product-rating">
-            <span class="rating-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-            <span class="rating-count">(51)</span>
-          </div>
-          <h3>Suero oral veterinario</h3>
-          <p class="product-detail">Apoyo de hidratación para cuidado básico.</p>
-          <div class="product-price-block">
-            <strong>$9.500</strong>
-            <span>$9.500 / Uni</span>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</div>
-
-      <button class="products-arrow products-arrow-right" id="productsNext" aria-label="Ver más productos">›</button>
-    </div>
-  </div>
-</section>
- {% endblock %}
+</main>
+{% endblock %}

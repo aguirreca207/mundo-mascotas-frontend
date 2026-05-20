@@ -1,235 +1,421 @@
-.adoption-hero {
-  padding: 50px 0 24px;
+.adoptions-page {
+  background:
+    radial-gradient(circle at top left, rgba(244, 180, 0, 0.16), transparent 30%),
+    linear-gradient(180deg, #fff8f0 0%, #fffdf9 100%);
 }
 
-.adoption-hero-box {
-  background: linear-gradient(135deg, #fff7ef 0%, #fffaf5 100%);
-  border: 1px solid #f1dfcf;
-  border-radius: 32px;
-  padding: 36px;
+.adoptions-hero {
+  padding: 64px 0 28px;
+}
+
+.adoptions-hero-box {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 24px;
-  align-items: center;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  gap: 28px;
+  align-items: stretch;
+  padding: 38px;
+  border: 1px solid rgba(235, 110, 37, 0.14);
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(255, 249, 242, 0.92)),
+    radial-gradient(circle at 92% 10%, rgba(244, 180, 0, 0.18), transparent 32%);
+  box-shadow: 0 26px 70px rgba(58, 36, 22, 0.09);
 }
 
-.adoption-hero-text h1 {
-  margin: 0 0 14px;
-  font-size: clamp(2rem, 4vw, 3.3rem);
-  line-height: 1.05;
-  color: #2f2a26;
-}
-
-.adoption-hero-text p {
-  margin: 0 0 24px;
-  color: var(--color-text-soft);
-  line-height: 1.7;
-  max-width: 620px;
-}
-
-.adoption-hero-actions {
+.adoptions-hero-text {
   display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.adoption-hero-stats {
+.adoptions-hero-text h1 {
+  max-width: 760px;
+  margin: 14px 0 16px;
+  color: #2f2a26;
+  font-size: clamp(2.25rem, 4.6vw, 4.15rem);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.adoptions-hero-text p {
+  max-width: 650px;
+  margin: 0 0 26px;
+  color: #6d6259;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.adoptions-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.adoptions-hero-stats {
   display: grid;
   gap: 14px;
 }
 
-.adoption-mini-card {
-  background: #ffffff;
-  border: 1px solid #f0e7dc;
+.adoptions-mini-card {
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  min-height: 116px;
+  padding: 22px;
+  border: 1px solid #f0dfce;
   border-radius: 20px;
-  padding: 18px 20px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
-}
-
-.adoption-mini-card strong {
-  display: block;
-  margin-bottom: 6px;
-  color: var(--color-secondary);
-  font-size: 1.3rem;
-}
-
-.adoption-mini-card span {
-  color: var(--color-text-soft);
-  font-size: 0.95rem;
-}
-
-.adoption-filters {
-  padding: 18px 0 10px;
-}
-
-.adoption-head-left {
-  text-align: left;
-  margin: 0 0 24px;
-}
-
-.adoption-filter-chips {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.adoption-chip {
-  border: 1px solid #ead8c5;
   background: #fff;
-  color: #2f2a26;
-  border-radius: 999px;
-  padding: 12px 18px;
-  font-weight: 700;
-  font-family: inherit;
-  cursor: pointer;
-  transition: 0.2s ease;
+  box-shadow: 0 16px 34px rgba(58, 36, 22, 0.06);
 }
 
-.adoption-chip:hover,
-.adoption-chip.active {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
+.adoptions-mini-card strong {
+  color: #eb6e25;
+  font-size: 1.6rem;
+  line-height: 1;
 }
 
-.adoption-main {
-  padding: 26px 0 70px;
+.adoptions-mini-card span {
+  color: #6d6259;
+  font-size: 0.95rem;
+  font-weight: 650;
 }
 
-.adoption-main-grid {
+.adoption-submit-section {
+  padding: 26px 0 72px;
+}
+
+.adoption-submit-grid {
   display: grid;
-  grid-template-columns: 1.45fr 0.75fr;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
   gap: 24px;
   align-items: start;
 }
 
-.adoption-cards-grid {
+.adoption-form-card,
+.adoption-process-card,
+.adoption-card,
+.adoption-empty-state,
+.adoption-request-item,
+.adoption-empty-line {
+  border: 1px solid #f0dfce;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 22px 54px rgba(58, 36, 22, 0.08);
+}
+
+.adoption-form-card {
+  padding: 32px;
+  border-radius: 26px;
+}
+
+.adoption-section-title {
+  margin-bottom: 22px;
+}
+
+.adoption-section-title h2,
+.adoptions-head-left h2 {
+  margin: 10px 0 8px;
+  color: #2f2a26;
+  font-size: clamp(1.9rem, 3.2vw, 2.75rem);
+  line-height: 1.08;
+}
+
+.adoption-section-title p,
+.adoptions-head-left p {
+  margin: 0;
+  color: #6d6259;
+  line-height: 1.65;
+}
+
+.adoption-alert {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border: 1px solid rgba(235, 110, 37, 0.22);
+  border-radius: 16px;
+  background: #fff0e8;
+  color: #c05a2c;
+  font-weight: 800;
+}
+
+.adoption-form {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
-  margin-bottom: 20px;
+}
+
+.adoption-field {
+  display: grid;
+  gap: 8px;
+}
+
+.adoption-field.full-width,
+.adoption-submit-btn.full-width {
+  grid-column: 1 / -1;
+}
+
+.adoption-field label {
+  color: #2f2a26;
+  font-weight: 800;
+  font-size: 0.94rem;
+}
+
+.adoption-field input,
+.adoption-field select,
+.adoption-field textarea {
+  width: 100%;
+  border: 1px solid #ead6c4;
+  border-radius: 16px;
+  background: #fffdfb;
+  color: #2f2a26;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.adoption-field input,
+.adoption-field select {
+  min-height: 50px;
+  padding: 0 16px;
+}
+
+.adoption-field textarea {
+  min-height: 116px;
+  padding: 14px 16px;
+  resize: vertical;
+}
+
+.adoption-field input:focus,
+.adoption-field select:focus,
+.adoption-field textarea:focus {
+  border-color: #eb6e25;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(235, 110, 37, 0.11);
+}
+
+.adoption-field input[type="file"] {
+  display: flex;
+  align-items: center;
+  padding: 13px 16px;
+  cursor: pointer;
+}
+
+.adoption-submit-btn {
+  min-height: 52px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #eb6e25, #f4b400);
+  color: #fff;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 16px 32px rgba(235, 110, 37, 0.24);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.adoption-submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 20px 40px rgba(235, 110, 37, 0.3);
+}
+
+.adoption-process-card {
+  position: sticky;
+  top: 112px;
+  display: grid;
+  gap: 14px;
+  padding: 26px;
+  border-radius: 26px;
+}
+
+.adoption-process-card > .material-symbols-outlined {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #eb6e25, #f4b400);
+  color: #fff;
+  font-size: 30px;
+}
+
+.adoption-process-card h3 {
+  margin: 0;
+  color: #2f2a26;
+  font-size: 1.35rem;
+}
+
+.adoption-process-card p {
+  margin: 0;
+  color: #6d6259;
+  line-height: 1.65;
+}
+
+.adoption-steps {
+  display: grid;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.adoption-steps div {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid #f1dfcf;
+  border-radius: 16px;
+  background: #fffaf5;
+}
+
+.adoption-steps strong {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #fff0e8;
+  color: #eb6e25;
+}
+
+.adoption-steps span {
+  color: #2f2a26;
+  font-weight: 800;
+}
+
+.approved-adoptions,
+.my-adoption-requests {
+  padding: 0 0 72px;
+}
+
+.adoptions-head-left {
+  max-width: 760px;
+  text-align: left;
+  margin: 0 0 24px;
+}
+
+.adoptions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(250px, 1fr));
+  gap: 20px;
 }
 
 .adoption-card {
-  background: #ffffff;
-  border: 1px solid #f0e7dc;
-  border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.adoption-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
-  border-color: #e7cdb4;
+  border-radius: 24px;
 }
 
 .adoption-card-image {
-  min-height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px 14px 10px;
+  height: 240px;
+  background:
+    radial-gradient(circle at 26% 18%, rgba(244, 180, 0, 0.2), transparent 30%),
+    linear-gradient(180deg, #fff8ef 0%, #fff1e6 100%);
+  border-bottom: 1px solid #f3dfcd;
 }
 
 .adoption-card-image img {
   width: 100%;
-  max-width: 170px;
-  aspect-ratio: 1 / 1;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
 .adoption-card-content {
-  padding: 16px 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  flex: 1;
+  display: grid;
+  gap: 12px;
+  padding: 18px;
 }
 
-.adoption-badge {
-  display: inline-flex;
-  align-self: flex-start;
-  background: #fff3e3;
-  color: #b96e19;
-  font-size: 0.8rem;
-  font-weight: 800;
-  padding: 8px 12px;
+.adoption-badge,
+.request-status {
+  justify-self: start;
+  padding: 7px 12px;
   border-radius: 999px;
+  background: #fff0e8;
+  color: #eb6e25;
+  font-size: 0.78rem;
+  font-weight: 900;
 }
 
 .adoption-card-content h3 {
   margin: 0;
-  font-size: 1.08rem;
   color: #2f2a26;
+  font-size: 1.25rem;
 }
 
 .adoption-card-content p {
   margin: 0;
-  color: var(--color-text-soft);
+  color: #6d6259;
   line-height: 1.6;
-  min-height: 78px;
 }
 
-.adoption-meta {
+.adoption-card-meta {
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
   flex-wrap: wrap;
-  color: #7c7268;
-  font-size: 0.84rem;
-  font-weight: 600;
+  gap: 8px;
 }
 
-.adopt-btn {
-  border: none;
+.adoption-card-meta span {
+  padding: 7px 10px;
+  border: 1px solid #f0dfce;
   border-radius: 999px;
-  background: var(--color-secondary);
-  color: #fff;
-  padding: 11px 18px;
-  font-family: inherit;
+  color: #6d6259;
+  font-size: 0.82rem;
   font-weight: 800;
-  cursor: pointer;
-  transition: 0.2s ease;
-  margin-top: auto;
 }
 
-.adopt-btn:hover {
-  opacity: 0.92;
-  transform: translateY(-1px);
+.adoption-requirements {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  border: 1px solid #f1dfcf;
+  border-radius: 16px;
+  background: #fffaf5;
 }
 
-.adoption-recent-card,
-.adoption-summary-card,
-.adoption-info-card {
-  background: #fff;
-  border: 1px solid #f0e7dc;
-  border-radius: 24px;
-  padding: 22px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
-}
-
-.adoption-section-title {
-  margin-bottom: 18px;
-}
-
-.adoption-section-title h2 {
-  margin: 0 0 8px;
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
+.adoption-requirements strong {
   color: #2f2a26;
 }
 
-.adoption-section-title p {
-  margin: 0;
-  color: var(--color-text-soft);
-  line-height: 1.6;
+.adoption-requirements span {
+  color: #6d6259;
+  line-height: 1.5;
+  font-size: 0.92rem;
 }
 
-.adoption-small-title h2 {
-  font-size: 1.45rem;
+.adoption-contact-btn {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #eb6e25, #f4b400);
+  color: #fff;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 14px 28px rgba(235, 110, 37, 0.22);
+}
+
+.adoption-empty-state {
+  grid-column: 1 / -1;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 44px 28px;
+  border-radius: 24px;
+  text-align: center;
+}
+
+.adoption-empty-state .material-symbols-outlined {
+  color: #eb6e25;
+  font-size: 58px;
+}
+
+.adoption-empty-state h3 {
+  margin: 0;
+  color: #2f2a26;
+}
+
+.adoption-empty-state p {
+  margin: 0;
+  color: #6d6259;
 }
 
 .adoption-request-list {
@@ -238,172 +424,102 @@
 }
 
 .adoption-request-item {
-  border: 1px solid #f2e5d8;
-  border-radius: 16px;
-  padding: 14px;
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
-  background: #fffaf5;
+  padding: 16px 18px;
+  border-radius: 18px;
+}
+
+.adoption-request-item div {
+  display: grid;
+  gap: 4px;
 }
 
 .adoption-request-item strong {
   color: #2f2a26;
-  font-size: 0.95rem;
 }
 
 .adoption-request-item span {
+  color: #6d6259;
+}
+
+.request-status-pendiente {
+  background: #fff3e4;
   color: #b96e19;
-  font-weight: 700;
-  font-size: 0.88rem;
 }
 
-.adoption-sidebar {
-  display: grid;
-  gap: 18px;
-  position: sticky;
-  top: 110px;
+.request-status-aprobado {
+  background: #fff0e8;
+  color: #eb6e25;
 }
 
-.adoption-summary-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 18px;
+.request-status-rechazado {
+  background: #fbe7e0;
+  color: #c05a2c;
 }
 
-.adoption-summary-head h3,
-.adoption-info-card h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  color: #2f2a26;
+.adoption-empty-line {
+  padding: 18px;
+  border-radius: 18px;
+  color: #6d6259;
 }
 
-.adoption-summary-head span {
-  color: var(--color-text-soft);
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.adoption-summary-body {
-  display: grid;
-  gap: 14px;
-  margin-bottom: 18px;
-}
-
-.adoption-line {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #f2e5d8;
-}
-
-.adoption-line span {
-  color: var(--color-text-soft);
-}
-
-.adoption-line strong {
-  color: #2f2a26;
-  text-align: right;
-  font-size: 0.96rem;
-}
-
-.adoption-main-btn {
-  width: 100%;
-}
-
-.adoption-info-card ul {
-  margin: 16px 0 0;
-  padding-left: 18px;
-  color: #6f655c;
-  line-height: 1.8;
-}
-
-.adoption-benefits {
-  padding: 0 0 70px;
-}
-
-.adoption-benefits-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.adoption-benefit-card {
-  background: #fff;
-  border: 1px solid #f0e7dc;
-  border-radius: 22px;
-  padding: 24px;
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.04);
-}
-
-.adoption-benefit-card h3 {
-  margin: 0 0 10px;
-  color: #2f2a26;
-  font-size: 1.1rem;
-}
-
-.adoption-benefit-card p {
-  margin: 0;
-  color: var(--color-text-soft);
-  line-height: 1.6;
-}
-
-.adoption-card.hidden {
-  display: none;
-}
-
-@media (max-width: 1200px) {
-  .adoption-cards-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+@media (max-width: 1180px) {
+  .adoptions-grid {
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
   }
 }
 
-@media (max-width: 1024px) {
-  .adoption-hero-box,
-  .adoption-main-grid,
-  .adoption-benefits-grid {
+@media (max-width: 960px) {
+  .adoptions-hero-box,
+  .adoption-submit-grid {
     grid-template-columns: 1fr;
   }
 
-  .adoption-sidebar {
+  .adoption-process-card {
     position: static;
-    top: auto;
   }
 }
 
-@media (max-width: 768px) {
-  .adoption-hero-box {
-    padding: 24px;
+@media (max-width: 720px) {
+  .adoptions-hero {
+    padding: 34px 0 20px;
   }
 
-  .adoption-cards-grid {
+  .adoptions-hero-box,
+  .adoption-form-card,
+  .adoption-process-card {
+    padding: 22px 16px;
+    border-radius: 22px;
+  }
+
+  .adoptions-hero-text h1 {
+    font-size: 2rem;
+  }
+
+  .adoptions-hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .adoptions-hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .adoption-form {
     grid-template-columns: 1fr;
   }
 
-  .adoption-card-content p {
-    min-height: auto;
-  }
-
-  .adoption-line {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .adoption-line strong {
-    text-align: left;
-  }
-
-  .adopt-btn {
-    width: 100%;
+  .adoptions-grid {
+    grid-template-columns: 1fr;
   }
 
   .adoption-request-item {
-    flex-direction: column;
     align-items: flex-start;
+    flex-direction: column;
   }
 }

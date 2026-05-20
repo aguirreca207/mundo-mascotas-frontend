@@ -1,158 +1,135 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
+  initNewsletter();
+  initProductsCarousel();
+});
 
-  console.log("JS cargado correctamente");
+/* =========================
+   NEWSLETTER
+========================= */
 
-  /* =========================
-     🔔 NEWSLETTER
-  ========================= */
-
+function initNewsletter() {
   const form = document.getElementById("newsletterForm");
 
-  if (form) {
+  if (!form) return;
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault(); // 🔥 evita recarga y salto SIEMPRE
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-      const email = form.querySelector("input[name='email']").value.trim();
-      const pet = form.querySelector("select[name='pet_type']").value;
+    const emailInput = form.querySelector("input[name='email']");
+    const petSelect = form.querySelector("select[name='pet_type']");
 
-      // VALIDACIONES
-      if (!email) {
-        showToast("Debes ingresar un correo");
-        return;
-      }
+    const email = emailInput ? emailInput.value.trim() : "";
+    const pet = petSelect ? petSelect.value : "";
 
-      if (!validateEmail(email)) {
-        showToast("Correo inválido");
-        return;
-      }
+    if (!email) {
+      showToast("Debes ingresar un correo electrónico.");
+      return;
+    }
 
-      fetch("/newsletter/", {
+    if (!validateEmail(email)) {
+      showToast("Ingresa un correo válido.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/newsletter/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "X-CSRFToken": getCSRFToken()
         },
         body: JSON.stringify({
-          email: email,
+          email,
           pet_type: pet
         })
-      })
-      .then(res => res.json())
-      .then(data => {
-        showToast(data.message || "Suscripción exitosa");
-        form.reset();
-      })
-      .catch(() => {
-        showToast("Error al enviar. Intenta nuevamente.");
       });
 
-    });
-  }
+      const data = await response.json();
 
+      if (!response.ok) {
+        showToast(data.message || "No pudimos registrar tu suscripción.");
+        return;
+      }
 
-  /* =========================
-     🎯 CARRUSEL PRODUCTOS
-  ========================= */
+      showToast(data.message || "Suscripción registrada correctamente.");
+      form.reset();
+    } catch (error) {
+      showToast("Error al enviar. Intenta nuevamente.");
+    }
+  });
+}
 
-  const track = document.getElementById("productsTrack");
+/* =========================
+   CARRUSEL PRODUCTOS HOME
+========================= */
+
+function initProductsCarousel() {
+  const viewport = document.querySelector(".products-viewport");
   const prevBtn = document.getElementById("productsPrev");
   const nextBtn = document.getElementById("productsNext");
 
-  if (track && prevBtn && nextBtn) {
+  if (!viewport || !prevBtn || !nextBtn) return;
 
-    let currentPage = 0;
-    const pages = document.querySelectorAll(".products-page");
-    const totalPages = pages.length;
-
-    function updateCarousel() {
-      const viewport = track.parentElement;
-      const width = viewport.clientWidth;
-
-      track.style.transform = `translateX(-${currentPage * width}px)`;
-
-      prevBtn.style.display = currentPage === 0 ? "none" : "flex";
-      nextBtn.style.display = currentPage === totalPages - 1 ? "none" : "flex";
-    }
-
-    nextBtn.addEventListener("click", () => {
-      if (currentPage < totalPages - 1) {
-        currentPage++;
-        updateCarousel();
-      }
-    });
-
-    prevBtn.addEventListener("click", () => {
-      if (currentPage > 0) {
-        currentPage--;
-        updateCarousel();
-      }
-    });
-
-    window.addEventListener("resize", updateCarousel);
-
-    updateCarousel();
+  function getScrollAmount() {
+    return Math.max(260, viewport.clientWidth * 0.85);
   }
 
-    /* =========================
-     👁️ TOGGLE PASSWORD
-  ========================= */
+  function updateButtons() {
+    const maxScroll = viewport.scrollWidth - viewport.clientWidth;
 
-  const toggleButtons = document.querySelectorAll(".toggle-password");
-
-  if (toggleButtons.length > 0) {
-    toggleButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-
-        const targetId = button.getAttribute("data-target");
-        const input = document.getElementById(targetId);
-        const icon = button.querySelector(".material-symbols-outlined");
-
-        if (!input) return;
-
-        if (input.type === "password") {
-          input.type = "text";
-          if (icon) icon.textContent = "visibility_off";
-        } else {
-          input.type = "password";
-          if (icon) icon.textContent = "visibility";
-        }
-
-      });
-    });
+    prevBtn.disabled = viewport.scrollLeft <= 4;
+    nextBtn.disabled = viewport.scrollLeft >= maxScroll - 4;
   }
 
-});
+  prevBtn.addEventListener("click", () => {
+    viewport.scrollBy({
+      left: -getScrollAmount(),
+      behavior: "smooth"
+    });
+  });
 
+  nextBtn.addEventListener("click", () => {
+    viewport.scrollBy({
+      left: getScrollAmount(),
+      behavior: "smooth"
+    });
+  });
 
+  viewport.addEventListener("scroll", updateButtons);
+  window.addEventListener("resize", updateButtons);
+
+  updateButtons();
+}
 /* =========================
-   🔔 TOAST
+   TOAST
 ========================= */
+
 function showToast(message) {
   const toast = document.getElementById("toast");
+
   if (!toast) return;
 
   toast.textContent = message;
   toast.classList.add("show");
 
-  setTimeout(() => {
+  window.clearTimeout(toast.dataset.timeoutId);
+
+  const timeoutId = window.setTimeout(() => {
     toast.classList.remove("show");
   }, 3000);
+
+  toast.dataset.timeoutId = timeoutId;
 }
 
-
 /* =========================
-   📧 VALIDACIÓN EMAIL
+   HELPERS
 ========================= */
+
 function validateEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-
-/* =========================
-   🔐 CSRF TOKEN DJANGO
-========================= */
 function getCSRFToken() {
-  const token = document.querySelector('[name=csrfmiddlewaretoken]');
+  const token = document.querySelector("[name=csrfmiddlewaretoken]");
   return token ? token.value : "";
 }
