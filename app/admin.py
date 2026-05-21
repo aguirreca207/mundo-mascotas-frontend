@@ -36,7 +36,28 @@ class OrderAdmin(admin.ModelAdmin):
     
 @admin.register(AdoptionPet)
 class AdoptionPetAdmin(admin.ModelAdmin):
-    list_display = ("name", "pet_type", "city", "status", "owner", "created_at")
+    list_display = ("name", "pet_type", "city", "status", "owner", "contact_phone", "created_at")
+    list_editable = ("status",)
     list_filter = ("status", "pet_type", "size", "city")
     search_fields = ("name", "city", "owner__email", "description")
-    readonly_fields = ("created_at", "updated_at")    
+    readonly_fields = ("created_at", "updated_at")
+    actions = ("approve_requests", "reject_requests")
+    fieldsets = (
+        ("Información de la mascota", {
+            "fields": ("name", "pet_type", "age", "size", "city", "photo")
+        }),
+        ("Contacto y publicación", {
+            "fields": ("owner", "contact_phone", "description", "requirements")
+        }),
+        ("Revisión administrativa", {
+            "fields": ("status", "admin_notes", "created_at", "updated_at")
+        }),
+    )
+
+    @admin.action(description="Aprobar solicitudes seleccionadas")
+    def approve_requests(self, request, queryset):
+        queryset.update(status="aprobado")
+
+    @admin.action(description="Rechazar solicitudes seleccionadas")
+    def reject_requests(self, request, queryset):
+        queryset.update(status="rechazado")

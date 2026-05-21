@@ -88,6 +88,121 @@
   margin: 0 0 24px;
 }
 
+.service-booking-controls {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(260px, 1fr) auto;
+  gap: 14px;
+  align-items: end;
+  margin: 0 0 22px;
+  padding: 18px;
+  border: 1px solid #eee3d8;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 16px 40px rgba(58, 36, 22, 0.06);
+}
+
+.service-booking-controls label {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  color: #2b2b2b;
+  font-weight: 900;
+}
+
+.service-booking-controls label span {
+  font-size: 0.92rem;
+}
+
+.service-booking-controls select {
+  width: 100%;
+  min-height: 52px;
+  border: 1px solid #ead8c8;
+  border-radius: 16px;
+  background: #fffdfb;
+  color: #2b2b2b;
+  padding: 0 16px;
+  font: inherit;
+  font-weight: 700;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.service-booking-controls select:focus {
+  border-color: #eb6e25;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(235, 110, 37, 0.12);
+}
+
+.service-register-pet-link,
+.service-empty-pets a {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 18px;
+  border: 1px solid #f0cdb9;
+  border-radius: 999px;
+  background: #fff0e8;
+  color: #eb6e25;
+  font-weight: 900;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.service-register-pet-link:hover,
+.service-empty-pets a:hover {
+  background: #fff7f1;
+  box-shadow: 0 12px 26px rgba(235, 110, 37, 0.12);
+  transform: translateY(-1px);
+}
+
+.service-register-pet-link .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.service-empty-pets {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 22px;
+  padding: 18px;
+  border: 1px solid #f0cdb9;
+  border-radius: 22px;
+  background: #fff7ef;
+  box-shadow: 0 14px 32px rgba(58, 36, 22, 0.05);
+}
+
+.service-empty-pets > .material-symbols-outlined {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #eb6e25 0%, #f4b400 100%);
+  color: #fff;
+  font-size: 26px;
+}
+
+.service-empty-pets div {
+  min-width: 0;
+  flex: 1;
+}
+
+.service-empty-pets strong {
+  display: block;
+  color: #2b2b2b;
+  font-weight: 900;
+}
+
+.service-empty-pets p {
+  margin: 4px 0 0;
+  color: #666;
+  line-height: 1.5;
+}
+
 .services-filter-chips {
   display: flex;
   gap: 12px;
@@ -354,6 +469,11 @@
   background: #fffaf6;
 }
 
+.reservation-item.reservation-empty {
+  border-style: dashed;
+  background: #fffdfb;
+}
+
 .reservation-item strong {
   color: #2b2b2b;
   font-size: 0.96rem;
@@ -466,6 +586,14 @@
     grid-template-columns: 1fr;
   }
 
+  .service-booking-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .service-register-pet-link {
+    width: 100%;
+  }
+
   .services-sidebar {
     position: static;
     top: auto;
@@ -505,6 +633,15 @@
 
   .booking-line strong {
     text-align: left;
+  }
+
+  .service-empty-pets {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .service-empty-pets a {
+    width: 100%;
   }
 }
 

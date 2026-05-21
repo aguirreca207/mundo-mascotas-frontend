@@ -63,8 +63,16 @@
           </p>
         </div>
 
+        {% if messages %}
+          {% for message in messages %}
+            <div class="adoption-alert adoption-alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+
         {% if adoption_error %}
-          <div class="adoption-alert">
+          <div class="adoption-alert adoption-alert-error">
             {{ adoption_error }}
           </div>
         {% endif %}
@@ -167,6 +175,12 @@
             <span>Se publica si es aprobada</span>
           </div>
         </div>
+
+        {% if request.user.is_staff %}
+          <a href="/admin/app/adoptionpet/" class="adoption-admin-link">
+            Revisar solicitudes en admin
+          </a>
+        {% endif %}
       </aside>
 
     </div>
@@ -237,6 +251,9 @@
               <div>
                 <strong>{{ request_item.name }}</strong>
                 <span>{{ request_item.pet_type }} · {{ request_item.city }}</span>
+                {% if request_item.admin_notes %}
+                  <small>{{ request_item.admin_notes }}</small>
+                {% endif %}
               </div>
 
               <span class="request-status request-status-{{ request_item.status }}">

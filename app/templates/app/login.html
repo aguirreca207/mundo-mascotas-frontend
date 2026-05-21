@@ -1,4 +1,4 @@
-{% extends 'app/base.html' %} {% load static %} {% block title %}Iniciar sesión
+{% extends 'app/base.html' %} {% load static socialaccount %} {% block title %}Iniciar sesión
 - Mundo Mascotas{% endblock %} {% block extra_css %}
 <link rel="stylesheet" href="{% static 'app/css/login.css' %}" />
 {% endblock %} {% block content %}
@@ -46,6 +46,22 @@
           <p>Ingresa tu correo y tu contraseña para continuar.</p>
         </div>
 
+        <div class="login-quick-actions">
+          <a href="{% provider_login_url 'google' process='login' %}" class="login-google-btn">
+            <i class="fa-brands fa-google"></i>
+            Continuar con Google
+          </a>
+
+          <button type="button" class="login-saved-btn" id="useSavedCredentialsBtn">
+            <span class="material-symbols-outlined">passkey</span>
+            Entrar con datos guardados
+          </button>
+        </div>
+
+        <div class="login-divider">
+          <span>o ingresa con tu correo</span>
+        </div>
+
         <form id="loginForm" class="login-form" method="POST">
           {% csrf_token %}
           {% if login_error %}
@@ -64,6 +80,8 @@
               id="loginEmail"
               name="email"
               placeholder="Ej. ana@email.com"
+              value="{{ prefill_email|default:'' }}"
+              autocomplete="email"
               required
             />
             <span class="error-text"></span>
@@ -76,6 +94,7 @@
               id="loginPassword"
               name="password"
               placeholder="Ingresa tu contraseña"
+              autocomplete="current-password"
               required
             />
 

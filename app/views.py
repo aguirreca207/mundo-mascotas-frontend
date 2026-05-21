@@ -3,6 +3,8 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib import messages
 from .models import UserProfile, Pet, Product, Order, OrderItem, AdoptionPet
 import json
 
@@ -17,19 +19,27 @@ def login_view(request):
     if request.method == "POST":
         email = request.POST.get("email", "").strip().lower()
         password = request.POST.get("password", "")
+        remember = request.POST.get("remember")
 
         user = authenticate(request, username=email, password=password)
 
         if user is not None:
             login(request, user)
+            if remember:
+                request.session.set_expiry(60 * 60 * 24 * 30)
+            else:
+                request.session.set_expiry(0)
             next_url = request.GET.get("next")
             return redirect(next_url or "/perfil/")
 
         return render(request, "app/login.html", {
-            "login_error": "Correo o contraseña incorrectos."
+            "login_error": "Correo o contraseña incorrectos.",
+            "prefill_email": email
         })
 
-    return render(request, "app/login.html")
+    return render(request, "app/login.html", {
+        "prefill_email": request.GET.get("email", "").strip().lower()
+    })
 
 
 @login_required(login_url="/login/")
@@ -108,7 +118,7 @@ def registro(request):
         profile.address = address
         profile.save()
 
-        return redirect("/login/")
+        return redirect(f"/login/?email={email}")
 
     return render(request, "app/registro.html")
 
@@ -188,8 +198,18 @@ def tienda(request):
     })
 
 
+@login_required(login_url="/login/")
 def servicios(request):
-    return render(request, 'app/servicios.html')
+    pets = Pet.objects.filter(owner=request.user).order_by("name")
+    return render(request, "app/servicios.html", {
+        "pets": pets
+    })
+
+
+@staff_member_required(login_url="/login/")
+def gestion_api(request):
+    return render(request, "app/gestion_api.html")
+
 
 @login_required(login_url="/login/")
 def adopciones(request):
@@ -225,6 +245,11 @@ def adopciones(request):
             requirements=requirements,
             contact_phone=contact_phone,
             photo=photo
+        )
+
+        messages.success(
+            request,
+            "Solicitud enviada correctamente. Quedó pendiente de revisión por el administrador."
         )
 
         return redirect("adopciones")

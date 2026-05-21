@@ -19,6 +19,7 @@ urlpatterns = [
     path('tienda/', views.tienda, name='tienda'),
     path('servicios/', views.servicios, name='servicios'),
     path('adopciones/', views.adopciones, name='adopciones'),
+    path('gestion-api/', views.gestion_api, name='gestion_api'),
 
     # 🔹 API / FUNCIONALIDAD
     path('newsletter/', views.newsletter, name='newsletter'),

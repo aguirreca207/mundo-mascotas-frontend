@@ -136,6 +136,18 @@
   font-weight: 800;
 }
 
+.adoption-alert-success {
+  border-color: rgba(235, 110, 37, 0.24);
+  background: #fff7ef;
+  color: #9c4f16;
+}
+
+.adoption-alert-error {
+  border-color: rgba(192, 90, 44, 0.28);
+  background: #fff0e8;
+  color: #c05a2c;
+}
+
 .adoption-form {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -278,6 +290,26 @@
 .adoption-steps span {
   color: #2f2a26;
   font-weight: 800;
+}
+
+.adoption-admin-link {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #eb6e25, #f4b400);
+  color: #fff;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 14px 28px rgba(235, 110, 37, 0.22);
+}
+
+.adoption-admin-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 34px rgba(235, 110, 37, 0.28);
 }
 
 .approved-adoptions,
@@ -443,6 +475,11 @@
 
 .adoption-request-item span {
   color: #6d6259;
+}
+
+.adoption-request-item small {
+  color: #8a7567;
+  line-height: 1.45;
 }
 
 .request-status-pendiente {

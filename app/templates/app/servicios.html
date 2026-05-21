@@ -54,6 +54,44 @@
         <p>Elige el servicio que necesitas y revisa el resumen antes de confirmar.</p>
       </div>
 
+      <div class="service-booking-controls">
+        <label>
+          <span>Mascota</span>
+          <select id="servicePetSelect">
+            <option value="">Selecciona una mascota</option>
+            {% for pet in pets %}
+              <option value="{{ pet.name }}">{{ pet.name }} · {{ pet.pet_type }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label>
+          <span>Jornada preferida</span>
+          <select id="serviceTimeSelect">
+            <option value="">Selecciona una jornada</option>
+            <option value="Mañana · 08:00 AM - 12:00 PM">Mañana · 08:00 AM - 12:00 PM</option>
+            <option value="Tarde · 02:00 PM - 06:00 PM">Tarde · 02:00 PM - 06:00 PM</option>
+            <option value="Fin de semana · Sujeto a disponibilidad">Fin de semana · Sujeto a disponibilidad</option>
+          </select>
+        </label>
+
+        <a href="{% url 'mascotas' %}" class="service-register-pet-link">
+          <span class="material-symbols-outlined">add_circle</span>
+          Registrar mascota
+        </a>
+      </div>
+
+      {% if not pets %}
+        <div class="service-empty-pets">
+          <span class="material-symbols-outlined">pets</span>
+          <div>
+            <strong>Aún no tienes mascotas registradas</strong>
+            <p>Registra una mascota para poder solicitar servicios personalizados.</p>
+          </div>
+          <a href="{% url 'mascotas' %}">Registrar ahora</a>
+        </div>
+      {% endif %}
+
       <div class="services-filter-chips">
         <button class="service-chip active" type="button" data-filter="todos">Todos</button>
         <button class="service-chip" type="button" data-filter="cuidado">Cuidado</button>
@@ -78,7 +116,7 @@
               <li>Ideal para rutina de higiene</li>
             </ul>
 
-            <button class="service-action-btn" type="button" data-service="Baño" data-pet="Luna" data-time="09:00 AM" data-status="Confirmada">
+            <button class="service-action-btn" type="button" data-service="Baño" data-status="Pendiente de confirmación">
               Reservar
             </button>
           </div>
@@ -100,7 +138,7 @@
               <li>Ideal para rutinas activas</li>
             </ul>
 
-            <button class="service-action-btn" type="button" data-service="Guardería" data-pet="Toby" data-time="08:00 AM" data-status="Pendiente">
+            <button class="service-action-btn" type="button" data-service="Guardería" data-status="Pendiente de confirmación">
               Reservar
             </button>
           </div>
@@ -122,7 +160,7 @@
               <li>Apoyo en seguimiento</li>
             </ul>
 
-            <button class="service-action-btn" type="button" data-service="Consulta a domicilio" data-pet="Max" data-time="11:30 AM" data-status="Pendiente">
+            <button class="service-action-btn" type="button" data-service="Consulta a domicilio" data-status="Pendiente de confirmación">
               Reservar
             </button>
           </div>
@@ -144,7 +182,7 @@
               <li>Ideal para energía y rutina</li>
             </ul>
 
-            <button class="service-action-btn" type="button" data-service="Paseo" data-pet="Luna" data-time="07:30 AM" data-status="Programado">
+            <button class="service-action-btn" type="button" data-service="Paseo" data-status="Pendiente de confirmación">
               Reservar
             </button>
           </div>
@@ -176,7 +214,7 @@
               <span>Disponible en Bogotá</span>
             </div>
 
-            <button class="walker-btn" type="button" data-service="Paseo" data-pet="Luna" data-time="07:30 AM" data-status="Programado" data-walker="Juan Pérez">
+            <button class="walker-btn" type="button" data-service="Paseo" data-status="Pendiente de confirmación" data-walker="Juan Pérez">
               Agendar paseo
             </button>
           </article>
@@ -195,7 +233,7 @@
               <span>Alta disponibilidad</span>
             </div>
 
-            <button class="walker-btn" type="button" data-service="Paseo" data-pet="Toby" data-time="08:00 AM" data-status="Pendiente" data-walker="María López">
+            <button class="walker-btn" type="button" data-service="Paseo" data-status="Pendiente de confirmación" data-walker="María López">
               Agendar paseo
             </button>
           </article>
@@ -208,19 +246,9 @@
           </div>
 
           <div class="reservation-list" id="reservationList">
-            <article class="reservation-item">
-              <strong>Baño - Luna</strong>
-              <span>Confirmada · 09:00 AM</span>
-            </article>
-
-            <article class="reservation-item">
-              <strong>Guardería - Toby</strong>
-              <span>Pendiente · 08:00 AM</span>
-            </article>
-
-            <article class="reservation-item">
-              <strong>Paseo - Luna</strong>
-              <span>Programado · 07:30 AM</span>
+            <article class="reservation-item reservation-empty">
+              <strong>Sin reservas recientes</strong>
+              <span>Cuando confirmes una solicitud, aparecerá aquí.</span>
             </article>
           </div>
         </div>
@@ -264,7 +292,7 @@
           <h3>Qué puedes gestionar aquí</h3>
           <ul>
             <li>Consultar tipos de servicio</li>
-            <li>Simular una reserva</li>
+            <li>Solicitar una reserva</li>
             <li>Visualizar paseadores</li>
             <li>Revisar estados de atención</li>
           </ul>

@@ -1,0 +1,82 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}Confirmar acceso - Mundo Mascotas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app/css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="login-section">
+  <div class="container">
+    <div class="login-layout">
+      <div class="login-info-card">
+        <span class="badge">Acceso con Google</span>
+        <h1>Confirma tu cuenta</h1>
+        <p>
+          Estás a un paso de entrar a Mundo Mascotas con tu correo de Google.
+          Confirma el correo para crear o conectar tu cuenta de forma segura.
+        </p>
+
+        <div class="login-benefits">
+          <div class="login-benefit">
+            <strong>Ingreso rápido</strong>
+            <span>Accede con una cuenta Google validada.</span>
+          </div>
+          <div class="login-benefit">
+            <strong>Cuenta conectada</strong>
+            <span>Tu perfil queda listo para consultar mascotas, citas y servicios.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-form-card">
+        <div class="login-card-head">
+          <h2>Finalizar acceso</h2>
+          <p>Revisa el correo y confirma para continuar.</p>
+        </div>
+
+        <form class="login-form" method="post" action="{% url 'socialaccount_signup' %}">
+          {% csrf_token %}
+
+          {% if form.non_field_errors %}
+            <div class="login-alert" role="alert">
+              <span class="login-alert-icon material-symbols-outlined">error</span>
+              <span>{{ form.non_field_errors }}</span>
+            </div>
+          {% endif %}
+
+          {% for field in form.hidden_fields %}
+            {{ field }}
+          {% endfor %}
+
+          <div class="form-group">
+            <label for="id_email">Correo electrónico</label>
+            <input
+              type="email"
+              id="id_email"
+              name="email"
+              value="{{ form.email.value|default:'' }}"
+              placeholder="correo@ejemplo.com"
+              autocomplete="email"
+              required
+            >
+            {% if form.email.errors %}
+              <span class="error-text">{{ form.email.errors|striptags }}</span>
+            {% else %}
+              <span class="error-text"></span>
+            {% endif %}
+          </div>
+
+          <button type="submit" class="login-submit-btn">Confirmar y entrar</button>
+        </form>
+
+        <div class="login-footer-note">
+          <p>¿Prefieres otro método? <a href="{% url 'login' %}">Volver al inicio de sesión</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

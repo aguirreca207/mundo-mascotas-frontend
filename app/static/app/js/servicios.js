@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const walkerButtons = document.querySelectorAll(".walker-btn");
   const reservationList = document.getElementById("reservationList");
   const confirmBtn = document.getElementById("confirmBookingBtn");
+  const petSelect = document.getElementById("servicePetSelect");
+  const timeSelect = document.getElementById("serviceTimeSelect");
 
   const summaryService = document.getElementById("summaryService");
   const summaryPet = document.getElementById("summaryPet");
@@ -47,6 +49,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function focusBookingField(field) {
+    if (!field) return;
+
+    field.focus();
+    field.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+
+  function getSelectedBookingData() {
+    const pet = petSelect?.value.trim() || "";
+    const time = timeSelect?.value.trim() || "";
+
+    if (!pet) {
+      showServiceNotice("Selecciona una mascota registrada para continuar.", "error");
+      focusBookingField(petSelect);
+      return null;
+    }
+
+    if (!time) {
+      showServiceNotice("Selecciona una jornada preferida para continuar.", "error");
+      focusBookingField(timeSelect);
+      return null;
+    }
+
+    return { pet, time };
+  }
+
   function updateSummary({ service, pet, time, status, walker }) {
     if (summaryService) summaryService.textContent = service || "No seleccionado";
     if (summaryPet) summaryPet.textContent = pet || "No seleccionada";
@@ -55,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (bookingStatusLabel) bookingStatusLabel.textContent = status || "Sin selección";
 
     resetConfirmButton();
-    showServiceNotice("Servicio agregado al resumen.");
+    showServiceNotice("Solicitud agregada al resumen. Revisa y confirma.");
   }
 
   filterButtons.forEach((button) => {
@@ -70,10 +101,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   serviceButtons.forEach((button) => {
     button.addEventListener("click", () => {
+      const bookingData = getSelectedBookingData();
+
+      if (!bookingData) return;
+
       updateSummary({
         service: button.dataset.service,
-        pet: button.dataset.pet,
-        time: button.dataset.time,
+        pet: bookingData.pet,
+        time: bookingData.time,
         status: button.dataset.status,
         walker: "No aplica"
       });
@@ -82,10 +117,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   walkerButtons.forEach((button) => {
     button.addEventListener("click", () => {
+      const bookingData = getSelectedBookingData();
+
+      if (!bookingData) return;
+
       updateSummary({
         service: button.dataset.service,
-        pet: button.dataset.pet,
-        time: button.dataset.time,
+        pet: bookingData.pet,
+        time: bookingData.time,
         status: button.dataset.status,
         walker: button.dataset.walker
       });
@@ -111,6 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
       confirmBtn.classList.add("is-confirmed");
 
       if (reservationList) {
+        reservationList.querySelector(".reservation-empty")?.remove();
+
         const newReservation = document.createElement("article");
         newReservation.className = "reservation-item";
 

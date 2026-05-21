@@ -1,0 +1,277 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}Gestión API - Mundo Mascotas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app/css/gestion_api.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="api-page">
+  <div class="api-toast" id="apiToast" role="status" aria-live="polite"></div>
+
+  <section class="api-hero">
+    <div class="container api-hero-grid">
+      <div class="api-hero-copy">
+        <span class="section-tag">Aplicación web funcional</span>
+        <h1>Gestión conectada a la API REST</h1>
+        <p>
+          Administra usuarios, productos y servicios consumiendo la API Node.js
+          de Mundo Mascotas mediante peticiones GET, POST, PUT y DELETE.
+        </p>
+
+        <div class="api-hero-actions">
+          <a href="#apiWorkspace" class="btn btn-primary">Ir al panel</a>
+          <button class="api-check-btn" type="button" id="checkApiBtn">
+            <span class="material-symbols-outlined">sync</span>
+            Verificar API
+          </button>
+        </div>
+      </div>
+
+      <aside class="api-status-card" aria-live="polite">
+        <span class="material-symbols-outlined">hub</span>
+        <div>
+          <p>Estado de API</p>
+          <strong id="apiStatusText">Pendiente de verificación</strong>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="api-summary">
+    <div class="container api-summary-grid">
+      <article class="api-summary-card">
+        <span>01</span>
+        <h3>Frontend</h3>
+        <p>Interfaz Django integrada al diseño actual de la plataforma.</p>
+      </article>
+      <article class="api-summary-card">
+        <span>02</span>
+        <h3>API REST</h3>
+        <p>Consumo real de endpoints Node.js con formato JSON.</p>
+      </article>
+      <article class="api-summary-card">
+        <span>03</span>
+        <h3>Base de datos</h3>
+        <p>Operaciones conectadas a SQLite mediante CRUD completo.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="api-workspace" id="apiWorkspace">
+    <div class="container">
+      <div class="api-workspace-head">
+        <div>
+          <span class="section-tag">Panel CRUD</span>
+          <h2>Prueba funcional de usuarios, productos y servicios</h2>
+          <p>
+            Usa este módulo para crear, consultar, actualizar y eliminar
+            registros desde el frontend consumiendo la API.
+          </p>
+        </div>
+        <div class="api-base-url">
+          <span>Base API</span>
+          <strong>http://localhost:3000</strong>
+        </div>
+      </div>
+
+      <div class="api-login-card">
+        <div class="api-card-title">
+          <span class="material-symbols-outlined">lock_open</span>
+          <div>
+            <h3>Autenticación API</h3>
+            <p>Valida el ingreso de un usuario registrado en la API.</p>
+          </div>
+        </div>
+
+        <form class="api-form api-login-form" id="apiLoginForm">
+          <label>
+            Correo
+            <input type="email" id="loginEmail" placeholder="Correo registrado en la API" autocomplete="email">
+          </label>
+          <label>
+            Contraseña
+            <input type="password" id="loginPassword" placeholder="Contraseña del usuario API" autocomplete="current-password">
+          </label>
+          <button type="submit" class="api-primary-btn">Iniciar sesión API</button>
+        </form>
+        <p class="api-helper-text">
+          Usa un usuario creado en el módulo Usuarios para probar el inicio de sesión contra la API.
+        </p>
+      </div>
+
+      <div class="api-tabs" role="tablist" aria-label="Módulos API">
+        <button class="api-tab active" type="button" data-module="users">Usuarios</button>
+        <button class="api-tab" type="button" data-module="products">Productos</button>
+        <button class="api-tab" type="button" data-module="services">Servicios</button>
+      </div>
+
+      <div class="api-module active" id="usersModule" data-module-panel="users">
+        <div class="api-module-grid">
+          <article class="api-panel">
+            <div class="api-card-title">
+              <span class="material-symbols-outlined">person_add</span>
+              <div>
+                <h3>Formulario de usuario</h3>
+                <p>Crea o actualiza usuarios mediante la API.</p>
+              </div>
+            </div>
+
+            <form class="api-form" id="userForm">
+              <input type="hidden" id="userId">
+              <label>Nombre<input type="text" id="userName" placeholder="Nombre completo"></label>
+              <label>Correo<input type="email" id="userEmail" placeholder="correo@ejemplo.com"></label>
+              <label>Contraseña<input type="password" id="userPassword" placeholder="Contraseña"></label>
+              <label>Rol<input type="text" id="userRole" placeholder="cliente"></label>
+              <div class="api-form-actions">
+                <button type="submit" class="api-primary-btn">Guardar usuario</button>
+                <button type="button" class="api-secondary-btn" data-reset="users">Limpiar</button>
+              </div>
+            </form>
+          </article>
+
+          <article class="api-panel">
+            <div class="api-list-head">
+              <div>
+                <h3>Usuarios registrados</h3>
+                <p>Datos obtenidos desde <code>GET /api/users</code>.</p>
+              </div>
+              <button type="button" class="api-icon-btn" data-refresh="users" aria-label="Actualizar usuarios">
+                <span class="material-symbols-outlined">refresh</span>
+              </button>
+            </div>
+            <div class="api-table-wrap">
+              <table class="api-table">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="api-module" id="productsModule" data-module-panel="products">
+        <div class="api-module-grid">
+          <article class="api-panel">
+            <div class="api-card-title">
+              <span class="material-symbols-outlined">inventory_2</span>
+              <div>
+                <h3>Formulario de producto</h3>
+                <p>Gestiona productos reales desde la API.</p>
+              </div>
+            </div>
+
+            <form class="api-form" id="productForm">
+              <input type="hidden" id="productId">
+              <label>Nombre<input type="text" id="productName" placeholder="Concentrado Premium"></label>
+              <label>Categoría<input type="text" id="productCategory" placeholder="Alimento"></label>
+              <label>Mascota<input type="text" id="productPetType" placeholder="Perro"></label>
+              <label>Descripción<textarea id="productDescription" rows="3" placeholder="Descripción del producto"></textarea></label>
+              <label>Precio<input type="number" id="productPrice" placeholder="85000"></label>
+              <label>Stock<input type="number" id="productStock" placeholder="20"></label>
+              <div class="api-form-actions">
+                <button type="submit" class="api-primary-btn">Guardar producto</button>
+                <button type="button" class="api-secondary-btn" data-reset="products">Limpiar</button>
+              </div>
+            </form>
+          </article>
+
+          <article class="api-panel">
+            <div class="api-list-head">
+              <div>
+                <h3>Productos registrados</h3>
+                <p>Datos obtenidos desde <code>GET /api/products</code>.</p>
+              </div>
+              <button type="button" class="api-icon-btn" data-refresh="products" aria-label="Actualizar productos">
+                <span class="material-symbols-outlined">refresh</span>
+              </button>
+            </div>
+            <div class="api-table-wrap">
+              <table class="api-table">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="productsTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="api-module" id="servicesModule" data-module-panel="services">
+        <div class="api-module-grid">
+          <article class="api-panel">
+            <div class="api-card-title">
+              <span class="material-symbols-outlined">room_service</span>
+              <div>
+                <h3>Formulario de servicio</h3>
+                <p>Gestiona servicios consumiendo la API REST.</p>
+              </div>
+            </div>
+
+            <form class="api-form" id="serviceForm">
+              <input type="hidden" id="serviceId">
+              <label>Nombre<input type="text" id="serviceName" placeholder="Baño para mascota"></label>
+              <label>Categoría<input type="text" id="serviceCategory" placeholder="Cuidado"></label>
+              <label>Descripción<textarea id="serviceDescription" rows="3" placeholder="Descripción del servicio"></textarea></label>
+              <label>Precio<input type="number" id="servicePrice" placeholder="35000"></label>
+              <label>Duración<input type="text" id="serviceDuration" placeholder="1 hora"></label>
+              <div class="api-form-actions">
+                <button type="submit" class="api-primary-btn">Guardar servicio</button>
+                <button type="button" class="api-secondary-btn" data-reset="services">Limpiar</button>
+              </div>
+            </form>
+          </article>
+
+          <article class="api-panel">
+            <div class="api-list-head">
+              <div>
+                <h3>Servicios registrados</h3>
+                <p>Datos obtenidos desde <code>GET /api/services</code>.</p>
+              </div>
+              <button type="button" class="api-icon-btn" data-refresh="services" aria-label="Actualizar servicios">
+                <span class="material-symbols-outlined">refresh</span>
+              </button>
+            </div>
+            <div class="api-table-wrap">
+              <table class="api-table">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th>Duración</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="servicesTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <p class="api-message" id="apiMessage" aria-live="polite"></p>
+    </div>
+  </section>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'app/js/gestion_api.js' %}"></script>
+{% endblock %}

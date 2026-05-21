@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   initNewsletter();
   initProductsCarousel();
+  initPasswordToggles();
+  initSavedCredentialsLogin();
 });
 
 /* =========================
@@ -100,6 +102,70 @@ function initProductsCarousel() {
 
   updateButtons();
 }
+
+/* =========================
+   MOSTRAR / OCULTAR CONTRASEÑA
+========================= */
+
+function initPasswordToggles() {
+  const toggleButtons = document.querySelectorAll(".toggle-password");
+
+  toggleButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const targetId = button.dataset.target;
+      const input = document.getElementById(targetId);
+      const icon = button.querySelector(".material-symbols-outlined");
+
+      if (!input) return;
+
+      const shouldShow = input.type === "password";
+      input.type = shouldShow ? "text" : "password";
+      button.setAttribute("aria-label", shouldShow ? "Ocultar contraseña" : "Mostrar contraseña");
+
+      if (icon) {
+        icon.textContent = shouldShow ? "visibility_off" : "visibility";
+      }
+    });
+  });
+}
+
+/* =========================
+   CREDENCIALES GUARDADAS
+========================= */
+
+function initSavedCredentialsLogin() {
+  const savedButton = document.getElementById("useSavedCredentialsBtn");
+  const loginForm = document.getElementById("loginForm");
+  const emailInput = document.getElementById("loginEmail");
+  const passwordInput = document.getElementById("loginPassword");
+
+  if (!savedButton || !loginForm || !emailInput || !passwordInput) return;
+
+  savedButton.addEventListener("click", async () => {
+    if (window.PasswordCredential && navigator.credentials) {
+      try {
+        const credential = await navigator.credentials.get({
+          password: true,
+          mediation: "optional"
+        });
+
+        if (credential) {
+          emailInput.value = credential.id || "";
+          passwordInput.value = credential.password || "";
+          showToast("Credenciales guardadas cargadas correctamente.");
+          loginForm.requestSubmit();
+          return;
+        }
+      } catch (error) {
+        showToast("No pudimos cargar credenciales guardadas automáticamente.");
+      }
+    }
+
+    emailInput.focus();
+    showToast("Selecciona las credenciales guardadas sugeridas por tu navegador.");
+  });
+}
+
 /* =========================
    TOAST
 ========================= */

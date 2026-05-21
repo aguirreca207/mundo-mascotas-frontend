@@ -41,6 +41,9 @@
         <li><a href="{% url 'tienda' %}">Tienda</a></li>
         <li><a href="{% url 'servicios' %}">Servicios</a></li>
         <li><a href="{% url 'adopciones' %}">Adopciones</a></li>
+        {% if request.user.is_staff %}
+          <li><a href="{% url 'gestion_api' %}">Gestión API</a></li>
+        {% endif %}
       </ul>
 
       {% if request.user.is_authenticated %}
