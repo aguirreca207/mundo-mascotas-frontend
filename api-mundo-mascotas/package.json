@@ -1,13 +1,20 @@
 {
   "name": "api-mundo-mascotas",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "API REST del proyecto Mundo Mascotas para gestión de usuarios, autenticación, productos y servicios.",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "api",
+    "rest",
+    "nodejs",
+    "express",
+    "sqlite",
+    "mundo-mascotas"
+  ],
+  "author": "Camila Aguirre",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
