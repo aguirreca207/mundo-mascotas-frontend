@@ -7,9 +7,10 @@
     "doc": "docs"
   },
   "scripts": {
-  "dev": "live-server --port=5500 --open=index.html",
-  "start": "live-server --port=5500 --open=index.html"
-},
+    "dev": "live-server --port=5500 --open=index.html",
+    "start": "live-server --port=5500 --open=index.html",
+    "build": "echo \"Static site ready\""
+  },
 "repository": {
     "type": "git",
     "url": "git+https://github.com/aguirreca207/mundo-mascotas-frontend.git"
