@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "live-server --port=5500 --open=index.html",
     "start": "live-server --port=5500 --open=index.html",
-    "build": "echo \"Static site ready\""
+    "build": "rm -rf dist && mkdir -p dist && cp -R index.html assets pages scripts styles dist/"
   },
 "repository": {
     "type": "git",
