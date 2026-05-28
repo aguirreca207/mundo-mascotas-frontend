@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("registerForm");
   const registerSubmitBtn = document.getElementById("registerSubmitBtn");
-  const googleRegisterBtn = document.getElementById("googleRegisterBtn");
   const registerName = document.getElementById("registerName");
   const registerEmail = document.getElementById("registerEmail");
   const registerPhone = document.getElementById("registerPhone");
@@ -89,18 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       return;
     }
-  }
-
-  if (googleRegisterBtn) {
-    googleRegisterBtn.addEventListener("click", () => {
-      const googleUrl = googleRegisterBtn.dataset.googleUrl || "/accounts/google/login/";
-
-      googleRegisterBtn.disabled = true;
-      googleRegisterBtn.classList.add("is-loading");
-      googleRegisterBtn.querySelector("span:last-child").textContent = "Conectando con Google...";
-
-      window.location.href = googleUrl;
-    });
   }
 
   if (registerPhone) {

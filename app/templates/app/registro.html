@@ -183,20 +183,6 @@ Mundo Mascotas{% endblock %} {% block extra_css %}
             Crear cuenta
           </button>
 
-          <div class="register-divider">
-            <span>o continúa con</span>
-          </div>
-
-          <button
-            type="button"
-            id="googleRegisterBtn"
-            class="google-register-btn"
-            data-google-url="/accounts/google/login/"
-          >
-            <span class="google-icon">G</span>
-            <span>Continuar con Google</span>
-          </button>
-
           <p class="register-login-link">
             ¿Ya tienes cuenta?
             <a href="{% url 'login' %}">Iniciar sesión</a>
@@ -216,6 +202,6 @@ Mundo Mascotas{% endblock %} {% block extra_css %}
 {% endblock %} {% block extra_js %}
 
 <script src="{% static 'app/js/utils.js' %}"></script>
-<script src="{% static 'app/js/registro.js' %}?v=20260528-1"></script>
+<script src="{% static 'app/js/registro.js' %}?v=20260528-2"></script>
 
 {% endblock %}
