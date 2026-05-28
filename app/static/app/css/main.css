@@ -543,6 +543,8 @@
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
+  scroll-padding-inline: 2px;
+  scroll-snap-type: x proximity;
   scrollbar-width: none;
   padding: 6px 2px 18px;
 }
@@ -564,6 +566,7 @@
 
 .product-card {
   flex: 0 0 180px;
+  scroll-snap-align: start;
 }
 
 .shop-card {

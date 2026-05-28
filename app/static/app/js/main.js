@@ -125,7 +125,16 @@ function initProductsCarousel() {
   if (!viewport || !prevBtn || !nextBtn) return;
 
   function getScrollAmount() {
-    return Math.max(260, viewport.clientWidth * 0.85);
+    const card = viewport.querySelector(".product-card");
+    const track = viewport.querySelector(".products-track");
+
+    if (!card || !track) return Math.max(260, viewport.clientWidth * 0.85);
+
+    const gap = Number.parseFloat(window.getComputedStyle(track).columnGap || "16") || 16;
+    const cardWidth = card.getBoundingClientRect().width + gap;
+    const visibleCards = Math.max(1, Math.floor(viewport.clientWidth / cardWidth));
+
+    return cardWidth * visibleCards;
   }
 
   function updateButtons() {

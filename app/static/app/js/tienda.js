@@ -59,6 +59,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }).format(value);
   }
 
+  function syncNoResultsState(searchValue, visibleCount) {
+    if (!productGrid || productCards.length === 0) return;
+
+    let noResults = productGrid.querySelector(".store-no-results");
+
+    if (!noResults) {
+      noResults = document.createElement("article");
+      noResults.className = "store-empty-state store-no-results hidden";
+      noResults.innerHTML = `
+        <span class="material-symbols-outlined">search_off</span>
+        <h3>No encontramos productos con esos filtros</h3>
+        <p>Prueba con otra palabra, revisa las categorías o vuelve al catálogo completo.</p>
+        <button type="button" class="btn btn-secondary" data-clear-store-search>
+          Ver catálogo completo
+        </button>
+      `;
+      productGrid.appendChild(noResults);
+    }
+
+    noResults.classList.toggle("hidden", visibleCount > 0);
+
+    const clearButton = noResults.querySelector("[data-clear-store-search]");
+    if (clearButton && clearButton.dataset.bound !== "true") {
+      clearButton.dataset.bound = "true";
+      clearButton.addEventListener("click", () => {
+        if (searchInput) searchInput.value = "";
+        if (petFilter) petFilter.value = "todos";
+        if (sortFilter) sortFilter.value = "default";
+        categoryButtons.forEach((btn) => btn.classList.remove("active"));
+        document.querySelector(".category-chip[data-category='todos']")?.classList.add("active");
+        currentCategory = "todos";
+        window.history.replaceState({}, "", window.location.pathname + "#catalogo");
+        applyFilters();
+      });
+    }
+  }
+
   function applyFilters() {
     if (!productGrid) return;
 
@@ -85,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     visibleCards = visibleCards.filter((card) => !card.classList.contains("hidden"));
+    syncNoResultsState(searchValue, visibleCards.length);
 
     if (sortValue !== "default") {
       visibleCards.sort((a, b) => {

@@ -626,6 +626,15 @@
   display: none;
 }
 
+.store-no-results {
+  grid-column: 1 / -1;
+  min-height: 260px;
+}
+
+.store-no-results.hidden {
+  display: none;
+}
+
 .store-notice {
   position: fixed;
   right: 22px;
