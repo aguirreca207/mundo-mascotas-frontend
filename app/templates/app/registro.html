@@ -1,6 +1,6 @@
-{% extends 'app/base.html' %} {% load static %} {% block title %}Crear cuenta -
+{% extends 'app/base.html' %} {% load static socialaccount %} {% block title %}Crear cuenta -
 Mundo Mascotas{% endblock %} {% block extra_css %}
-<link rel="stylesheet" href="{% static 'app/css/registro.css' %}?v=20260527-2" />
+<link rel="stylesheet" href="{% static 'app/css/registro.css' %}?v=20260528-1" />
 {% endblock %} {% block content %}
 
 <section class="register-section">
@@ -182,6 +182,19 @@ Mundo Mascotas{% endblock %} {% block extra_css %}
           >
             Crear cuenta
           </button>
+
+          <div class="register-divider">
+            <span>o crea tu cuenta con</span>
+          </div>
+
+          <a
+            href="{% provider_login_url 'google' process='login' %}"
+            class="google-register-btn"
+            aria-label="Continuar con Google"
+          >
+            <span class="google-icon" aria-hidden="true">G</span>
+            <span>Continuar con Google</span>
+          </a>
 
           <p class="register-login-link">
             ¿Ya tienes cuenta?

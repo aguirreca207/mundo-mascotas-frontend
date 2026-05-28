@@ -1,6 +1,6 @@
-{% extends 'app/base.html' %} {% load static %} {% block title %}Iniciar sesión
+{% extends 'app/base.html' %} {% load static socialaccount %} {% block title %}Iniciar sesión
 - Mundo Mascotas{% endblock %} {% block extra_css %}
-<link rel="stylesheet" href="{% static 'app/css/login.css' %}?v=20260527-3" />
+<link rel="stylesheet" href="{% static 'app/css/login.css' %}?v=20260528-1" />
 {% endblock %} {% block content %}
 <section class="login-section">
   <div class="container">
@@ -43,7 +43,19 @@
       <div class="login-form-card">
         <div class="login-card-head">
           <h2>Bienvenido de nuevo</h2>
-          <p>Ingresa tu correo y tu contraseña para continuar.</p>
+          <p>Elige cómo quieres entrar a tu cuenta.</p>
+        </div>
+
+        <div class="login-quick-actions" aria-label="Acceso rápido">
+          <a href="{% provider_login_url 'google' process='login' %}" class="login-google-btn">
+            <span class="google-mark" aria-hidden="true">G</span>
+            <span>Continuar con Google</span>
+          </a>
+          <p class="login-social-note">Acceso rápido con tu correo Google, sin llenar el formulario.</p>
+        </div>
+
+        <div class="login-divider">
+          <span>o ingresa con tu correo</span>
         </div>
 
         <form id="loginForm" class="login-form" method="POST">

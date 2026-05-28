@@ -36,6 +36,9 @@ ALLOWED_HOSTS = [
     '.vercel.app',
 ]
 
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Application definition
 
@@ -95,6 +98,7 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/perfil/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/login/'
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https' if os.getenv('VERCEL') else 'http'
 
 ACCOUNT_LOGIN_METHODS = {'email'}
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
