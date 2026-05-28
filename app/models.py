@@ -96,6 +96,58 @@ class OrderItem(models.Model):
         return f"{self.product.name} x {self.quantity}"
 
 
+class Appointment(models.Model):
+    TIME_CHOICES = [
+        ("Mañana", "Mañana"),
+        ("Tarde", "Tarde"),
+        ("Noche", "Noche"),
+    ]
+
+    STATUS_CHOICES = [
+        ("pendiente", "Pendiente de confirmación"),
+        ("confirmada", "Confirmada"),
+        ("cancelada", "Cancelada"),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="appointments")
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name="appointments")
+    reason = models.CharField(max_length=120)
+    preferred_date = models.DateField()
+    preferred_time = models.CharField(max_length=20, choices=TIME_CHOICES)
+    notes = models.TextField(blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pendiente")
+    admin_notes = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.pet.name} - {self.reason}"
+
+
+class ServiceReservation(models.Model):
+    STATUS_CHOICES = [
+        ("pendiente", "Pendiente de confirmación"),
+        ("confirmada", "Confirmada"),
+        ("cancelada", "Cancelada"),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="service_reservations")
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name="service_reservations")
+    service = models.CharField(max_length=120)
+    preferred_time = models.CharField(max_length=120)
+    walker = models.CharField(max_length=120, blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="confirmada")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.service} - {self.pet.name}"
+
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -138,3 +190,28 @@ class AdoptionPet(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.get_status_display()}"
+
+
+class AdoptionApplication(models.Model):
+    STATUS_CHOICES = [
+        ("pendiente", "Pendiente"),
+        ("aprobada", "Aprobada"),
+        ("rechazada", "Rechazada"),
+    ]
+
+    pet = models.ForeignKey(AdoptionPet, on_delete=models.CASCADE, related_name="applications")
+    applicant = models.ForeignKey(User, on_delete=models.CASCADE, related_name="adoption_applications")
+    message = models.TextField(blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pendiente")
+    admin_notes = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        constraints = [
+            models.UniqueConstraint(fields=["pet", "applicant"], name="unique_adoption_application_per_user")
+        ]
+
+    def __str__(self):
+        return f"{self.pet.name} - {self.applicant.email}"

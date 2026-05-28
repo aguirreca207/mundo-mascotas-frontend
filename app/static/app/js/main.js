@@ -1,9 +1,61 @@
 document.addEventListener("DOMContentLoaded", () => {
+  initRawAuthMessageCleanup();
+  initDjangoMessages();
   initNewsletter();
   initProductsCarousel();
+  initFeaturedProductLinks();
   initPasswordToggles();
   initSavedCredentialsLogin();
 });
+
+function normalizeSystemMessage(message) {
+  if (!message) return "";
+
+  const cleanMessage = message.trim();
+
+  if (/^Successfully signed in as/i.test(cleanMessage) || /^Bienvenida\/o a Mundo Mascotas/i.test(cleanMessage)) {
+    return "Bienvenida/o a Mundo Mascotas.";
+  }
+
+  if (/^Successfully signed out/i.test(cleanMessage)) {
+    return "Sesión cerrada correctamente.";
+  }
+
+  return cleanMessage;
+}
+
+function initRawAuthMessageCleanup() {
+  const bodyNodes = Array.from(document.body.childNodes);
+
+  bodyNodes.forEach((node) => {
+    if (node.nodeType !== Node.TEXT_NODE) return;
+
+    const text = node.textContent.trim();
+
+    if (
+      /^Successfully signed in as/i.test(text) ||
+      /^Successfully signed out/i.test(text) ||
+      /^Bienvenida\/o a Mundo Mascotas/i.test(text)
+    ) {
+      const normalizedMessage = normalizeSystemMessage(text);
+      node.remove();
+
+      window.setTimeout(() => {
+        showToast(normalizedMessage);
+      }, 150);
+    }
+  });
+}
+
+function initDjangoMessages() {
+  const messages = document.querySelectorAll("[data-django-messages] .django-message");
+
+  messages.forEach((message, index) => {
+    window.setTimeout(() => {
+      showToast(normalizeSystemMessage(message.textContent));
+    }, index * 450);
+  });
+}
 
 /* =========================
    NEWSLETTER
@@ -103,6 +155,31 @@ function initProductsCarousel() {
   updateButtons();
 }
 
+function initFeaturedProductLinks() {
+  const productCards = document.querySelectorAll(".featured-products .product-card");
+
+  productCards.forEach((card) => {
+    const title = card.querySelector("h3")?.textContent.trim();
+    if (!title) return;
+
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("role", "link");
+    card.setAttribute("aria-label", `Ver ${title} en la tienda`);
+
+    const goToProduct = () => {
+      window.location.href = `/tienda/?buscar=${encodeURIComponent(title)}#catalogo`;
+    };
+
+    card.addEventListener("click", goToProduct);
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        goToProduct();
+      }
+    });
+  });
+}
+
 /* =========================
    MOSTRAR / OCULTAR CONTRASEÑA
 ========================= */
@@ -111,8 +188,11 @@ function initPasswordToggles() {
   const toggleButtons = document.querySelectorAll(".toggle-password");
 
   toggleButtons.forEach((button) => {
+    if (button.dataset.toggleBound === "true") return;
+    button.dataset.toggleBound = "true";
+
     button.addEventListener("click", () => {
-      const targetId = button.dataset.target;
+      const targetId = button.dataset.target || button.dataset.passwordToggle;
       const input = document.getElementById(targetId);
       const icon = button.querySelector(".material-symbols-outlined");
 
@@ -121,6 +201,7 @@ function initPasswordToggles() {
       const shouldShow = input.type === "password";
       input.type = shouldShow ? "text" : "password";
       button.setAttribute("aria-label", shouldShow ? "Ocultar contraseña" : "Mostrar contraseña");
+      button.classList.toggle("is-visible", shouldShow);
 
       if (icon) {
         icon.textContent = shouldShow ? "visibility_off" : "visibility";

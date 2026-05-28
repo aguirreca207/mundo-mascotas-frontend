@@ -1,6 +1,6 @@
 {% extends 'app/base.html' %} {% load static %} {% block title %}Citas
 veterinarias - Mundo Mascotas{% endblock %} {% block extra_css %}
-<link rel="stylesheet" href="{% static 'app/css/citas.css' %}" />
+<link rel="stylesheet" href="{% static 'app/css/citas.css' %}?v=20260528-2" />
 {% endblock %} {% block content %}
 <main>
   <section class="appointments-hero">
@@ -68,23 +68,16 @@ veterinarias - Mundo Mascotas{% endblock %} {% block extra_css %}
           </div>
         </div>
 
-        <form id="appointmentForm" class="appointment-form">
+        <form id="appointmentForm" class="appointment-form" data-create-url="{% url 'crear_cita' %}">
+          {% csrf_token %}
           <div class="appointment-field">
             <label for="appointmentPetSelect">Mascota</label>
             <select id="appointmentPetSelect" name="pet" required>
-  <option value="">Selecciona una mascota</option>
-
-  {% for pet in pets %}
-    <option value="{{ pet.name }}">{{ pet.name }} - {{ pet.pet_type }}</option>
-  {% endfor %}
-</select>
-  <option value="">Selecciona una mascota</option>
-
-  {% for pet in pets %}
-    <option value="{{ pet.name }}">{{ pet.name }} - {{ pet.pet_type }}</option>
-  {% endfor %}
-</select>
-
+              <option value="">Selecciona una mascota</option>
+              {% for pet in pets %}
+                <option value="{{ pet.id }}" data-name="{{ pet.name }}">{{ pet.name }} - {{ pet.pet_type }}</option>
+              {% endfor %}
+            </select>
           </div>
 
           <div class="appointment-field">
@@ -101,7 +94,7 @@ veterinarias - Mundo Mascotas{% endblock %} {% block extra_css %}
 
           <div class="appointment-field">
             <label for="appointmentDateInput">Fecha preferida</label>
-            <input type="date" id="appointmentDateInput" name="date" required />
+            <input type="date" id="appointmentDateInput" name="date" min="{% now 'Y-m-d' %}" required />
           </div>
 
           <div class="appointment-field">
@@ -184,15 +177,46 @@ veterinarias - Mundo Mascotas{% endblock %} {% block extra_css %}
       </div>
 
       <div class="appointments-list" id="appointmentsList">
-        <article class="appointment-empty-state" id="appointmentsEmptyState">
-          <span class="material-symbols-outlined">event_available</span>
-          <h3>Aún no tienes citas solicitadas</h3>
-          <p>Agenda una cita para verla reflejada en este espacio.</p>
-        </article>
+        {% if appointments %}
+          {% for appointment in appointments %}
+            <article class="appointment-request-card">
+              <div>
+                <h3>{{ appointment.pet.name }} · {{ appointment.reason }}</h3>
+                <p>{{ appointment.notes|default:"Solicitud registrada sin observaciones adicionales." }}</p>
+                {% if appointment.admin_notes %}
+                  <p class="appointment-admin-note">{{ appointment.admin_notes }}</p>
+                {% endif %}
+
+                <div class="appointment-request-meta">
+                  <span>{{ appointment.preferred_date|date:"d/m/Y" }}</span>
+                  <span>{{ appointment.preferred_time }}</span>
+                </div>
+              </div>
+
+              <span class="appointment-request-status appointment-status-{{ appointment.status }}">{{ appointment.get_status_display }}</span>
+              <div class="appointment-card-actions">
+                <a href="#appointmentScheduler">Reprogramar</a>
+                {% if appointment.status != "cancelada" %}
+                  <form method="POST" action="{% url 'cancelar_cita' appointment.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{% url 'citas' %}#upcomingAppointments">
+                    <button type="submit">Cancelar cita</button>
+                  </form>
+                {% endif %}
+              </div>
+            </article>
+          {% endfor %}
+        {% else %}
+          <article class="appointment-empty-state" id="appointmentsEmptyState">
+            <span class="material-symbols-outlined">event_available</span>
+            <h3>Aún no tienes citas solicitadas</h3>
+            <p>Agenda una cita para verla reflejada en este espacio.</p>
+          </article>
+        {% endif %}
       </div>
     </div>
   </section>
 </main>
 {% endblock %} {% block extra_js %}
-<script src="{% static 'app/js/citas.js' %}"></script>
+<script src="{% static 'app/js/citas.js' %}?v=20260528-1"></script>
 {% endblock %}

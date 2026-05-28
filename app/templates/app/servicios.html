@@ -60,7 +60,7 @@
           <select id="servicePetSelect">
             <option value="">Selecciona una mascota</option>
             {% for pet in pets %}
-              <option value="{{ pet.name }}">{{ pet.name }} · {{ pet.pet_type }}</option>
+              <option value="{{ pet.id }}" data-name="{{ pet.name }}">{{ pet.name }} · {{ pet.pet_type }}</option>
             {% endfor %}
           </select>
         </label>
@@ -245,11 +245,20 @@
             <p>Vista rápida del estado de servicios y reservas del usuario.</p>
           </div>
 
-          <div class="reservation-list" id="reservationList">
-            <article class="reservation-item reservation-empty">
-              <strong>Sin reservas recientes</strong>
-              <span>Cuando confirmes una solicitud, aparecerá aquí.</span>
-            </article>
+          <div class="reservation-list" id="reservationList" data-create-url="{% url 'crear_reserva_servicio' %}">
+            {% if reservations %}
+              {% for reservation in reservations %}
+                <article class="reservation-item">
+                  <strong>{{ reservation.service }} - {{ reservation.pet.name }}</strong>
+                  <span>{{ reservation.get_status_display }} · {{ reservation.preferred_time }}{% if reservation.walker %} · {{ reservation.walker }}{% endif %}</span>
+                </article>
+              {% endfor %}
+            {% else %}
+              <article class="reservation-item reservation-empty">
+                <strong>Sin reservas recientes</strong>
+                <span>Cuando confirmes una solicitud, aparecerá aquí.</span>
+              </article>
+            {% endif %}
           </div>
         </div>
       </div>

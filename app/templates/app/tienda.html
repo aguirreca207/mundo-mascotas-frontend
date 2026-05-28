@@ -4,7 +4,7 @@
 {% block title %}Tienda - Mundo Mascotas{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'app/css/tienda.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/tienda.css' %}?v=20260528-1">
 {% endblock %}
 
 {% block content %}
@@ -111,9 +111,15 @@
               <article
                 class="store-product-card"
                 data-category="{{ product.category }}"
+                data-category-label="{{ product.get_category_display }}"
                 data-pet="{{ product.pet_type }}"
+                data-pet-label="{{ product.get_pet_type_display }}"
                 data-name="{{ product.name|lower }}"
+                data-title="{{ product.name }}"
+                data-description="{{ product.description }}"
                 data-price="{{ product.price }}"
+                data-stock="{{ product.stock }}"
+                data-image="{% if product.image %}{% static product.image %}{% endif %}"
               >
                 <div class="store-product-image">
                   {% if product.image %}
@@ -143,15 +149,25 @@
                     <strong>${{ product.price }}</strong>
 
                     {% if product.stock > 0 %}
-                      <button
-                        type="button"
-                        class="add-cart-btn"
-                        data-id="{{ product.id }}"
-                        data-name="{{ product.name }}"
-                        data-price="{{ product.price }}"
-                      >
-                        Agregar
-                      </button>
+                      <div class="store-product-actions">
+                        <button
+                          type="button"
+                          class="detail-product-btn"
+                          data-id="{{ product.id }}"
+                        >
+                          Ver detalle
+                        </button>
+                        <button
+                          type="button"
+                          class="add-cart-btn"
+                          data-id="{{ product.id }}"
+                          data-name="{{ product.name }}"
+                          data-price="{{ product.price }}"
+                          data-stock="{{ product.stock }}"
+                        >
+                          Agregar
+                        </button>
+                      </div>
                     {% else %}
                       <button type="button" class="add-cart-btn" disabled>
                         Agotado
@@ -193,9 +209,15 @@
               <strong id="cartTotal">$0</strong>
             </div>
 
-            <button type="button" class="btn btn-primary cart-action-btn" id="finishOrderBtn">
-              Finalizar pedido
-            </button>
+            {% if request.user.is_authenticated %}
+              <button type="button" class="btn btn-primary cart-action-btn" id="finishOrderBtn" data-create-url="{% url 'crear_pedido' %}">
+                Finalizar pedido
+              </button>
+            {% else %}
+              <a href="{% url 'login' %}?next={% url 'tienda' %}" class="btn btn-primary cart-action-btn">
+                Inicia sesión para finalizar
+              </a>
+            {% endif %}
           </div>
         </section>
 
@@ -206,7 +228,23 @@
           </div>
 
           <div class="order-status-list" id="ordersList">
-            <p class="order-empty">No tienes pedidos recientes.</p>
+            {% if orders %}
+              {% for order in orders %}
+                <article class="order-status-item order-status-{{ order.status }}">
+                  <strong>Pedido #{{ order.id }}</strong>
+                  <span>{{ order.get_status_display }} · ${{ order.total }}</span>
+                  {% if order.items.all %}
+                    <small>
+                      {% for item in order.items.all %}
+                        {{ item.quantity }}x {{ item.product.name }}{% if not forloop.last %} · {% endif %}
+                      {% endfor %}
+                    </small>
+                  {% endif %}
+                </article>
+              {% endfor %}
+            {% else %}
+              <p class="order-empty">No tienes pedidos recientes.</p>
+            {% endif %}
           </div>
         </section>
       </aside>
@@ -238,9 +276,49 @@
     </div>
   </section>
 
+  <div class="product-detail-modal" id="productDetailModal" aria-hidden="true">
+    <div class="product-detail-backdrop" data-close-product-modal></div>
+    <article class="product-detail-dialog" role="dialog" aria-modal="true" aria-labelledby="productDetailTitle">
+      <button type="button" class="product-detail-close" data-close-product-modal aria-label="Cerrar detalle">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="product-detail-media" id="productDetailMedia"></div>
+
+      <div class="product-detail-content">
+        <span class="store-card-tag" id="productDetailCategory">Producto</span>
+        <h2 id="productDetailTitle">Detalle del producto</h2>
+        <p id="productDetailDescription"></p>
+
+        <div class="product-detail-meta">
+          <span id="productDetailPet"></span>
+          <span id="productDetailStock"></span>
+        </div>
+
+        <div class="product-detail-price">
+          <span>Precio</span>
+          <strong id="productDetailPrice">$0</strong>
+        </div>
+
+        <div class="product-detail-quantity">
+          <label for="productDetailQuantity">Cantidad</label>
+          <div>
+            <button type="button" id="productQtyMinus" aria-label="Reducir cantidad">-</button>
+            <input type="number" id="productDetailQuantity" min="1" value="1">
+            <button type="button" id="productQtyPlus" aria-label="Aumentar cantidad">+</button>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-primary product-detail-add" id="productDetailAddBtn">
+          Agregar al carrito
+        </button>
+      </div>
+    </article>
+  </div>
+
 </main>
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'app/js/tienda.js' %}"></script>
+<script src="{% static 'app/js/tienda.js' %}?v=20260528-1"></script>
 {% endblock %}

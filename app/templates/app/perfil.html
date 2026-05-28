@@ -4,49 +4,181 @@
 {% block title %}Mi cuenta - Mundo Mascotas{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'app/css/perfil.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/perfil.css' %}?v=20260528-1">
 {% endblock %}
 
 {% block content %}
 <section class="profile-section">
   <div class="container profile-layout">
     <article class="profile-hero">
-      <div class="profile-avatar">{{ request.user.first_name|default:request.user.email|first|upper }}</div>
+      <div class="profile-avatar-wrap">
+        <div class="profile-avatar">{{ request.user.first_name|default:request.user.email|first|upper }}</div>
+        <span class="profile-status-dot" aria-label="Cuenta activa"></span>
+      </div>
 
       <div class="profile-main-info">
         <span class="profile-badge">Cuenta activa</span>
-        <h1>Hola, {{ request.user.first_name|default:"bienvenido" }}</h1>
-        <p>{{ request.user.email }}</p>
+        <h1>Hola, {{ request.user.first_name|default:"bienvenida/o" }}</h1>
+        <p>Este es tu espacio para gestionar mascotas, citas, compras, servicios y adopciones.</p>
       </div>
 
       <div class="profile-actions">
-        <a href="/perfil/editar/" class="profile-edit-btn">Editar perfil</a>
-        <a href="{% url 'logout' %}" class="profile-logout-btn">Cerrar sesión</a>
+        <a href="{% url 'editar_perfil' %}" class="profile-edit-btn">
+          <span class="material-symbols-outlined">edit</span>
+          Editar perfil
+        </a>
+        <a href="{% url 'logout' %}" class="profile-logout-btn">
+          <span class="material-symbols-outlined">logout</span>
+          Cerrar sesión
+        </a>
       </div>
     </article>
+
+    <section class="profile-welcome-grid">
+      <article class="profile-welcome-card">
+        <div>
+          <span class="profile-badge">Siguiente paso</span>
+          <h2>{{ next_action.label }}</h2>
+          <p>{{ next_action.description }}</p>
+        </div>
+        <a href="{{ next_action.url }}" class="profile-primary-action">
+          {{ next_action.label }}
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </article>
+
+      <article class="profile-completion-card">
+        <div class="profile-completion-top">
+          <span>Perfil</span>
+          <strong>{{ profile_completion }}%</strong>
+        </div>
+        <div class="profile-progress" aria-label="Progreso del perfil">
+          <span style="width: {{ profile_completion }}%"></span>
+        </div>
+        <p>
+          {% if profile_completion == 100 %}
+            Tus datos principales están completos.
+          {% else %}
+            Completa tus datos para que las reservas y pedidos sean más claros.
+          {% endif %}
+        </p>
+      </article>
+    </section>
+
+    <div class="profile-stats-grid">
+      <a href="{% url 'mascotas' %}" class="profile-stat-card">
+        <span class="profile-stat-icon material-symbols-outlined">pets</span>
+        <span class="profile-stat-value">{{ pets_count }}</span>
+        <span class="profile-stat-label">Mascotas</span>
+      </a>
+
+      <a href="{% url 'citas' %}" class="profile-stat-card">
+        <span class="profile-stat-icon material-symbols-outlined">event_available</span>
+        <span class="profile-stat-value">{{ appointments_count }}</span>
+        <span class="profile-stat-label">Citas</span>
+      </a>
+
+      <a href="{% url 'tienda' %}" class="profile-stat-card">
+        <span class="profile-stat-icon material-symbols-outlined">shopping_bag</span>
+        <span class="profile-stat-value">{{ orders_count }}</span>
+        <span class="profile-stat-label">Pedidos</span>
+      </a>
+
+      <a href="{% url 'servicios' %}" class="profile-stat-card">
+        <span class="profile-stat-icon material-symbols-outlined">room_service</span>
+        <span class="profile-stat-value">{{ reservations_count }}</span>
+        <span class="profile-stat-label">Reservas</span>
+      </a>
+
+      <a href="{% url 'adopciones' %}" class="profile-stat-card">
+        <span class="profile-stat-icon material-symbols-outlined">volunteer_activism</span>
+        <span class="profile-stat-value">{{ adoption_requests_count }}</span>
+        <span class="profile-stat-label">Adopciones</span>
+      </a>
+    </div>
 
     <div class="profile-grid">
       <article class="profile-card">
         <span class="material-symbols-outlined">person</span>
         <h3>Datos personales</h3>
-        <p><strong>Nombre:</strong> {{ request.user.first_name|default:"Pendiente" }}</p>
-        <p><strong>Correo:</strong> {{ request.user.email }}</p>
+        <p><strong>Nombre:</strong> <span>{{ request.user.first_name|default:"Pendiente" }}</span></p>
+        <p><strong>Correo:</strong> <span class="profile-break">{{ request.user.email }}</span></p>
       </article>
 
       <article class="profile-card">
         <span class="material-symbols-outlined">location_on</span>
         <h3>Ubicación</h3>
-        <p><strong>Ciudad:</strong> {{ request.user.profile.city|default:"Pendiente" }}</p>
-        <p><strong>Dirección:</strong> {{ request.user.profile.address|default:"Pendiente" }}</p>
+        <p><strong>Ciudad:</strong> <span>{{ profile.city|default:"Pendiente" }}</span></p>
+        <p><strong>Dirección:</strong> <span>{{ profile.address|default:"Pendiente" }}</span></p>
       </article>
 
       <article class="profile-card">
         <span class="material-symbols-outlined">call</span>
         <h3>Contacto</h3>
-        <p><strong>Teléfono:</strong> {{ request.user.profile.phone|default:"Pendiente" }}</p>
-        <p><strong>Estado:</strong> Perfil registrado</p>
+        <p><strong>Teléfono:</strong> <span>{{ profile.phone|default:"Pendiente" }}</span></p>
+        <p><strong>Estado:</strong> <span>Perfil registrado</span></p>
       </article>
     </div>
+
+    <section class="profile-activity-grid">
+      <article class="profile-activity-card">
+        <div class="profile-section-head">
+          <h2>Citas recientes</h2>
+          <a href="{% url 'citas' %}">Gestionar</a>
+        </div>
+
+        {% if recent_appointments %}
+          {% for appointment in recent_appointments %}
+            <div class="profile-activity-item">
+              <div>
+                <strong>{{ appointment.pet.name }} · {{ appointment.reason }}</strong>
+                <span>{{ appointment.preferred_date|date:"d/m/Y" }} · {{ appointment.get_status_display }}</span>
+              </div>
+              <div class="profile-activity-actions">
+                <a href="{% url 'citas' %}#appointmentScheduler">Reprogramar</a>
+                {% if appointment.status != "cancelada" %}
+                  <form method="POST" action="{% url 'cancelar_cita' appointment.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{% url 'perfil' %}">
+                    <button type="submit">Cancelar</button>
+                  </form>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="profile-empty-state">
+            <span class="material-symbols-outlined">event_available</span>
+            <strong>Aún no tienes citas solicitadas</strong>
+            <p>Agenda una cita para iniciar el seguimiento de tu mascota.</p>
+            <a href="{% url 'citas' %}">Agendar cita</a>
+          </div>
+        {% endif %}
+      </article>
+
+      <article class="profile-activity-card">
+        <div class="profile-section-head">
+          <h2>Pedidos recientes</h2>
+          <a href="{% url 'tienda' %}">Ir a tienda</a>
+        </div>
+
+        {% if recent_orders %}
+          {% for order in recent_orders %}
+            <div class="profile-activity-item">
+              <strong>Pedido #{{ order.id }}</strong>
+              <span>{{ order.get_status_display }} · ${{ order.total }}</span>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="profile-empty-state">
+            <span class="material-symbols-outlined">shopping_cart</span>
+            <strong>Aún no tienes pedidos registrados</strong>
+            <p>Explora la tienda y agrega productos al carrito.</p>
+            <a href="{% url 'tienda' %}">Ir a tienda</a>
+          </div>
+        {% endif %}
+      </article>
+    </section>
   </div>
 </section>
 {% endblock %}

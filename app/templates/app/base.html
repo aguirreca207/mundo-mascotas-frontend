@@ -10,10 +10,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 
-  <link rel="stylesheet" href="{% static 'app/css/variables.css' %}">
-  <link rel="stylesheet" href="{% static 'app/css/components.css' %}">
-  <link rel="stylesheet" href="{% static 'app/css/main.css' %}">
-  <link rel="stylesheet" href="{% static 'app/css/responsive.css' %}">
+  <link rel="stylesheet" href="{% static 'app/css/variables.css' %}?v=20260527-4">
+  <link rel="stylesheet" href="{% static 'app/css/components.css' %}?v=20260527-4">
+  <link rel="stylesheet" href="{% static 'app/css/main.css' %}?v=20260528-10">
+  <link rel="stylesheet" href="{% static 'app/css/responsive.css' %}?v=20260528-4">
 
   {% block extra_css %}{% endblock %}
 </head>
@@ -28,6 +28,14 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
+  {% if messages %}
+    <div class="django-messages" data-django-messages hidden style="display: none;">
+      {% for message in messages %}
+        <div class="django-message {{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
   <nav class="navbar">
     <div class="container nav-content">
       <a href="{% url 'home' %}" class="logo" aria-label="Ir al inicio">
@@ -36,20 +44,20 @@
       </a>
 
       <ul class="nav-links">
-        <li><a href="{% url 'mascotas' %}">Mascotas</a></li>
-        <li><a href="{% url 'citas' %}">Citas</a></li>
-        <li><a href="{% url 'tienda' %}">Tienda</a></li>
-        <li><a href="{% url 'servicios' %}">Servicios</a></li>
-        <li><a href="{% url 'adopciones' %}">Adopciones</a></li>
+        <li><a href="{% url 'mascotas' %}" class="{% if request.resolver_match.url_name == 'mascotas' %}active{% endif %}">Mascotas</a></li>
+        <li><a href="{% url 'citas' %}" class="{% if request.resolver_match.url_name == 'citas' or request.resolver_match.url_name == 'crear_cita' or request.resolver_match.url_name == 'cancelar_cita' %}active{% endif %}">Citas</a></li>
+        <li><a href="{% url 'tienda' %}" class="{% if request.resolver_match.url_name == 'tienda' or request.resolver_match.url_name == 'crear_pedido' %}active{% endif %}">Tienda</a></li>
+        <li><a href="{% url 'servicios' %}" class="{% if request.resolver_match.url_name == 'servicios' or request.resolver_match.url_name == 'crear_reserva_servicio' %}active{% endif %}">Servicios</a></li>
+        <li><a href="{% url 'adopciones' %}" class="{% if request.resolver_match.url_name == 'adopciones' or request.resolver_match.url_name == 'solicitar_adopcion' %}active{% endif %}">Adopciones</a></li>
         {% if request.user.is_staff %}
-          <li><a href="{% url 'gestion_api' %}">Gestión API</a></li>
+          <li><a href="{% url 'gestion_api' %}" class="{% if request.resolver_match.url_name == 'gestion_api' %}active{% endif %}">Gestión API</a></li>
         {% endif %}
       </ul>
 
       {% if request.user.is_authenticated %}
-        <a href="{% url 'perfil' %}" class="btn-nav">Mi cuenta</a>
+        <a href="{% url 'perfil' %}" class="btn-nav {% if request.resolver_match.url_name == 'perfil' or request.resolver_match.url_name == 'editar_perfil' %}active{% endif %}">Mi cuenta</a>
       {% else %}
-        <a href="{% url 'registro' %}" class="btn-nav">Crear cuenta</a>
+        <a href="{% url 'login' %}" class="btn-nav {% if request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'registro' %}active{% endif %}">Iniciar sesión</a>
       {% endif %}
     </div>
   </nav>
@@ -99,16 +107,16 @@
           </p>
 
           <div class="footer-social">
-            <a href="#" aria-label="Instagram">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
               <i class="fab fa-instagram"></i>
             </a>
-            <a href="#" aria-label="Facebook">
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
               <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="#" aria-label="TikTok">
+            <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok">
               <i class="fab fa-tiktok"></i>
             </a>
-            <a href="#" aria-label="YouTube">
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
               <i class="fab fa-youtube"></i>
             </a>
           </div>
@@ -127,10 +135,10 @@
         <div class="footer-column">
           <h4>Ayuda</h4>
           <ul>
-            <li><a href="#">Preguntas frecuentes</a></li>
+            <li><a href="{% url 'servicios' %}">Preguntas frecuentes</a></li>
             <li><a href="mailto:info@mundomascotas.com">Contáctanos</a></li>
-            <li><a href="#">Términos y condiciones</a></li>
-            <li><a href="#">Política de privacidad</a></li>
+            <li><a href="mailto:info@mundomascotas.com?subject=Términos%20y%20condiciones">Términos y condiciones</a></li>
+            <li><a href="mailto:info@mundomascotas.com?subject=Política%20de%20privacidad">Política de privacidad</a></li>
           </ul>
         </div>
 
@@ -150,7 +158,7 @@
     </div>
   </footer>
 
-  <script src="{% static 'app/js/main.js' %}"></script>
+  <script src="{% static 'app/js/main.js' %}?v=20260528-2"></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>

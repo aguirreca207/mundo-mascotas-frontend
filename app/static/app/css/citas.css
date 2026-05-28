@@ -343,6 +343,52 @@
   white-space: nowrap;
 }
 
+.appointment-status-pendiente {
+  background: #fff6df;
+  color: #996300;
+}
+
+.appointment-status-confirmada {
+  background: #e8fff3;
+  color: #1f6d46;
+}
+
+.appointment-status-cancelada {
+  background: #fff0ed;
+  color: #b23a2d;
+}
+
+.appointment-card-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.appointment-card-actions a,
+.appointment-card-actions button {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid #f4d1b8;
+  background: #fff4e6;
+  color: #d95f1f;
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 900;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.appointment-card-actions button {
+  background: #fff;
+  color: #a9392b;
+}
+
 .appointment-notice {
   position: fixed;
   right: 24px;
@@ -476,6 +522,16 @@
 .appointment-pet-helper a:hover {
   background: #fff3e8;
   border-color: #eb6e25;
+}
+
+.appointment-admin-note {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #fff7ec;
+  border: 1px solid #f2d5b6;
+  color: #7b4a20;
+  font-weight: 750;
 }
 
 @media (max-width: 700px) {

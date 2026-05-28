@@ -1,6 +1,6 @@
 {% extends 'app/base.html' %} {% load static %} {% block title %}Crear cuenta -
 Mundo Mascotas{% endblock %} {% block extra_css %}
-<link rel="stylesheet" href="{% static 'app/css/registro.css' %}" />
+<link rel="stylesheet" href="{% static 'app/css/registro.css' %}?v=20260527-2" />
 {% endblock %} {% block content %}
 
 <section class="register-section">
@@ -71,10 +71,13 @@ Mundo Mascotas{% endblock %} {% block extra_css %}
         <div class="form-group">
           <label for="registerPhone">Teléfono</label>
           <input
-            type="text"
+            type="tel"
             id="registerPhone"
             name="phone"
             placeholder="Ej. 3001234567"
+            inputmode="numeric"
+            maxlength="10"
+            pattern="[0-9]{7,10}"
           />
           <small class="error-text"></small>
         </div>
@@ -213,6 +216,6 @@ Mundo Mascotas{% endblock %} {% block extra_css %}
 {% endblock %} {% block extra_js %}
 
 <script src="{% static 'app/js/utils.js' %}"></script>
-<script src="{% static 'app/js/registro.js' %}?v=10"></script>
+<script src="{% static 'app/js/registro.js' %}?v=20260528-1"></script>
 
 {% endblock %}

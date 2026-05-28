@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const adoptionForm = document.querySelector(".adoption-form");
   const submitButton = document.querySelector(".adoption-submit-btn");
   const photoInput = document.getElementById("adoptionPhoto");
+  const phoneInput = document.getElementById("adoptionPhone");
 
   function showAdoptionNotice(message, type = "success") {
     let notice = document.querySelector(".adoption-notice");
@@ -51,6 +52,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  if (phoneInput) {
+    phoneInput.addEventListener("input", () => {
+      phoneInput.value = phoneInput.value.replace(/\D/g, "").slice(0, 10);
+      phoneInput.classList.remove("has-adoption-error");
+    });
+  }
+
   if (adoptionForm) {
     adoptionForm.addEventListener("submit", (event) => {
       clearErrors();
@@ -68,6 +76,12 @@ document.addEventListener("DOMContentLoaded", () => {
           isValid = false;
         }
       });
+
+      if (phoneInput && !/^\d{7,10}$/.test(phoneInput.value.trim())) {
+        phoneInput.classList.add("has-adoption-error");
+        isValid = false;
+        showAdoptionNotice("Ingresa un teléfono válido, solo con números.", "error");
+      }
 
       if (!isValid) {
         event.preventDefault();

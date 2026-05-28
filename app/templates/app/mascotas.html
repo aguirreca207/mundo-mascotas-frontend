@@ -65,12 +65,12 @@
 
           <div class="pet-field">
             <label for="petNameInput">Nombre</label>
-            <input type="text" id="petNameInput" name="name" placeholder="Ej. Luna">
+            <input type="text" id="petNameInput" name="name" placeholder="Ej. Luna" required>
           </div>
 
           <div class="pet-field">
             <label for="petTypeSelect">Tipo</label>
-            <select id="petTypeSelect" name="pet_type">
+            <select id="petTypeSelect" name="pet_type" required>
               <option value="">Selecciona el tipo</option>
               <option value="Perro">Perro</option>
               <option value="Gato">Gato</option>
@@ -80,22 +80,22 @@
 
           <div class="pet-field">
             <label for="petBreedInput">Raza</label>
-            <input type="text" id="petBreedInput" name="breed" placeholder="Ej. Labrador, criollo, siamés">
+            <input type="text" id="petBreedInput" name="breed" placeholder="Ej. Labrador, criollo, siamés" required>
           </div>
 
           <div class="pet-field">
             <label for="petBirthInput">Fecha de nacimiento</label>
-            <input type="date" id="petBirthInput" name="birth_date">
+            <input type="date" id="petBirthInput" name="birth_date" max="{% now 'Y-m-d' %}" required>
           </div>
 
           <div class="pet-field">
             <label for="petVaccineInput">Vacunas</label>
-            <input type="text" id="petVaccineInput" name="vaccines" placeholder="Ej. Rabia, moquillo, pendiente">
+            <input type="text" id="petVaccineInput" name="vaccines" placeholder="Ej. Rabia, moquillo, pendiente" required>
           </div>
 
           <div class="pet-field">
             <label for="petStatusSelect">Estado general</label>
-            <select id="petStatusSelect" name="status">
+            <select id="petStatusSelect" name="status" required>
               <option value="">Selecciona el estado</option>
               <option value="Salud estable">Salud estable</option>
               <option value="Seguimiento preventivo">Seguimiento preventivo</option>

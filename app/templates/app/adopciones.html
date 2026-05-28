@@ -4,7 +4,7 @@
 {% block title %}Adopciones - Mundo Mascotas{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'app/css/adopciones.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/adopciones.css' %}?v=20260528-2">
 {% endblock %}
 
 {% block content %}
@@ -25,7 +25,11 @@
           </p>
 
           <div class="adoptions-hero-actions">
-            <a href="#adoptionForm" class="btn btn-primary">Publicar mascota</a>
+            {% if request.user.is_authenticated %}
+              <a href="#adoptionForm" class="btn btn-primary">Publicar mascota</a>
+            {% else %}
+              <a href="{% url 'login' %}?next={% url 'adopciones' %}" class="btn btn-primary">Iniciar sesión para publicar</a>
+            {% endif %}
             <a href="#approvedAdoptions" class="btn btn-secondary">Ver adopciones</a>
           </div>
         </div>
@@ -50,6 +54,7 @@
     </div>
   </section>
 
+  {% if request.user.is_authenticated %}
   <section class="adoption-submit-section" id="adoptionForm">
     <div class="container adoption-submit-grid">
 
@@ -82,12 +87,12 @@
 
           <div class="adoption-field">
             <label for="adoptionName">Nombre de la mascota</label>
-            <input type="text" id="adoptionName" name="name" placeholder="Ej. Luna">
+            <input type="text" id="adoptionName" name="name" placeholder="Ej. Luna" required>
           </div>
 
           <div class="adoption-field">
             <label for="adoptionType">Tipo</label>
-            <select id="adoptionType" name="pet_type">
+            <select id="adoptionType" name="pet_type" required>
               <option value="">Selecciona el tipo</option>
               <option value="Perro">Perro</option>
               <option value="Gato">Gato</option>
@@ -97,12 +102,12 @@
 
           <div class="adoption-field">
             <label for="adoptionAge">Edad aproximada</label>
-            <input type="text" id="adoptionAge" name="age" placeholder="Ej. 2 años, 6 meses">
+            <input type="text" id="adoptionAge" name="age" placeholder="Ej. 2 años, 6 meses" required>
           </div>
 
           <div class="adoption-field">
             <label for="adoptionSize">Tamaño</label>
-            <select id="adoptionSize" name="size">
+            <select id="adoptionSize" name="size" required>
               <option value="">Selecciona el tamaño</option>
               <option value="Pequeño">Pequeño</option>
               <option value="Mediano">Mediano</option>
@@ -112,12 +117,21 @@
 
           <div class="adoption-field">
             <label for="adoptionCity">Ciudad</label>
-            <input type="text" id="adoptionCity" name="city" placeholder="Ej. Bogotá">
+            <input type="text" id="adoptionCity" name="city" placeholder="Ej. Bogotá" required>
           </div>
 
           <div class="adoption-field">
             <label for="adoptionPhone">Teléfono de contacto</label>
-            <input type="text" id="adoptionPhone" name="contact_phone" placeholder="Ej. 3001234567">
+            <input
+              type="tel"
+              id="adoptionPhone"
+              name="contact_phone"
+              placeholder="Ej. 3001234567"
+              inputmode="numeric"
+              maxlength="10"
+              pattern="[0-9]{7,10}"
+              required
+            >
           </div>
 
           <div class="adoption-field full-width">
@@ -127,6 +141,7 @@
               name="description"
               rows="4"
               placeholder="Cuéntanos cómo es, qué le gusta y qué necesita."
+              required
             ></textarea>
           </div>
 
@@ -137,12 +152,13 @@
               name="requirements"
               rows="4"
               placeholder="Ej. Hogar responsable, espacio seguro, seguimiento posterior."
+              required
             ></textarea>
           </div>
 
           <div class="adoption-field full-width">
             <label for="adoptionPhoto">Foto de la mascota</label>
-            <input type="file" id="adoptionPhoto" name="photo" accept="image/*">
+            <input type="file" id="adoptionPhoto" name="photo" accept="image/*" required>
           </div>
 
           <button type="submit" class="adoption-submit-btn full-width">
@@ -185,6 +201,47 @@
 
     </div>
   </section>
+  {% else %}
+  <section class="adoption-submit-section" id="adoptionForm">
+    <div class="container">
+      <article class="adoption-form-card">
+        <div class="adoption-section-title">
+          <span class="section-tag">Publicación responsable</span>
+          <h2>Inicia sesión para dar una mascota en adopción</h2>
+          <p>Así podemos asociar la solicitud a tu cuenta y permitir seguimiento administrativo.</p>
+        </div>
+        <a href="{% url 'login' %}?next={% url 'adopciones' %}" class="btn btn-primary">Iniciar sesión</a>
+      </article>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if request.user.is_authenticated %}
+  <section class="adoption-account-panel">
+    <div class="container adoption-account-grid">
+      <article class="adoption-account-card">
+        <span class="material-symbols-outlined">pets</span>
+        <strong>{{ approved_pets|length }}</strong>
+        <p>Mascotas disponibles para solicitar adopción.</p>
+        <a href="#approvedAdoptions">Ver disponibles</a>
+      </article>
+
+      <article class="adoption-account-card">
+        <span class="material-symbols-outlined">assignment</span>
+        <strong>{{ my_applications|length }}</strong>
+        <p>Solicitudes de adopción enviadas desde tu cuenta.</p>
+        <a href="#myAdoptionHistory">Ver solicitudes</a>
+      </article>
+
+      <article class="adoption-account-card">
+        <span class="material-symbols-outlined">verified</span>
+        <strong>{{ my_requests|length }}</strong>
+        <p>Mascotas que publicaste y están en revisión o aprobadas.</p>
+        <a href="#myAdoptionHistory">Ver publicaciones</a>
+      </article>
+    </div>
+  </section>
+  {% endif %}
 
   <section class="approved-adoptions" id="approvedAdoptions">
     <div class="container">
@@ -222,6 +279,20 @@
                 <a href="tel:{{ pet.contact_phone }}" class="adoption-contact-btn">
                   Contactar
                 </a>
+
+                {% if request.user.is_authenticated %}
+                  {% if request.user != pet.owner %}
+                    <form method="POST" action="{% url 'solicitar_adopcion' pet.id %}" class="adoption-apply-form">
+                      {% csrf_token %}
+                      <textarea name="message" rows="3" placeholder="Cuéntanos brevemente por qué quieres adoptar a {{ pet.name }}."></textarea>
+                      <button type="submit" class="adoption-contact-btn adoption-apply-btn">Solicitar adopción</button>
+                    </form>
+                  {% endif %}
+                {% else %}
+                  <a href="{% url 'login' %}?next={% url 'adopciones' %}" class="adoption-contact-btn adoption-apply-btn">
+                    Iniciar sesión para solicitar adopción
+                  </a>
+                {% endif %}
               </div>
             </article>
           {% endfor %}
@@ -236,20 +307,38 @@
     </div>
   </section>
 
-  <section class="my-adoption-requests">
+  <section class="my-adoption-requests" id="myAdoptionHistory">
     <div class="container">
       <div class="section-head adoptions-head-left">
         <span class="section-tag">Seguimiento</span>
-        <h2>Mis solicitudes de adopción</h2>
-        <p>Consulta el estado de las mascotas que has enviado para revisión.</p>
+        <h2>Mi historial de adopciones</h2>
+        <p>Consulta publicaciones enviadas y solicitudes realizadas.</p>
       </div>
 
       <div class="adoption-request-list">
-        {% if my_requests %}
+        {% if request.user.is_authenticated and my_applications %}
+          {% for application in my_applications %}
+            <article class="adoption-request-item">
+              <div>
+                <strong>Solicitud para {{ application.pet.name }}</strong>
+                <span>{{ application.pet.pet_type }} · {{ application.pet.city }}</span>
+                {% if application.admin_notes %}
+                  <small>{{ application.admin_notes }}</small>
+                {% endif %}
+              </div>
+
+              <span class="request-status request-status-{{ application.status }}">
+                {{ application.get_status_display }}
+              </span>
+            </article>
+          {% endfor %}
+        {% endif %}
+
+        {% if request.user.is_authenticated and my_requests %}
           {% for request_item in my_requests %}
             <article class="adoption-request-item">
               <div>
-                <strong>{{ request_item.name }}</strong>
+                <strong>Publicación: {{ request_item.name }}</strong>
                 <span>{{ request_item.pet_type }} · {{ request_item.city }}</span>
                 {% if request_item.admin_notes %}
                   <small>{{ request_item.admin_notes }}</small>
@@ -261,9 +350,13 @@
               </span>
             </article>
           {% endfor %}
-        {% else %}
+        {% elif not request.user.is_authenticated %}
           <article class="adoption-empty-line">
-            No has enviado solicitudes de adopción todavía.
+            Inicia sesión para enviar solicitudes y consultar tu historial.
+          </article>
+        {% elif not my_applications %}
+          <article class="adoption-empty-line">
+            Todavía no tienes solicitudes ni publicaciones de adopción.
           </article>
         {% endif %}
       </div>
@@ -271,4 +364,8 @@
   </section>
 
 </main>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'app/js/adopciones.js' %}?v=20260528-1"></script>
 {% endblock %}

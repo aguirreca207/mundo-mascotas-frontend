@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function initLoginPage() {
   const form = document.getElementById("loginForm");
   const loginEmail = document.getElementById("loginEmail");
   const loginPassword = document.getElementById("loginPassword");
@@ -32,25 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
       errorText.textContent = "";
     }
   }
-
-  document.querySelectorAll(".toggle-password").forEach((button) => {
-    button.addEventListener("click", () => {
-      const input = document.getElementById(button.dataset.target);
-      const icon = button.querySelector(".material-symbols-outlined");
-
-      if (!input || !icon) return;
-
-      const passwordIsHidden = input.type === "password";
-
-      input.type = passwordIsHidden ? "text" : "password";
-      icon.textContent = passwordIsHidden ? "visibility_off" : "visibility";
-
-      button.setAttribute(
-        "aria-label",
-        passwordIsHidden ? "Ocultar contraseña" : "Mostrar contraseña"
-      );
-    });
-  });
 
   if (!form) return;
 
@@ -89,4 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
       submitButton.classList.add("is-loading");
     }
   });
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initLoginPage);
+} else {
+  initLoginPage();
+}

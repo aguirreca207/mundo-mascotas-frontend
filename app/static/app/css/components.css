@@ -87,3 +87,30 @@ a {
   font-weight: 800;
   margin-bottom: 16px;
 }
+
+.django-messages {
+  display: none;
+}
+
+.toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+  max-width: min(360px, calc(100vw - 32px));
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: #27313f;
+  color: var(--color-white);
+  box-shadow: var(--shadow-soft);
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}

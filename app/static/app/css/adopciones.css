@@ -325,34 +325,59 @@
 
 .adoptions-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
+  gap: 24px;
+  align-items: stretch;
 }
 
 .adoption-card {
   overflow: hidden;
-  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  border: 1px solid #f0dfce;
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 24px 58px rgba(58, 36, 22, 0.08);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.adoption-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(235, 110, 37, 0.28);
+  box-shadow: 0 30px 70px rgba(58, 36, 22, 0.12);
 }
 
 .adoption-card-image {
-  height: 240px;
+  position: relative;
+  height: clamp(290px, 24vw, 350px);
   background:
     radial-gradient(circle at 26% 18%, rgba(244, 180, 0, 0.2), transparent 30%),
     linear-gradient(180deg, #fff8ef 0%, #fff1e6 100%);
   border-bottom: 1px solid #f3dfcd;
 }
 
+.adoption-card-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 62%, rgba(47, 42, 38, 0.06) 100%);
+  pointer-events: none;
+}
+
 .adoption-card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 18%;
   display: block;
 }
 
 .adoption-card-content {
   display: grid;
   gap: 12px;
-  padding: 18px;
+  flex: 1;
+  padding: 22px;
 }
 
 .adoption-badge,
@@ -455,6 +480,57 @@
   gap: 12px;
 }
 
+.adoption-account-panel {
+  padding: 18px 0 34px;
+  background: linear-gradient(180deg, #fff8f0 0%, #fffdf9 100%);
+}
+
+.adoption-account-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.adoption-account-card {
+  display: grid;
+  gap: 10px;
+  padding: 22px;
+  border: 1px solid #f0dfce;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 18px 42px rgba(58, 36, 22, 0.06);
+}
+
+.adoption-account-card .material-symbols-outlined {
+  color: #eb6e25;
+  font-size: 30px;
+}
+
+.adoption-account-card strong {
+  color: #2f2a26;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.adoption-account-card p {
+  margin: 0;
+  color: #6d6259;
+  line-height: 1.55;
+}
+
+.adoption-account-card a {
+  width: fit-content;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: #fff0e8;
+  color: #eb6e25;
+  font-weight: 900;
+  text-decoration: none;
+}
+
 .adoption-request-item {
   display: flex;
   justify-content: space-between;
@@ -503,9 +579,43 @@
   color: #6d6259;
 }
 
+.adoption-apply-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.adoption-apply-form textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 86px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid #ead8c8;
+  background: #fffdfb;
+  color: #2f2a26;
+  font-family: inherit;
+  outline: none;
+}
+
+.adoption-apply-form textarea:focus {
+  border-color: #eb6e25;
+  box-shadow: 0 0 0 4px rgba(235, 110, 37, 0.12);
+}
+
+.adoption-apply-btn {
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
 @media (max-width: 1180px) {
   .adoptions-grid {
     grid-template-columns: repeat(2, minmax(250px, 1fr));
+  }
+
+  .adoption-account-grid {
+    grid-template-columns: 1fr;
   }
 }
 

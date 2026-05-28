@@ -1,6 +1,6 @@
 {% extends 'app/base.html' %} {% load static %} {% block title %}Editar perfil -
 Mundo Mascotas{% endblock %} {% block extra_css %}
-<link rel="stylesheet" href="{% static 'app/css/perfil.css' %}" />
+<link rel="stylesheet" href="{% static 'app/css/perfil.css' %}?v=20260527-5" />
 {% endblock %} {% block content %}
 <section class="profile-section">
   <div class="container profile-layout">
@@ -17,6 +17,10 @@ Mundo Mascotas{% endblock %} {% block extra_css %}
     </article>
 
     <article class="profile-card profile-edit-card">
+      {% if profile_error %}
+        <div class="profile-alert" role="alert">{{ profile_error }}</div>
+      {% endif %}
+
       <form method="POST" class="profile-edit-form">
         {% csrf_token %}
 
@@ -27,6 +31,7 @@ Mundo Mascotas{% endblock %} {% block extra_css %}
             id="profileName"
             name="name"
             value="{{ request.user.first_name }}"
+            required
           />
         </div>
 
@@ -37,6 +42,7 @@ Mundo Mascotas{% endblock %} {% block extra_css %}
             id="profileEmail"
             name="email"
             value="{{ request.user.email }}"
+            required
           />
         </div>
 
@@ -47,6 +53,10 @@ Mundo Mascotas{% endblock %} {% block extra_css %}
             id="profilePhone"
             name="phone"
             value="{{ profile.phone }}"
+            inputmode="numeric"
+            maxlength="10"
+            pattern="[0-9]{7,10}"
+            required
           />
         </div>
 
@@ -57,6 +67,7 @@ Mundo Mascotas{% endblock %} {% block extra_css %}
             id="profileCity"
             name="city"
             value="{{ profile.city }}"
+            required
           />
         </div>
 
@@ -67,6 +78,7 @@ Mundo Mascotas{% endblock %} {% block extra_css %}
             id="profileAddress"
             name="address"
             value="{{ profile.address }}"
+            required
           />
         </div>
 

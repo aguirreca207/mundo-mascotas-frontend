@@ -25,7 +25,8 @@
     margin-left: auto;
   }
 
-  .hero-grid {
+  .hero-grid,
+  .footer-main-content {
     grid-template-columns: 1fr;
   }
 
@@ -41,11 +42,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .promo-content {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
+  .promo-content,
   .footer-top-content {
     align-items: flex-start;
     flex-direction: column;
@@ -62,6 +59,10 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    width: min(100% - 32px, 1120px);
+  }
+
   .topbar-content {
     flex-direction: column;
     gap: 4px;
@@ -70,18 +71,26 @@
 
   .nav-content {
     align-items: center;
+    gap: 14px;
+    padding: 14px 0 12px;
   }
 
   .logo-text {
-    font-size: 1.12rem;
+    font-size: 1.1rem;
+  }
+
+  .btn-nav {
+    margin-left: auto;
+    padding: 10px 16px;
+    font-size: 0.9rem;
   }
 
   .nav-links {
     justify-content: flex-start;
     overflow-x: auto;
     flex-wrap: nowrap;
-    gap: 16px;
-    padding-bottom: 4px;
+    gap: 18px;
+    padding: 4px 2px 8px;
     scrollbar-width: none;
   }
 
@@ -94,75 +103,173 @@
     font-size: 0.9rem;
   }
 
-  .btn-nav {
-    padding: 10px 18px;
-    font-size: 0.9rem;
+  .hero {
+    padding: 34px 0 56px;
   }
 
-  .hero {
-    padding: 40px 0 54px;
+  .hero-grid {
+    gap: 28px;
   }
 
   .hero-text h1 {
     font-size: 2.35rem;
   }
 
-  .hero-actions {
+  .hero-actions,
+  .hero-stats,
+  .cards-grid {
     display: grid;
     grid-template-columns: 1fr;
   }
 
-  .hero-actions .btn {
+  .hero-actions .btn,
+  .promo-content .btn {
     width: 100%;
     justify-content: center;
-  }
-
-  .hero-stats {
-    grid-template-columns: 1fr;
   }
 
   .hero-image {
     min-height: 360px;
     border-radius: 26px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
-  .cards-grid {
-    grid-template-columns: 1fr;
+  .hero-image img,
+  .hero-shape {
+    inset: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .services-preview,
+  .home-offers,
+  .featured-products {
+    padding-top: 54px;
+    padding-bottom: 54px;
   }
 
   .home-offers-head,
   .products-head {
     align-items: flex-start;
     flex-direction: column;
+    gap: 12px;
+  }
+
+  .home-offers-head h2,
+  .products-head h2 {
+    font-size: 2rem;
+  }
+
+  .home-offers-link {
+    white-space: normal;
   }
 
   .home-offers-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .home-offer-card {
-    min-height: 250px;
+    min-height: 224px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 124px;
+    grid-template-rows: 1fr auto;
+    align-items: center;
     padding: 20px;
+    border-radius: 24px;
+    gap: 14px 12px;
+    background:
+      radial-gradient(circle at 92% 16%, rgba(244, 180, 0, 0.22), transparent 30%),
+      linear-gradient(145deg, #fffaf3 0%, #fff4e8 100%);
   }
 
-  .home-offer-text {
+  .home-offer-text,
+  .home-offer-card:first-child .home-offer-text {
+    grid-column: 1;
+    grid-row: 1;
     max-width: 100%;
     padding-right: 0;
   }
 
-  .home-offer-image-placeholder {
-    opacity: 0.28;
-    right: 8px;
-    width: 54%;
+  .home-offer-text h3 {
+    max-width: 100%;
+    font-size: 1.35rem;
+    line-height: 1.08;
+  }
+
+  .home-offer-text p {
+    max-width: 100%;
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  .home-offer-image-placeholder,
+  .home-offer-card:first-child .home-offer-image-placeholder {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    height: 150px;
+    margin-top: 0;
+    padding-right: 0;
+    justify-content: center;
+    opacity: 1;
+    transform: none;
+    border: 1px solid rgba(240, 223, 206, 0.9);
+    border-radius: 22px;
+    background:
+      radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.95), rgba(255, 248, 239, 0.58) 68%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 242, 231, 0.25));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 16px 28px rgba(58, 36, 22, 0.08);
+  }
+
+  .home-offer-image-placeholder img {
+    max-width: 102px;
+    max-height: 124px;
+    object-fit: contain;
+    transform: translateY(2px);
+  }
+
+  .rascador-img img,
+  .churu-img img,
+  .comida-img img {
+    max-width: 108px;
   }
 
   .home-offer-arrow {
-    right: 20px;
-    bottom: 16px;
+    grid-column: 1;
+    grid-row: 2;
+    position: relative;
+    right: auto;
+    bottom: auto;
+    justify-self: start;
+    align-self: start;
+    width: auto;
+    min-width: 122px;
+    height: 44px;
+    padding: 0 15px;
+    gap: 8px;
+    border-radius: 999px;
+    font-size: 1.2rem;
+  }
+
+  .home-offer-arrow::before {
+    content: "Ver oferta";
+    font-size: 0.86rem;
+    line-height: 1;
+    font-weight: 900;
   }
 
   .products-carousel {
     grid-template-columns: 1fr;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
   }
 
   .products-arrow {
@@ -170,13 +277,19 @@
   }
 
   .products-viewport {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     overflow-x: auto;
     padding-bottom: 8px;
     scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
   }
 
   .products-track {
     transform: none !important;
+    width: max-content;
+    max-width: none;
   }
 
   .products-page {
@@ -189,60 +302,6 @@
     scroll-snap-align: start;
   }
 
-  .footer-newsletter {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .footer-newsletter select,
-  .footer-newsletter input,
-  .footer-newsletter button {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .footer-main-content {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-brand-box {
-    align-items: flex-start;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    width: min(100% - 28px, 1120px);
-  }
-
-  .hero-text h1 {
-    font-size: 2rem;
-  }
-
-  .section-head h2,
-  .home-offers-head h2,
-  .products-head h2 {
-    font-size: 1.8rem;
-  }
-
-  .home-offer-card {
-    min-height: 230px;
-  }
-
-  .toast {
-    right: 14px;
-    bottom: 14px;
-    max-width: calc(100vw - 28px);
-  }
-  /* =====================
-   FOOTER MOBILE POLISH
-===================== */
-
-@media (max-width: 768px) {
-  .site-footer {
-    margin-top: 42px;
-  }
-
   .footer-top {
     padding: 28px 0 34px;
   }
@@ -253,16 +312,6 @@
 
   .footer-brand-box {
     width: 100%;
-  }
-
-  .footer-brand-text h3 {
-    font-size: 1.45rem;
-    line-height: 1.2;
-  }
-
-  .footer-brand-text p {
-    font-size: 0.95rem;
-    line-height: 1.55;
   }
 
   .footer-newsletter {
@@ -283,105 +332,139 @@
     font-size: 0.92rem;
   }
 
-  .footer-newsletter input {
-    padding: 0 16px;
-    background: #fff;
-  }
-
-  .footer-newsletter button {
-    border-radius: 999px;
-    font-weight: 900;
-  }
-
-  .footer-newsletter-message {
-    min-height: 18px;
-    font-size: 0.84rem;
-  }
-
-  .footer-main {
-    padding: 34px 0 18px;
-  }
-
   .footer-main-content {
+    grid-template-columns: 1fr;
     gap: 26px;
   }
+}
 
-  .footer-column h4 {
-    margin-bottom: 10px;
+@media (max-width: 480px) {
+  .container {
+    width: min(100% - 28px, 1120px);
   }
 
-  .footer-column li {
-    margin-bottom: 9px;
+  .logo-icon {
+    font-size: 1.45rem;
+  }
+
+  .logo-text {
+    font-size: 1.05rem;
+  }
+
+  .btn-nav {
+    padding: 9px 14px;
+    font-size: 0.86rem;
+  }
+
+  .nav-links {
+    gap: 12px;
+    padding-right: 18px;
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+
+  .hero-text p {
+    font-size: 0.96rem;
+  }
+
+  .stat-card {
+    padding: 18px;
+  }
+
+  .section-head h2,
+  .home-offers-head h2,
+  .products-head h2 {
+    font-size: 1.8rem;
+  }
+
+  .home-offer-card {
+    grid-template-columns: minmax(0, 1fr) 108px;
+    min-height: 218px;
+    padding: 18px;
+  }
+
+  .home-offer-text h3 {
+    max-width: 100%;
+    font-size: 1.18rem;
+  }
+
+  .home-offer-text p {
+    max-width: 100%;
+    font-size: 0.86rem;
+  }
+
+  .home-offer-image-placeholder,
+  .home-offer-card:first-child .home-offer-image-placeholder {
+    height: 136px;
+  }
+
+  .home-offer-image-placeholder img,
+  .rascador-img img,
+  .churu-img img,
+  .comida-img img {
+    max-width: 92px;
+    max-height: 112px;
+  }
+
+  .home-offer-arrow {
+    min-width: 112px;
+    height: 42px;
+    padding: 0 13px;
+  }
+
+  .toast {
+    right: 14px;
+    bottom: 14px;
+    max-width: calc(100vw - 28px);
   }
 }
 
-@media (max-width: 420px) {
-  .footer-top {
-    padding: 24px 0 30px;
+@media (max-width: 380px) {
+  .container {
+    width: min(100% - 24px, 1120px);
   }
 
-  .footer-brand-text h3,
-  .footer-logo span {
-    font-size: 1.25rem;
+  .nav-links a {
+    font-size: 0.86rem;
   }
 
-  .footer-description {
-    font-size: 0.92rem;
-    line-height: 1.55;
+  .home-offer-text h3,
+  .home-offer-text p {
+    max-width: 100%;
   }
 
-  .footer-social a {
-    width: 36px;
-    height: 36px;
-  }
-}
-}
-
-/* =====================
-   FOOTER NEWSLETTER FIX
-===================== */
-
-@media (max-width: 768px) {
-  .footer-top .footer-newsletter {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-    width: 100% !important;
+  .home-offer-image-placeholder,
+  .home-offer-card:first-child .home-offer-image-placeholder {
+    height: 124px;
   }
 
-  .footer-top .footer-newsletter select,
-  .footer-top .footer-newsletter input,
-  .footer-top .footer-newsletter button {
-    display: block !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    height: 48px !important;
-    min-height: 48px !important;
-    padding: 0 16px !important;
-    border-radius: 16px !important;
-    font-size: 0.92rem !important;
-    line-height: 48px !important;
-    box-sizing: border-box !important;
+  .home-offer-card {
+    grid-template-columns: minmax(0, 1fr) 96px;
+    gap: 12px 10px;
   }
 
-  .footer-top .footer-newsletter input {
-    background: #ffffff !important;
-    color: #2f2a26 !important;
-    border: 0 !important;
+  .home-offer-tag {
+    padding: 6px 10px;
+    font-size: 0.72rem;
   }
 
-  .footer-top .footer-newsletter button {
-    border-radius: 999px !important;
-    background: #ffffff !important;
-    color: #eb6e25 !important;
-    font-weight: 900 !important;
-    cursor: pointer;
+  .home-offer-text h3 {
+    font-size: 1.08rem;
   }
 
-  .footer-top .footer-newsletter-message {
-    min-height: 18px !important;
-    margin: 0 !important;
-    font-size: 0.84rem !important;
-    line-height: 1.4 !important;
+  .home-offer-text p {
+    font-size: 0.82rem;
+  }
+
+  .home-offer-arrow {
+    min-width: 102px;
+    height: 40px;
+    font-size: 1.08rem;
+  }
+
+  .home-offer-arrow::before {
+    font-size: 0.78rem;
   }
 }

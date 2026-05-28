@@ -73,6 +73,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (petForm) {
     petForm.addEventListener("submit", (event) => {
+      const selectedBirthDate = petBirthInput.value ? new Date(`${petBirthInput.value}T00:00:00`) : null;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
       if (
         !petNameInput.value.trim() ||
         !petTypeSelect.value ||
@@ -84,6 +88,21 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
         showPetNotice("Completa los datos principales de tu mascota.", "error");
       }
+
+      if (selectedBirthDate && selectedBirthDate > today) {
+        event.preventDefault();
+        showPetNotice("La fecha de nacimiento no puede ser futura.", "error");
+      }
     });
   }
+
+  document.querySelectorAll(".pet-delete-form").forEach((form) => {
+    form.addEventListener("submit", (event) => {
+      const confirmed = window.confirm("¿Seguro que deseas eliminar esta mascota? Esta acción no se puede deshacer.");
+
+      if (!confirmed) {
+        event.preventDefault();
+      }
+    });
+  });
 });

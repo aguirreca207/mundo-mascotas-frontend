@@ -15,6 +15,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const appointmentsList = document.getElementById("appointmentsList");
   const emptyState = document.getElementById("appointmentsEmptyState");
 
+  function getCsrfToken() {
+    return appointmentForm?.querySelector("[name=csrfmiddlewaretoken]")?.value || "";
+  }
+
+  function getSelectedPetName() {
+    const option = petSelect?.selectedOptions?.[0];
+    return option?.dataset.name || option?.textContent || "";
+  }
+
   function showAppointmentNotice(message, type = "success") {
     let notice = document.querySelector(".appointment-notice");
 
@@ -45,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateSummary() {
-    if (summaryPet) summaryPet.textContent = petSelect.value || "No seleccionada";
+    if (summaryPet) summaryPet.textContent = getSelectedPetName() || "No seleccionada";
     if (summaryReason) summaryReason.textContent = reasonSelect.value || "Sin información";
     if (summaryDate) summaryDate.textContent = formatDate(dateInput.value);
     if (summaryTime) summaryTime.textContent = timeSelect.value || "Sin jornada";
@@ -66,11 +75,49 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (appointmentForm) {
-    appointmentForm.addEventListener("submit", (event) => {
+    appointmentForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       if (!petSelect.value || !reasonSelect.value || !dateInput.value || !timeSelect.value) {
         showAppointmentNotice("Completa mascota, motivo, fecha y jornada.", "error");
+        return;
+      }
+
+      const selectedDate = new Date(`${dateInput.value}T00:00:00`);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      if (selectedDate < today) {
+        showAppointmentNotice("La cita no puede programarse en una fecha pasada.", "error");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("pet_id", petSelect.value);
+      formData.append("reason", reasonSelect.value);
+      formData.append("date", dateInput.value);
+      formData.append("time", timeSelect.value);
+      formData.append("notes", notesInput.value.trim());
+
+      let data;
+
+      try {
+        const response = await fetch(appointmentForm.dataset.createUrl, {
+          method: "POST",
+          headers: {
+            "X-CSRFToken": getCsrfToken()
+          },
+          body: formData
+        });
+
+        data = await response.json();
+
+        if (!response.ok) {
+          showAppointmentNotice(data.message || "No se pudo guardar la cita.", "error");
+          return;
+        }
+      } catch (error) {
+        showAppointmentNotice("No se pudo conectar con el servidor.", "error");
         return;
       }
 
@@ -81,21 +128,22 @@ document.addEventListener("DOMContentLoaded", () => {
       const card = document.createElement("article");
       card.className = "appointment-request-card";
 
-      const formattedDate = formatDate(dateInput.value);
-      const notes = notesInput.value.trim();
+      const appointment = data.appointment;
+      const formattedDate = formatDate(appointment.date);
+      const notes = appointment.notes;
 
       card.innerHTML = `
         <div>
-          <h3>${petSelect.value} · ${reasonSelect.value}</h3>
+          <h3>${appointment.pet} · ${appointment.reason}</h3>
           <p>${notes || "Solicitud registrada sin observaciones adicionales."}</p>
 
           <div class="appointment-request-meta">
             <span>${formattedDate}</span>
-            <span>${timeSelect.value}</span>
+            <span>${appointment.time}</span>
           </div>
         </div>
 
-        <span class="appointment-request-status">Pendiente de confirmación</span>
+        <span class="appointment-request-status">${appointment.status}</span>
       `;
 
       appointmentsList.prepend(card);
@@ -104,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
         statusLabel.textContent = "Solicitud enviada";
       }
 
-      showAppointmentNotice("Cita solicitada correctamente.");
+      showAppointmentNotice(data.message || "Cita solicitada correctamente.");
 
       appointmentForm.reset();
       updateSummary();

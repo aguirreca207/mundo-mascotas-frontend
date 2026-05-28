@@ -16,6 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentFilter = "todos";
 
+  function getCsrfToken() {
+    const match = document.cookie.match(/csrftoken=([^;]+)/);
+    return match ? decodeURIComponent(match[1]) : "";
+  }
+
   function showServiceNotice(message, type = "success") {
     let notice = document.querySelector(".service-notice");
 
@@ -75,7 +80,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return null;
     }
 
-    return { pet, time };
+    const petName = petSelect?.selectedOptions?.[0]?.dataset.name || "";
+
+    return { pet, petName, time };
   }
 
   function updateSummary({ service, pet, time, status, walker }) {
@@ -107,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       updateSummary({
         service: button.dataset.service,
-        pet: bookingData.pet,
+        pet: bookingData.petName,
         time: bookingData.time,
         status: button.dataset.status,
         walker: "No aplica"
@@ -123,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       updateSummary({
         service: button.dataset.service,
-        pet: bookingData.pet,
+        pet: bookingData.petName,
         time: bookingData.time,
         status: button.dataset.status,
         walker: button.dataset.walker
@@ -132,14 +139,43 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   if (confirmBtn) {
-    confirmBtn.addEventListener("click", () => {
+    confirmBtn.addEventListener("click", async () => {
       const servicio = summaryService?.textContent || "No seleccionado";
       const mascota = summaryPet?.textContent || "No seleccionada";
       const horario = summaryTime?.textContent || "Sin horario";
       const paseador = summaryWalker?.textContent || "No aplica";
+      const petId = petSelect?.value || "";
 
       if (servicio === "No seleccionado") {
         showServiceNotice("Selecciona un servicio antes de confirmar.", "error");
+        return;
+      }
+
+      let data;
+
+      try {
+        const response = await fetch(reservationList.dataset.createUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCsrfToken()
+          },
+          body: JSON.stringify({
+            pet_id: petId,
+            service: servicio,
+            time: horario,
+            walker: paseador === "No aplica" ? "" : paseador
+          })
+        });
+
+        data = await response.json();
+
+        if (!response.ok) {
+          showServiceNotice(data.message || "No se pudo guardar la reserva.", "error");
+          return;
+        }
+      } catch (error) {
+        showServiceNotice("No se pudo conectar con el servidor.", "error");
         return;
       }
 
@@ -155,21 +191,22 @@ document.addEventListener("DOMContentLoaded", () => {
         const newReservation = document.createElement("article");
         newReservation.className = "reservation-item";
 
-        let detalle = `Confirmada · ${horario}`;
+        const reservation = data.reservation;
+        let detalle = `${reservation.status} · ${reservation.time}`;
 
-        if (paseador !== "No aplica") {
-          detalle += ` · ${paseador}`;
+        if (reservation.walker !== "No aplica") {
+          detalle += ` · ${reservation.walker}`;
         }
 
         newReservation.innerHTML = `
-          <strong>${servicio} - ${mascota}</strong>
+          <strong>${reservation.service} - ${reservation.pet}</strong>
           <span>${detalle}</span>
         `;
 
         reservationList.prepend(newReservation);
       }
 
-      showServiceNotice("Reserva confirmada correctamente.");
+      showServiceNotice(data.message || "Reserva confirmada correctamente.");
     });
   }
 
