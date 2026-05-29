@@ -25,7 +25,9 @@ from .models import (
 import json
 
 
-DOG_CEO_RANDOM_IMAGE_URL = "https://dog.ceo/api/breeds/image/random"
+OPEN_METEO_FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
+BOGOTA_LATITUDE = 4.7110
+BOGOTA_LONGITUDE = -74.0721
 
 
 def is_valid_email(email):
@@ -36,40 +38,58 @@ def is_valid_email(email):
         return False
 
 
-def format_breed_from_dog_image(image_url):
-    if "/breeds/" not in image_url:
-        return "Mascota sorpresa"
-
-    breed_slug = image_url.split("/breeds/", 1)[1].split("/", 1)[0]
-    return breed_slug.replace("-", " ").title()
-
-
-def get_external_pet_inspiration():
+def get_walk_weather_recommendation():
     fallback = {
         "available": False,
-        "source": "Dog CEO API",
-        "image_url": "",
-        "breed": "Inspiración no disponible",
-        "message": "No se pudo conectar con la API externa en este momento.",
+        "city": "Bogotá",
+        "temperature": "No disponible",
+        "wind": "No disponible",
+        "precipitation": "No disponible",
+        "recommendation": "Agenda servicios con normalidad. Si vas a programar paseo, revisa el clima antes de salir.",
+        "source": "Open-Meteo",
     }
 
     try:
-        response = requests.get(DOG_CEO_RANDOM_IMAGE_URL, timeout=4)
+        response = requests.get(
+            OPEN_METEO_FORECAST_URL,
+            params={
+                "latitude": BOGOTA_LATITUDE,
+                "longitude": BOGOTA_LONGITUDE,
+                "current": "temperature_2m,precipitation,wind_speed_10m",
+                "timezone": "America/Bogota",
+            },
+            timeout=4,
+        )
         response.raise_for_status()
         data = response.json()
     except requests.RequestException:
         return fallback
 
-    image_url = data.get("message", "")
-    if data.get("status") != "success" or not image_url:
+    current = data.get("current") or {}
+    temperature = current.get("temperature_2m")
+    precipitation = current.get("precipitation", 0)
+    wind = current.get("wind_speed_10m")
+
+    if temperature is None:
         return fallback
+
+    if precipitation and precipitation > 0:
+        recommendation = "Hay lluvia registrada. Para paseos, elige una franja cubierta o reprograma si tu mascota es sensible al frío."
+    elif temperature >= 26:
+        recommendation = "Hace calor. Prioriza paseos cortos, hidratación y horarios de menor sol."
+    elif wind and wind >= 28:
+        recommendation = "Hay viento fuerte. Revisa arnés, correa y evita zonas abiertas para mascotas nerviosas."
+    else:
+        recommendation = "Buen momento para paseos y servicios al aire libre con hidratación disponible."
 
     return {
         "available": True,
-        "source": "Dog CEO API",
-        "image_url": image_url,
-        "breed": format_breed_from_dog_image(image_url),
-        "message": "Imagen obtenida correctamente desde una API externa pública.",
+        "city": "Bogotá",
+        "temperature": round(temperature),
+        "wind": round(wind) if wind is not None else "No disponible",
+        "precipitation": precipitation,
+        "recommendation": recommendation,
+        "source": "Open-Meteo",
     }
 
 
@@ -82,7 +102,7 @@ def render_with_auth_error(request, template_name, error_key, message, extra_con
 # 🔹 HOME
 def home(request):
     return render(request, 'app/index.html', {
-        "external_pet": get_external_pet_inspiration()
+        "walk_weather": get_walk_weather_recommendation()
     })
 
 
@@ -635,8 +655,8 @@ def gestion_api(request):
     return render(request, "app/gestion_api.html")
 
 
-def external_pet_api(request):
-    return JsonResponse(get_external_pet_inspiration())
+def external_weather_api(request):
+    return JsonResponse(get_walk_weather_recommendation())
 
 
 def adopciones(request):

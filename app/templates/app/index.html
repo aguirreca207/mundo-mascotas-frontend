@@ -107,35 +107,37 @@
     </div>
   </section>
 
-  <section class="external-api-section">
+  <section class="weather-care-section">
     <div class="container">
-      <article class="external-api-card">
-        <div class="external-api-copy">
-          <span class="section-tag">API externa</span>
-          <h2>Inspiración conectada para amantes de las mascotas</h2>
+      <article class="weather-care-card">
+        <div class="weather-care-copy">
+          <span class="section-tag">Cuidado inteligente</span>
+          <h2>Planifica paseos y servicios según el clima</h2>
           <p>
-            Esta tarjeta consume una API pública externa en tiempo real para traer
-            una imagen de mascota y demostrar integración con servicios de terceros.
+            Mundo Mascotas consulta el clima actual para ayudarte a elegir mejores
+            momentos de paseo, guardería y servicios al aire libre.
           </p>
 
-          <div class="external-api-meta">
-            <span>Fuente: {{ external_pet.source }}</span>
-            <strong>{{ external_pet.breed }}</strong>
+          <div class="weather-care-meta">
+            <span>{{ walk_weather.city }}</span>
+            <strong>
+              {% if walk_weather.available %}
+                {{ walk_weather.temperature }}°C
+              {% else %}
+                Clima no disponible
+              {% endif %}
+            </strong>
           </div>
-
-          <a href="{% url 'external_pet_api' %}" class="external-api-link" target="_blank" rel="noopener noreferrer">
-            Ver respuesta JSON
-          </a>
         </div>
 
-        <div class="external-api-visual">
-          {% if external_pet.available and external_pet.image_url %}
-            <img src="{{ external_pet.image_url }}" alt="Mascota obtenida desde Dog CEO API">
-            <span class="external-api-status is-online">Conectado a API externa</span>
-          {% else %}
-            <img src="{% static 'app/img/hero-mundo-mascotas-premium.png' %}" alt="Mascotas Mundo Mascotas">
-            <span class="external-api-status">Modo respaldo local</span>
-          {% endif %}
+        <div class="weather-care-panel">
+          <span class="material-symbols-outlined">partly_cloudy_day</span>
+          <strong>Recomendación de hoy</strong>
+          <p>{{ walk_weather.recommendation }}</p>
+          <div class="weather-care-details">
+            <span>Lluvia: {{ walk_weather.precipitation }}</span>
+            <span>Viento: {{ walk_weather.wind }}</span>
+          </div>
         </div>
       </article>
     </div>

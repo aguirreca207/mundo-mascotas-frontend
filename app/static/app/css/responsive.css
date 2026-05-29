@@ -26,7 +26,7 @@
   }
 
   .hero-grid,
-  .external-api-card,
+  .weather-care-card,
   .footer-main-content {
     grid-template-columns: 1fr;
   }
@@ -146,26 +146,25 @@
   }
 
   .services-preview,
-  .external-api-section,
+  .weather-care-section,
   .home-offers,
   .featured-products {
     padding-top: 54px;
     padding-bottom: 54px;
   }
 
-  .external-api-card {
+  .weather-care-card {
     padding: 22px;
     border-radius: 24px;
     gap: 18px;
   }
 
-  .external-api-copy h2 {
+  .weather-care-copy h2 {
     font-size: 2rem;
   }
 
-  .external-api-visual,
-  .external-api-visual img {
-    min-height: 260px;
+  .weather-care-panel {
+    min-height: 240px;
   }
 
   .home-offers-head,
@@ -391,27 +390,22 @@
   }
 
   .section-head h2,
-  .external-api-copy h2,
+  .weather-care-copy h2,
   .home-offers-head h2,
   .products-head h2 {
     font-size: 1.8rem;
   }
 
-  .external-api-card {
+  .weather-care-card {
     padding: 18px;
   }
 
-  .external-api-meta {
+  .weather-care-meta {
     align-items: flex-start;
     flex-direction: column;
   }
 
-  .external-api-link {
-    width: 100%;
-  }
-
-  .external-api-visual,
-  .external-api-visual img {
+  .weather-care-panel {
     min-height: 220px;
   }
 
