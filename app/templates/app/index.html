@@ -107,6 +107,40 @@
     </div>
   </section>
 
+  <section class="external-api-section">
+    <div class="container">
+      <article class="external-api-card">
+        <div class="external-api-copy">
+          <span class="section-tag">API externa</span>
+          <h2>Inspiración conectada para amantes de las mascotas</h2>
+          <p>
+            Esta tarjeta consume una API pública externa en tiempo real para traer
+            una imagen de mascota y demostrar integración con servicios de terceros.
+          </p>
+
+          <div class="external-api-meta">
+            <span>Fuente: {{ external_pet.source }}</span>
+            <strong>{{ external_pet.breed }}</strong>
+          </div>
+
+          <a href="{% url 'external_pet_api' %}" class="external-api-link" target="_blank" rel="noopener noreferrer">
+            Ver respuesta JSON
+          </a>
+        </div>
+
+        <div class="external-api-visual">
+          {% if external_pet.available and external_pet.image_url %}
+            <img src="{{ external_pet.image_url }}" alt="Mascota obtenida desde Dog CEO API">
+            <span class="external-api-status is-online">Conectado a API externa</span>
+          {% else %}
+            <img src="{% static 'app/img/hero-mundo-mascotas-premium.png' %}" alt="Mascotas Mundo Mascotas">
+            <span class="external-api-status">Modo respaldo local</span>
+          {% endif %}
+        </div>
+      </article>
+    </div>
+  </section>
+
   <section class="promo-band">
     <div class="container promo-content">
       <div>

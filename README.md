@@ -12,6 +12,7 @@ Mundo Mascotas es una aplicacion web desarrollada en Django para gestionar servi
 - JavaScript
 - Django Allauth
 - Pillow
+- Requests
 
 ## Funcionalidades Principales
 
@@ -26,6 +27,7 @@ Mundo Mascotas es una aplicacion web desarrollada en Django para gestionar servi
 - Reserva de servicios como bano, guarderia, consulta a domicilio y paseo.
 - Modulo de adopciones con imagenes y estado de revision.
 - Mensajes visuales de confirmacion para operaciones importantes.
+- Consumo de API externa publica mediante Dog CEO API.
 - Panel administrativo de Django para gestionar informacion.
 
 ## Estructura Del Proyecto
@@ -83,6 +85,26 @@ Modelos principales:
 - `Appointment`
 - `ServiceReservation`
 - `AdoptionPet`
+
+## Consumo De API Externa
+
+Para cumplir el requisito de integracion con servicios de terceros, el proyecto
+consume la API publica Dog CEO API:
+
+```txt
+https://dog.ceo/api/breeds/image/random
+```
+
+Esta integracion se usa en la pagina de inicio para mostrar una imagen externa
+de mascota y extraer una raza sugerida desde la respuesta. Tambien existe una
+ruta interna de comprobacion:
+
+```txt
+/api-externa/mascota/
+```
+
+Si la API externa no responde, el sistema usa una imagen local de respaldo para
+evitar que la pagina se rompa.
 
 ## Instalacion
 
@@ -154,6 +176,7 @@ python3 manage.py runserver 127.0.0.1:8010
 - Las reservas de servicios se guardan en la base de datos.
 - Las citas y reservas vuelven a mostrarse al actualizar la pagina.
 - Se agregaron validaciones para evitar cantidades invalidas, stock negativo y reservas/citas duplicadas.
+- Se agrego consumo real de API externa con manejo de errores y respaldo visual.
 
 ## Capturas Del Sistema
 

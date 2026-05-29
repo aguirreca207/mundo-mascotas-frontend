@@ -10,6 +10,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.utils import timezone
 from django.utils.dateparse import parse_date
+import requests
 from .models import (
     AdoptionPet,
     AdoptionApplication,
@@ -24,12 +25,52 @@ from .models import (
 import json
 
 
+DOG_CEO_RANDOM_IMAGE_URL = "https://dog.ceo/api/breeds/image/random"
+
+
 def is_valid_email(email):
     try:
         validate_email(email)
         return True
     except ValidationError:
         return False
+
+
+def format_breed_from_dog_image(image_url):
+    if "/breeds/" not in image_url:
+        return "Mascota sorpresa"
+
+    breed_slug = image_url.split("/breeds/", 1)[1].split("/", 1)[0]
+    return breed_slug.replace("-", " ").title()
+
+
+def get_external_pet_inspiration():
+    fallback = {
+        "available": False,
+        "source": "Dog CEO API",
+        "image_url": "",
+        "breed": "Inspiración no disponible",
+        "message": "No se pudo conectar con la API externa en este momento.",
+    }
+
+    try:
+        response = requests.get(DOG_CEO_RANDOM_IMAGE_URL, timeout=4)
+        response.raise_for_status()
+        data = response.json()
+    except requests.RequestException:
+        return fallback
+
+    image_url = data.get("message", "")
+    if data.get("status") != "success" or not image_url:
+        return fallback
+
+    return {
+        "available": True,
+        "source": "Dog CEO API",
+        "image_url": image_url,
+        "breed": format_breed_from_dog_image(image_url),
+        "message": "Imagen obtenida correctamente desde una API externa pública.",
+    }
 
 
 def render_with_auth_error(request, template_name, error_key, message, extra_context=None):
@@ -40,7 +81,9 @@ def render_with_auth_error(request, template_name, error_key, message, extra_con
 
 # 🔹 HOME
 def home(request):
-    return render(request, 'app/index.html')
+    return render(request, 'app/index.html', {
+        "external_pet": get_external_pet_inspiration()
+    })
 
 
 # 🔹 AUTENTICACIÓN
@@ -590,6 +633,10 @@ def crear_pedido(request):
 @staff_member_required(login_url="/login/")
 def gestion_api(request):
     return render(request, "app/gestion_api.html")
+
+
+def external_pet_api(request):
+    return JsonResponse(get_external_pet_inspiration())
 
 
 def adopciones(request):

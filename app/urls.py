@@ -58,4 +58,5 @@ urlpatterns = [
     # 🔹 API / FUNCIONALIDAD
     path('newsletter/', views.newsletter, name='newsletter'),
     path('validar-correo/', views.validar_correo, name='validar_correo'),
+    path('api-externa/mascota/', views.external_pet_api, name='external_pet_api'),
 ]
